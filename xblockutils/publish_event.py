@@ -15,6 +15,9 @@ class PublishEventMixin(object):
         except KeyError as e:
             return {'result': 'error', 'message': 'Missing event_type in JSON data'}
 
+        return self.publish_event_from_python(event_type, data)
+
+    def publish_event_from_python(self, event_type, data):
         for key, value in self.additional_publish_event_data.items():
             if key in data:
                 return {'result': 'error', 'message': 'Key should not be in publish_event data: {}'.format(key)}

@@ -53,17 +53,21 @@ class SeleniumBaseTest(SeleniumTest):
         header1 = self.browser.find_element_by_css_selector('h1')
         self.assertEqual(header1.text, 'XBlock scenarios')
 
+    def wait_until_hidden(self, elem):
+        wait = WebDriverWait(elem, self.timeout)
+        wait.until(lambda e: not e.is_displayed(), u"{} should be hidden".format(elem.text))
+
     def wait_until_disabled(self, elem):
         wait = WebDriverWait(elem, self.timeout)
-        wait.until(lambda e: not e.is_enabled(), "{} should be disabled".format(elem.text))
+        wait.until(lambda e: not e.is_enabled(), u"{} should be disabled".format(elem.text))
 
     def wait_until_clickable(self, elem):
         wait = WebDriverWait(elem, self.timeout)
-        wait.until(lambda e: e.is_displayed() and e.is_enabled(), "{} should be cliclable".format(elem.text))
+        wait.until(lambda e: e.is_displayed() and e.is_enabled(), u"{} should be cliclable".format(elem.text))
 
     def wait_until_text_in(self, text, elem):
         wait = WebDriverWait(elem, self.timeout)
-        wait.until(lambda e: text in e.text, "{} should be in {}".format(text, elem.text))
+        wait.until(lambda e: text in e.text, u"{} should be in {}".format(text, elem.text))
 
     def go_to_page(self, page_name, css_selector=None):
         """

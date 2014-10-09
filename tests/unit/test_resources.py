@@ -45,6 +45,30 @@ expected_filled_js_template = u"""\
 """.format(expected_filled_template)
 
 
+another_template = u"""\
+<explanation>This is an even simpler xml template.</explanation>
+"""
+
+
+simple_template = u"""\
+<example>
+    <title>This is a simple xml template.</title>
+    <arguments>
+        <url_name>simple_template</url_name>
+    </arguments>
+</example>
+"""
+
+
+expected_scenarios_with_identifiers = [
+    ("another_template", "Another Template", another_template),
+    ("simple_template", "Simple Template", simple_template),
+]
+
+
+expected_scenarios = [(t, c) for (i, t, c) in expected_scenarios_with_identifiers]
+
+
 class TestResourceLoader(unittest.TestCase):
     def test_load_unicode(self):
         s = ResourceLoader(__name__).load_unicode("data/simple_django_template.txt")
@@ -55,11 +79,21 @@ class TestResourceLoader(unittest.TestCase):
         self.assertEquals(s, expected_string)
 
     def test_render_template(self):
-        loader = ResourceLoader("tests.unit.data")
-        s = loader.render_template("simple_django_template.txt", example_context)
+        loader = ResourceLoader(__name__)
+        s = loader.render_template("data/simple_django_template.txt", example_context)
         self.assertEquals(s, expected_filled_template)
 
     def test_render_js_template(self):
-        loader = ResourceLoader("tests.unit.data")
-        s = loader.render_js_template("simple_django_template.txt", example_id, example_context)
+        loader = ResourceLoader(__name__)
+        s = loader.render_js_template("data/simple_django_template.txt", example_id, example_context)
         self.assertEquals(s, expected_filled_js_template)
+
+    def test_load_scenarios(self):
+        loader = ResourceLoader(__name__)
+        scenarios = loader.load_scenarios_from_path("data")
+        self.assertEquals(scenarios, expected_scenarios)
+
+    def test_load_scenarios_with_identifiers(self):
+        loader = ResourceLoader(__name__)
+        scenarios = loader.load_scenarios_from_path("data", include_identifier=True)
+        self.assertEquals(scenarios, expected_scenarios_with_identifiers)

@@ -1,3 +1,6 @@
+import os
+import sys
+
 import pkg_resources
 from django.template import Context, Template
 
@@ -29,3 +32,29 @@ class ResourceLoader(object):
             element_id,
             self.render_template(template_path, context)
         )
+
+    def load_scenarios_from_path(self, relative_scenario_dir, include_identifier=False):
+        """
+        Returns an array of (title, xmlcontent) from files contained in a specified directory,
+        formatted as expected for the return value of the workbench_scenarios() method.
+
+        If `include_identifier` is True, returns an array of (identifier, title, xmlcontent).
+        """
+        base_dir = os.path.dirname(os.path.realpath(sys.modules[self.module_name].__file__))
+        scenario_dir = os.path.join(base_dir, relative_scenario_dir)
+
+        scenarios = []
+        if os.path.isdir(scenario_dir):
+            for template in os.listdir(scenario_dir):
+                if not template.endswith('.xml'):
+                    continue
+                identifier = template[:-4]
+                title = identifier.replace('_', ' ').title()
+                template_path = os.path.join(relative_scenario_dir, template)
+                scenario = unicode(self.render_template(template_path, {"url_name": identifier}))
+                if not include_identifier:
+                    scenarios.append((title, scenario))
+                else:
+                    scenarios.append((identifier, title, scenario))
+
+        return scenarios

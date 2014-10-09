@@ -6,6 +6,7 @@ from django.template import Context, Template
 
 
 class ResourceLoader(object):
+    """Loads resources relative to the module named by the module_name parameter."""
     def __init__(self, module_name):
         self.module_name = module_name
 

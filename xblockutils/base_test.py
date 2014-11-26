@@ -61,11 +61,15 @@ class SeleniumBaseTest(SeleniumTest):
 
     def wait_until_clickable(self, elem):
         wait = WebDriverWait(elem, self.timeout)
-        wait.until(lambda e: e.is_displayed() and e.is_enabled(), u"{} should be cliclable".format(elem.text))
+        wait.until(lambda e: e.is_displayed() and e.is_enabled(), u"{} should be clickable".format(elem.text))
 
     def wait_until_text_in(self, text, elem):
         wait = WebDriverWait(elem, self.timeout)
         wait.until(lambda e: text in e.text, u"{} should be in {}".format(text, elem.text))
+
+    def wait_until_exists(self, selector):
+        wait = WebDriverWait(self.browser, self.timeout)
+        wait.until(lambda driver: driver.find_element_by_css_selector(selector), u"Selector '{}' should exist.")
 
     def go_to_page(self, page_name, css_selector=None):
         """

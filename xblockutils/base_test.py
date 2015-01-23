@@ -69,9 +69,9 @@ class SeleniumBaseTest(SeleniumTest):
 
     def wait_until_exists(self, selector):
         wait = WebDriverWait(self.browser, self.timeout)
-        wait.until(lambda driver: driver.find_element_by_css_selector(selector), u"Selector '{}' should exist.")
+        wait.until(lambda driver: driver.find_element_by_css_selector(selector), u"Selector '{}' should exist.".format(selector))
 
-    def go_to_page(self, page_name, css_selector=None):
+    def go_to_page(self, page_name, css_selector=None, view_name=None):
         """
         Navigate to the page `page_name`, as listed on the workbench home
         Returns the DOM element on the visited page located by the `css_selector`
@@ -80,7 +80,10 @@ class SeleniumBaseTest(SeleniumTest):
             css_selector = self._default_css_selector
 
         self.browser.get(self.live_server_url)
-        self.browser.find_element_by_link_text(page_name).click()
+        target_url = self.browser.find_element_by_link_text(page_name).get_attribute('href')
+        if view_name:
+            target_url += '%s/' % view_name
+        self.browser.get(target_url)
         time.sleep(1)
         block = self.browser.find_element_by_css_selector(css_selector)
         return block

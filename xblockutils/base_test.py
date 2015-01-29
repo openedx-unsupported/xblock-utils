@@ -82,7 +82,7 @@ class SeleniumBaseTest(SeleniumTest):
         self.browser.get(self.live_server_url)
         target_url = self.browser.find_element_by_link_text(page_name).get_attribute('href')
         if view_name:
-            target_url += '%s/' % view_name
+            target_url += '{}/'.format(view_name)
         self.browser.get(target_url)
         time.sleep(1)
         block = self.browser.find_element_by_css_selector(css_selector)

@@ -188,3 +188,67 @@ class StudioEditableXBlockMixin(object):
         validation = super(StudioEditableXBlockMixin, self).validate()
         self.validate_field_data(validation, self)
         return validation
+
+
+class StudioContainerXBlockMixin(object):
+    """
+    An XBlock mixin to provide convenient use of an XBlock in Studio
+    that wants to allow the user to assign children to it.
+    """
+    has_author_view = True  # Without this flag, studio will use student_view on newly-added blocks :/
+
+    def render_children(self, context, fragment, can_reorder=True, can_add=False):
+        """
+        Renders the children of the module with HTML appropriate for Studio. If can_reorder is
+        True, then the children will be rendered to support drag and drop.
+        """
+        contents = []
+
+        for child_id in self.children:
+            child = self.runtime.get_block(child_id)
+            if can_reorder:
+                context['reorderable_items'].add(child.scope_ids.usage_id)
+            rendered_child = child.render('author_view' if hasattr(child, 'author_view') else 'student_view', context)
+            fragment.add_frag_resources(rendered_child)
+
+            contents.append({
+                'id': child.location.to_deprecated_string(),
+                'content': rendered_child.content
+            })
+
+        fragment.add_content(self.runtime.render_template("studio_render_children_view.html", {
+            'items': contents,
+            'xblock_context': context,
+            'can_add': can_add,
+            'can_reorder': can_reorder,
+        }))
+
+    def author_view(self, context):
+        """
+        Display a the studio editor when the user has clicked "View" to see the container view,
+        otherwise just show the normal 'author_preview_view' or 'student_view' preview.
+        """
+        root_xblock = context.get('root_xblock')
+        is_root = root_xblock and root_xblock.location == self.location
+
+        if is_root:
+            # User has clicked the "View" link. Show an editable preview of this block's children
+            return self.author_edit_view(context)
+        else:
+            return self.author_preview_view(context)
+
+    def author_edit_view(self, context):
+        """
+        Child blocks can override this to control the view shown to authors in Studio when
+        editing this block's children.
+        """
+        fragment = Fragment()
+        self.render_children(context, fragment, can_reorder=True, can_add=False)
+        return fragment
+
+    def author_preview_view(self, context):
+        """
+        Child blocks can override this to add a custom preview shown to authors in Studio when
+        not editing this block's children.
+        """
+        return self.student_view(context)

@@ -10,6 +10,7 @@ StudioEditableXBlockMixin to your XBlock.
 
 # Imports ###########################################################
 
+import json
 import logging
 
 from xblock.core import XBlock
@@ -106,6 +107,10 @@ class StudioEditableXBlockMixin(object):
                 break
         if "type" not in info:
             raise NotImplementedError("StudioEditableXBlockMixin currently only supports fields derived from JSONField")
+        if info["type"] == "generic":
+            # Convert value to JSON string if we're treating this field generically:
+            info["value"] = json.dumps(info["value"])
+            info["default"] = json.dumps(info["default"])
         if field.values and not isinstance(field, Boolean):
             info['has_values'] = True
             # This field has only a limited number of pre-defined options.

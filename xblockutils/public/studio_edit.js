@@ -23,6 +23,13 @@ function StudioEditableXBlockMixin(runtime, element) {
                     return parseInt(val, 10);
                 if (type == "float")
                     return parseFloat(val);
+                if (type == "generic") {
+                    val = val.trim();
+                    if (val === "")
+                        val = null;
+                    else
+                        val = JSON.parse(val); // TODO: handle parse errors
+                }
                 return val;
             }
         });
@@ -33,7 +40,7 @@ function StudioEditableXBlockMixin(runtime, element) {
         };
         $field.bind("change input paste", fieldChanged);
         $resetButton.click(function() {
-            $field.val($wrapper.data('default'));
+            $field.val($wrapper.attr('data-default')); // Use attr instead of data to force treating the default value as a string
             $wrapper.removeClass('is-set');
             $resetButton.removeClass('active').addClass('inactive');
         });

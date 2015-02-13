@@ -3,11 +3,13 @@ function StudioEditableXBlockMixin(runtime, element) {
     "use strict";
     
     var fields = [];
+    var tinyMceAvailable = (typeof $.fn.tinymce !== 'undefined'); // Studio includes a copy of tinyMCE and its jQuery plugin
+
     $(element).find('.field-data-control').each(function() {
         var $field = $(this);
         var $wrapper = $field.closest('li');
         var $resetButton = $wrapper.find('button.setting-clear');
-        var cast = $wrapper.data('cast');
+        var type = $wrapper.data('cast');
         fields.push({
             $field: $field,
             name: $wrapper.data('field-name'),
@@ -15,25 +17,46 @@ function StudioEditableXBlockMixin(runtime, element) {
             val: function() {
                 var val = $field.val();
                 // Cast values to the appropriate type so that we send nice clean JSON over the wire:
-                if (cast == 'boolean')
+                if (type == 'boolean')
                     return (val == 'true' || val == '1');
-                if (cast == "integer")
+                if (type == "integer")
                     return parseInt(val, 10);
-                if (cast == "float")
+                if (type == "float")
                     return parseFloat(val);
                 return val;
             }
         });
-        $field.bind("change input paste", function() {
+        var fieldChanged = function() {
             // Field value has been modified:
             $wrapper.addClass('is-set');
             $resetButton.removeClass('inactive').addClass('active');
-        });
+        };
+        $field.bind("change input paste", fieldChanged);
         $resetButton.click(function() {
             $field.val($wrapper.data('default'));
             $wrapper.removeClass('is-set');
             $resetButton.removeClass('active').addClass('inactive');
         });
+        if (type == 'html' && tinyMceAvailable) {
+            if ($field.tinymce())
+                $field.tinymce().remove(); // Stale instance from a previous dialog. Delete it to avoid interference.
+            $field.tinymce({
+                theme: 'modern',
+                skin: 'studio-tmce4',
+                height: '200px',
+                formats: { code: { inline: 'code' } },
+                codemirror: { path: "" + baseUrl + "/js/vendor" },
+                plugins: "link codemirror",
+                menubar: false,
+                statusbar: false,
+                toolbar_items_size: 'small',
+                toolbar: "formatselect | styleselect | bold italic underline forecolor wrapAsCode | bullist numlist outdent indent blockquote | link unlink | code",
+                resize: "both",
+                setup : function(ed) {
+                    ed.on('change', fieldChanged);
+                }
+            });
+        }
     });
 
     var studio_submit = function(data) {

@@ -91,13 +91,18 @@ class StudioEditableXBlockMixin(object):
             'value': field.read_from(self),
             'has_values': False,
             'help': field.help,
+            'allow_reset': field.runtime_options.get('resettable_editor', True),
         }
         for type_class, type_name in supported_field_types:
             if isinstance(field, type_class):
                 info['type'] = type_name
                 # If String fields are declared like String(..., multiline_editor=True), then call them "text" type:
-                if type_class is String and field.runtime_options.get('multiline_editor'):
-                    info['type'] = 'text'
+                editor_type = field.runtime_options.get('multiline_editor')
+                if type_class is String and editor_type:
+                    if editor_type == "html":
+                        info['type'] = 'html'
+                    else:
+                        info['type'] = 'text'
                 break
         if "type" not in info:
             raise NotImplementedError("StudioEditableXBlockMixin currently only supports fields derived from JSONField")

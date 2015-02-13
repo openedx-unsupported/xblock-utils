@@ -52,7 +52,7 @@
                 {% if field.min %} min="{{field.min}}" {% endif %}
                 value="{{field.value|default_if_none:""}}"
               >
-            {% elif field.type == "text" %}
+            {% elif field.type == "text" or field.type == "html" %}
               <textarea class="field-data-control" data-field-name="{{field.name}}" id="xb-field-edit-{{field.name}}" rows=10 cols=70>{{field.value}}</textarea>
             {% elif field.type == 'generic' %}
               {# Show a textarea so we can edit it as a JSON string #}
@@ -60,9 +60,12 @@
             {% else %}
               Unsupported field type. This setting cannot be edited.
             {% endif %}
-            <button class="action setting-clear {% if field.is_set %}active{%else%}inactive{% endif %}" type="button" name="setting-clear" value="{% trans "Clear" %}" data-tooltip="{% trans "Clear" %}">
-              <i class="icon fa fa-undo"></i><span class="sr">{% trans "Clear Value" %}</span>
-            </button>
+
+            {% if field.allow_reset %}
+              <button class="action setting-clear {% if field.is_set %}active{%else%}inactive{% endif %}" type="button" name="setting-clear" value="{% trans "Clear" %}" data-tooltip="{% trans "Clear" %}">
+                <i class="icon fa fa-undo"></i><span class="sr">{% trans "Clear Value" %}</span>
+              </button>
+            {% endif %}
           </div>
           {% if field.help %}
             <span class="tip setting-help"> {{ field.help }} </span>

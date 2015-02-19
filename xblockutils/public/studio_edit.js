@@ -81,6 +81,10 @@ function StudioEditableXBlockMixin(runtime, element) {
             if (jqXHR.responseText) { // Is there a more specific error message we can show?
                 try {
                     message = JSON.parse(jqXHR.responseText).error;
+                    if (typeof message === "object" && message.messages) {
+                        // e.g. {"error": {"messages": [{"text": "Unknown user 'bob'!", "type": "error"}, ...]}} etc.
+                        message = $.map(message.messages, function(msg) { return msg.text; }).join(", ");
+                    }
                 } catch (error) { message = jqXHR.responseText.substr(0, 300); }
             }
             runtime.notify('error', {title: gettext("Unable to update settings"), message: message});

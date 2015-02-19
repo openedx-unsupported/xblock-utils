@@ -26,6 +26,8 @@ from xblockutils.resources import ResourceLoader
 log = logging.getLogger(__name__)
 loader = ResourceLoader(__name__)
 
+# Classes ###########################################################
+
 
 class FutureFields(object):
     """
@@ -35,6 +37,7 @@ class FutureFields(object):
         self._new_fields_dict = new_fields_dict
         self._blacklist = newly_removed_fields
         self._fallback_obj = fallback_obj
+
     def __getattr__(self, name):
         try:
             return self._new_fields_dict[name]

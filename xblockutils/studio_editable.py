@@ -126,7 +126,7 @@ class StudioEditableXBlockMixin(object):
             else:
                 # e.g. [1, 2, 3] or [ {"display_name": "Always", "value": "always"}, {...}, ... ]
                 values = field.values
-                if "display_name" not in values[0]:
+                if not isinstance(values[0], dict) or "display_name" not in values[0]:
                     values = [{"display_name": val, "value": val} for val in values]
                 info['values'] = values
         return info

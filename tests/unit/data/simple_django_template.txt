@@ -1,0 +1,10 @@
+This is a simple django template example.
+
+This template can make use of the following context variables:
+Name: {{name}}
+List: {{items|safe}}
+
+It can also do some fancy things with them:
+Default value if name is empty: {{name|default:"Default Name"}}
+Length of the list: {{items|length}}
+Items of the list:{% for item in items %} {{item}}{% endfor %}

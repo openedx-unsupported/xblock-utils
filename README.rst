@@ -1,9 +1,13 @@
-# xblock-utils: Various utilities for XBlocks
+xblock-utils: Various utilities for XBlocks
+-------------------------------------------
 
 These are a collection of useful utility functions,
 test base classes and documentation shared by many XBlocks.
-(Especially those of [edx-solutions](https://github.com/edx-solutions).)
+(Especially those of `edx-solutions`_.)
 
-To test the utilities, run:
+.. _edx-solutions: https://github.com/edx-solutions
+
+
+To test the utilities, run::
 
     nosetests --with-coverage --cover-package xblockutils --cover-html

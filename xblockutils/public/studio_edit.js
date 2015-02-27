@@ -11,7 +11,6 @@ function StudioEditableXBlockMixin(runtime, element) {
         var $resetButton = $wrapper.find('button.setting-clear');
         var type = $wrapper.data('cast');
         fields.push({
-            $field: $field,
             name: $wrapper.data('field-name'),
             isSet: function() { return $wrapper.hasClass('is-set'); },
             val: function() {
@@ -23,7 +22,7 @@ function StudioEditableXBlockMixin(runtime, element) {
                     return parseInt(val, 10);
                 if (type == "float")
                     return parseFloat(val);
-                if (type == "generic") {
+                if (type == "generic" || type == "list" || type == "set") {
                     val = val.trim();
                     if (val === "")
                         val = null;
@@ -64,6 +63,43 @@ function StudioEditableXBlockMixin(runtime, element) {
                 }
             });
         }
+    });
+
+    $(element).find('.wrapper-list-settings .list-set').each(function() {
+        var $optionList = $(this);
+        var $checkboxes = $(this).find('input');
+        var $wrapper = $optionList.closest('li');
+        var $resetButton = $wrapper.find('button.setting-clear');
+
+        fields.push({
+            name: $wrapper.data('field-name'),
+            isSet: function() { return $wrapper.hasClass('is-set'); },
+            val: function() {
+                var val = [];
+                $checkboxes.each(function() {
+                    if ($(this).is(':checked')) {
+                        val.push(JSON.parse($(this).val()));
+                    }
+                });
+                return val;
+            }
+        });
+        var fieldChanged = function() {
+            // Field value has been modified:
+            $wrapper.addClass('is-set');
+            $resetButton.removeClass('inactive').addClass('active');
+        };
+        $checkboxes.bind("change input", fieldChanged);
+
+        $resetButton.click(function() {
+            var defaults = JSON.parse($wrapper.attr('data-default'));
+            $checkboxes.each(function() {
+                var val = JSON.parse($(this).val());
+                $(this).prop('checked', defaults.indexOf(val) > -1);
+            });
+            $wrapper.removeClass('is-set');
+            $resetButton.removeClass('active').addClass('inactive');
+        });
     });
 
     var studio_submit = function(data) {

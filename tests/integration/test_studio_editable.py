@@ -161,6 +161,13 @@ class TestEditableXBlock_StudioView(StudioEditableBaseTest):
         self.click_save()
 
 
+def fancy_list_values_provider_a(block):
+    return [1, 2, 3, 4, 5]
+
+def fancy_list_values_provider_b(block):
+    return [{"display_name": "Robert", "value": "bob"}, {"display_name": "Alexandra", "value": "alex"}]
+
+
 class FancyXBlock(StudioEditableXBlockMixin, XBlock):
     """
     A Studio-editable XBlock with lots of fields and fancy features
@@ -188,6 +195,19 @@ class FancyXBlock(StudioEditableXBlockMixin, XBlock):
     list_normal = List(display_name="Normal List", default=[])
     list_intdefs = List(display_name="Integer List With Default", default=[1, 2, 3, 4, 5])
     list_strdefs = List(display_name="String List With Default", default=['1', '2', '3', '4', '5'])
+
+    list_set_ints = List(
+        display_name="Int List (Set)",
+        list_style="set",
+        list_values_provider=fancy_list_values_provider_a,
+        default=[1, 3, 5],
+    )
+    list_set_strings = List(
+        display_name="String List (Set)",
+        list_style="set",
+        list_values_provider=fancy_list_values_provider_b,
+        default=["alex"],
+    )
     
     string_normal = String(display_name="Normal String Field")
     string_values = String(display_name="String Field With Values", default="A", values=("A", "B", "C", "D"))
@@ -211,8 +231,9 @@ class FancyXBlock(StudioEditableXBlockMixin, XBlock):
 
     editable_fields = (
         'bool_normal', 'dict_normal', 'float_normal', 'float_values', 'int_normal', 'int_ranged', 'int_dynamic',
-        'int_values', 'list_normal', 'list_intdefs', 'list_strdefs', 'string_normal', 'string_values', 'string_named',
-        'string_dynamic', 'string_multiline', 'string_multiline_reset', 'string_html',
+        'int_values', 'list_normal', 'list_intdefs', 'list_strdefs', 'list_set_ints', 'list_set_strings',
+        'string_normal', 'string_values', 'string_named', 'string_dynamic', 'string_multiline',
+        'string_multiline_reset', 'string_html',
     )
 
 
@@ -255,6 +276,8 @@ class TestFancyXBlock_StudioView(StudioEditableBaseTest):
         block.list_normal = []
         block.list_intdefs = [9, 10, 11]
         block.list_strdefs = ['H', 'e', 'l', 'l', 'o']
+        block.list_set_ints = [2, 3, 4]
+        block.list_set_strings = ["bob"]
         block.string_normal = "A"
         block.string_values = "B"
         block.string_named = "BC"

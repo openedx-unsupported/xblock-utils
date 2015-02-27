@@ -69,6 +69,15 @@ Supported field types:
   ``field_name = String(multiline_editor='html', resettable_editor=False)``
 * Any of the above will use a dropdown menu if they have a pre-defined
   list of possible values.
+* List of undordered unique values (i.e. sets) drawn from a small set of
+  possible values:
+  ``field_name = List(list_style='set', list_values_provider=some_method)``
+
+  - The ``List`` declaration must include the property ``list_style='set'`` to
+    indicate that the ``List`` field is being used with set semantics.
+  - The ``List`` declaration must also define a ``list_values_provider`` method
+    which will be called with the block as its only parameter and which must
+    return a list of possible values.
 * Rudimentary support for List, Dict, and any other JSONField-derived field types
 
   - ``list_field = List(display_name="Normal List", default=[])``

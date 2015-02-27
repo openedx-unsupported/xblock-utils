@@ -14,7 +14,7 @@ import json
 import logging
 
 from xblock.core import XBlock
-from xblock.fields import Scope, JSONField, Integer, Float, Boolean, String
+from xblock.fields import Scope, JSONField, List, Integer, Float, Boolean, String
 from xblock.exceptions import JsonHandlerError
 from xblock.fragment import Fragment
 from xblock.validation import Validation
@@ -85,6 +85,7 @@ class StudioEditableXBlockMixin(object):
             (Float, 'float'),
             (Boolean, 'boolean'),
             (String, 'string'),
+            (List, 'list'),
             (JSONField, 'generic'),  # This is last so as a last resort we display a text field w/ the JSON string
         )
         info = {
@@ -96,6 +97,8 @@ class StudioEditableXBlockMixin(object):
             'has_values': False,
             'help': field.help,
             'allow_reset': field.runtime_options.get('resettable_editor', True),
+            'list_values': None,  # Only available for List fields
+            'list_values_count': None,
         }
         for type_class, type_name in supported_field_types:
             if isinstance(field, type_class):
@@ -107,9 +110,19 @@ class StudioEditableXBlockMixin(object):
                         info['type'] = 'html'
                     else:
                         info['type'] = 'text'
+                if type_class is List and field.runtime_options.get('list_style') == "set":
+                    # List represents unordered, unique items, optionally drawn from list_values_provider()
+                    info['type'] = 'set'
+                elif type_class is List:
+                    info['type'] = "generic"  # disable other types of list for now until properly implemented
                 break
         if "type" not in info:
             raise NotImplementedError("StudioEditableXBlockMixin currently only supports fields derived from JSONField")
+        if info["type"] in ("list", "set"):
+            info["value"] = [json.dumps(val) for val in info["value"]]
+            if info["default"] is None:
+                info["default"] = []
+            info["default"] = json.dumps(info["default"])
         if info["type"] == "generic":
             # Convert value to JSON string if we're treating this field generically:
             info["value"] = json.dumps(info["value"])
@@ -129,6 +142,18 @@ class StudioEditableXBlockMixin(object):
                 if not isinstance(values[0], dict) or "display_name" not in values[0]:
                     values = [{"display_name": val, "value": val} for val in values]
                 info['values'] = values
+        if info["type"] in ("list", "set") and field.runtime_options.get('list_values_provider'):
+            list_values = field.runtime_options['list_values_provider'](self)
+            # list_values must be a list of values or {"display_name": x, "value": y} objects
+            # Furthermore, we need to convert all values to JSON since they could be of any type
+            if list_values and (not isinstance(list_values[0], dict) or "display_name" not in list_values[0]):
+                list_values = [json.dumps(val) for val in list_values]
+                list_values = [{"display_name": val, "value": val} for val in list_values]
+            else:
+                for entry in list_values:
+                    entry["value"] = json.dumps(entry["value"])
+            info['list_values'] = list_values
+            info['list_values_count'] = len(list_values)
         return info
 
     @XBlock.json_handler

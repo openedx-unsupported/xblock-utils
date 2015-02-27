@@ -15,10 +15,12 @@ disable=
 	protected-access,
 	star-args,
 	too-few-public-methods,
-	too-many-public-methods,
 	too-many-ancestors,
 	too-many-arguments,
+	too-many-branches,
 	too-many-locals,
+	too-many-public-methods,
+	too-many-statements,
 	unused-argument
 
 [SIMILARITIES]

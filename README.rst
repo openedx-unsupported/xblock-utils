@@ -101,6 +101,9 @@ Supported field options (all field types):
   - A callable that returns one of the above. (Note: the callable does
     *not* get passed the XBlock instance or runtime, so it cannot be a
     normal member function)
+* ``values_provider`` can define a callable that accepts the XBlock
+  instance as an argument, and returns a list of possible values in one
+  of the formats listed above.
 * ``resettable_editor`` - defaults to ``True``. Set ``False`` to hide the
   "Reset" button used to return a field to its default value by removing
   the field's value from the XBlock instance.

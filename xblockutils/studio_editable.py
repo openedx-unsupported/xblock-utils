@@ -127,7 +127,11 @@ class StudioEditableXBlockMixin(object):
             # Convert value to JSON string if we're treating this field generically:
             info["value"] = json.dumps(info["value"])
             info["default"] = json.dumps(info["default"])
-        if field.values and not isinstance(field, Boolean):
+        if 'values_provider' in field.runtime_options:
+            values = field.runtime_options["values_provider"](self)
+        else:
+            values = field.values
+        if values and not isinstance(field, Boolean):
             info['has_values'] = True
             # This field has only a limited number of pre-defined options.
             # Protip: when defining the field, values= can be a callable.
@@ -138,7 +142,6 @@ class StudioEditableXBlockMixin(object):
                 info["step"] = field.values["step"]
             else:
                 # e.g. [1, 2, 3] or [ {"display_name": "Always", "value": "always"}, {...}, ... ]
-                values = field.values
                 if not isinstance(values[0], dict) or "display_name" not in values[0]:
                     values = [{"display_name": val, "value": val} for val in values]
                 info['values'] = values

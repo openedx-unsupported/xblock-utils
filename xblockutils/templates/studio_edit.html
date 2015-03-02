@@ -54,9 +54,9 @@
               >
             {% elif field.type == "text" or field.type == "html" %}
               <textarea class="field-data-control" data-field-name="{{field.name}}" id="xb-field-edit-{{field.name}}" rows=10 cols=70>{{field.value}}</textarea>
-            {% elif field.type == 'set' and field.list_values %}
+            {% elif field.type == 'set' and field.has_list_values %}
               {% comment %}
-                TODO: If list_values_count is high, show an alternate editor 
+                TODO: If len(list_values) is high, show an alternate editor 
                 with a select box and a growing list of selected choices
               {% endcomment %}
               <div class="wrapper-list-settings">
@@ -73,6 +73,8 @@
                         {{choice.display_name}}
                       </label>
                     </li>
+                  {% empty %}
+                    <li>{% trans "No choices available." %}</li>
                   {% endfor %}
                 </ul>
               </div>

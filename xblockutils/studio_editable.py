@@ -98,7 +98,7 @@ class StudioEditableXBlockMixin(object):
             'help': field.help,
             'allow_reset': field.runtime_options.get('resettable_editor', True),
             'list_values': None,  # Only available for List fields
-            'list_values_count': None,
+            'has_list_values': False,  # True if list_values_provider exists, even if it returned no available options
         }
         for type_class, type_name in supported_field_types:
             if isinstance(field, type_class):
@@ -153,7 +153,7 @@ class StudioEditableXBlockMixin(object):
                 for entry in list_values:
                     entry["value"] = json.dumps(entry["value"])
             info['list_values'] = list_values
-            info['list_values_count'] = len(list_values)
+            info['has_list_values'] = True
         return info
 
     @XBlock.json_handler

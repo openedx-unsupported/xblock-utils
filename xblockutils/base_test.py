@@ -87,6 +87,11 @@ class SeleniumBaseTest(SeleniumTest):
         wait = WebDriverWait(elem, self.timeout)
         wait.until(lambda e: text in e.text, u"{} should be in {}".format(text, elem.text))
 
+    def wait_until_html_in(self, html, elem):
+        wait = WebDriverWait(elem, self.timeout)
+        wait.until(lambda e: html in e.get_attribute('innerHTML'),
+                   u"{} should be in {}".format(html, elem.get_attribute('innerHTML')))
+
     def wait_until_exists(self, selector):
         wait = WebDriverWait(self.browser, self.timeout)
         wait.until(lambda driver: driver.find_element_by_css_selector(selector), u"Selector '{}' should exist.".format(selector))

@@ -115,7 +115,7 @@ class SeleniumBaseTest(SeleniumXBlockTest):
     """
     Selenium Base Test for loading a whole folder of XML scenarios and then running tests.
     This is kept for compatibility, but it is recommended that SeleniumXBlockTest be used
-    instead, since it is faster and more flexible (specifically, senarios are only loaded
+    instead, since it is faster and more flexible (specifically, scenarios are only loaded
     as needed, and can be defined inline with the tests).
     """
     module_name = None  # You must set this to __name__ in any subclass so ResourceLoader can find scenario XML files

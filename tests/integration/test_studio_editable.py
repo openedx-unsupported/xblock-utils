@@ -7,7 +7,7 @@ from xblockutils.studio_editable_test import StudioEditableBaseTest
 
 class EditableXBlock(StudioEditableXBlockMixin, XBlock):
     """
-    A Studio-editable XBlock
+    A basic Studio-editable XBlock (for use in tests)
     """
     color = String(default="red")
     count = Integer(default=42)
@@ -15,8 +15,11 @@ class EditableXBlock(StudioEditableXBlockMixin, XBlock):
     editable_fields = ('color', 'count', 'comment')
 
     def validate_field_data(self, validation, data):
-        """ Basic validation method for these tests """
-        if data.count <=0:
+        """
+        A validation method to check that 'count' is positive and prevent
+        swearing in the 'comment' field.
+        """
+        if data.count < 0:
             validation.add(ValidationMessage(ValidationMessage.ERROR, u"Count cannot be negative"))
         if "damn" in data.comment.lower():
             validation.add(ValidationMessage(ValidationMessage.ERROR, u"No swearing allowed"))
@@ -33,6 +36,18 @@ class TestEditableXBlock_StudioView(StudioEditableBaseTest):
         self.go_to_view("studio_view")
         self.fix_js_environment()
 
+    def assert_unchanged(self, block, orig_field_values=None, explicitly_set=False):
+        """
+        Check that all field values on 'block' match with either the value in orig_field_values
+        (if provided) or the default value.
+        If 'explitly_set' is False (default) it asserts that no fields have an explicit value
+        set. If 'explititly_set' is True it expects all fields to be explicitly set.
+        """
+        for field_name in block.editable_fields:
+            expected_value = orig_field_values[field_name] if orig_field_values else block.fields[field_name].default
+            self.assertEqual(getattr(block, field_name), expected_value)
+            self.assertEqual(block.fields[field_name].is_set_on(block), explicitly_set)
+
     def test_no_changes_with_defaults(self):
         """
         If we load the edit form and then save right away, there should be no changes.
@@ -40,9 +55,7 @@ class TestEditableXBlock_StudioView(StudioEditableBaseTest):
         block = self.load_root_xblock()
         orig_values = {field_name: getattr(block, field_name) for field_name in EditableXBlock.editable_fields}
         self.click_save()
-        for field_name in EditableXBlock.editable_fields:
-            self.assertEqual(getattr(block, field_name), orig_values[field_name])
-            self.assertFalse(block.fields[field_name].is_set_on(block))
+        self.assert_unchanged(block, orig_values)
 
     def test_no_changes_with_values_set(self):
         """
@@ -61,9 +74,7 @@ class TestEditableXBlock_StudioView(StudioEditableBaseTest):
 
         self.click_save()
         block = self.load_root_xblock()  # Need to reload the block to bypass its cache
-        for field_name in EditableXBlock.editable_fields:
-            self.assertEqual(getattr(block, field_name), orig_values[field_name])
-            self.assertTrue(block.fields[field_name].is_set_on(block))
+        self.assert_unchanged(block, orig_values, explicitly_set=True)
 
     def test_explicit_overrides(self):
         """
@@ -71,33 +82,29 @@ class TestEditableXBlock_StudioView(StudioEditableBaseTest):
         value will be saved explicitly.
         """
         block = self.load_root_xblock()
-        for field_name in EditableXBlock.editable_fields:
-            self.assertFalse(block.fields[field_name].is_set_on(block))
+        self.assert_unchanged(block)
 
-        color_control = self.get_element_for_field('color')
-        color_control.clear()
-        color_control.send_keys('red')
+        field_names = EditableXBlock.editable_fields
+        # It is crucial to this test that at least one of the fields is a String field with
+        # an empty string as its default value:
+        defaults = set([block.fields[field_name].default for field_name in field_names])
+        self.assertIn(u'', defaults)
 
-        count_control = self.get_element_for_field('count')
-        count_control.clear()
-        count_control.send_keys('42')
-
-        comment_control = self.get_element_for_field('comment')
-        comment_control.send_keys('forcing a change')
-        comment_control.clear()
+        for field_name in field_names:
+            control = self.get_element_for_field(field_name)
+            control.send_keys('9999')  # In case the field is blank and the new value is blank, this forces a change
+            control.clear()
+            control.send_keys(str(block.fields[field_name].default))
 
         self.click_save()
-        for field_name in EditableXBlock.editable_fields:
-            self.assertEqual(getattr(block, field_name), block.fields[field_name].default)
-            self.assertTrue(block.fields[field_name].is_set_on(block))
+        self.assert_unchanged(block, explicitly_set=True)
 
     def test_set_and_reset(self):
         """
         Test that we can set values, save, then reset to defaults.
         """
         block = self.load_root_xblock()
-        for field_name in EditableXBlock.editable_fields:
-            self.assertFalse(block.fields[field_name].is_set_on(block))
+        self.assert_unchanged(block)
 
         for field_name in EditableXBlock.editable_fields:
             color_control = self.get_element_for_field(field_name)
@@ -105,6 +112,8 @@ class TestEditableXBlock_StudioView(StudioEditableBaseTest):
             color_control.send_keys('1000')
 
         self.click_save()
+
+        block = self.load_root_xblock()  # Need to reload the block to bypass its cache
 
         self.assertEqual(block.color, '1000')
         self.assertEqual(block.count, 1000)
@@ -115,19 +124,12 @@ class TestEditableXBlock_StudioView(StudioEditableBaseTest):
 
         self.click_save()
         block = self.load_root_xblock()  # Need to reload the block to bypass its cache
-        for field_name in EditableXBlock.editable_fields:
-            self.assertEqual(getattr(block, field_name), block.fields[field_name].default)
-            self.assertFalse(block.fields[field_name].is_set_on(block))
+        self.assert_unchanged(block)
 
     def test_invalid_data(self):
         """
         Test that we get notified when there's a problem with our data.
         """
-        def assert_unchanged():
-            block = self.load_root_xblock()
-            for field_name in EditableXBlock.editable_fields:
-                self.assertEqual(getattr(block, field_name), block.fields[field_name].default)
-                self.assertFalse(block.fields[field_name].is_set_on(block))
         def expect_error_message(expected_message):
             notification = self.dequeue_runtime_notification()
             self.assertEqual(notification[0], "error")
@@ -147,14 +149,14 @@ class TestEditableXBlock_StudioView(StudioEditableBaseTest):
 
         self.click_save(expect_success=False)
         expect_error_message("Count cannot be negative, No swearing allowed")
-        assert_unchanged()
+        self.assert_unchanged(self.load_root_xblock())
 
         count_control.clear()
         count_control.send_keys('10')
 
         self.click_save(expect_success=False)
         expect_error_message("No swearing allowed")
-        assert_unchanged()
+        self.assert_unchanged(self.load_root_xblock())
 
         comment_control.clear()
 

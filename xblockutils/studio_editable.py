@@ -32,8 +32,25 @@ loader = ResourceLoader(__name__)
 class FutureFields(object):
     """
     A helper class whose attribute values come from the specified dictionary or fallback object.
+
+    This is only used by StudioEditableXBlockMixin and is not meant to be re-used anywhere else!
+
+    This class wraps an XBlock and makes it appear that some of the block's field values have
+    been changed to new values or deleted (and reset to default values). It does so without
+    actually modifying the XBlock. The only reason we need this is because the XBlock validation
+    API is built around attribute access, but often we want to validate data that's stored in a
+    dictionary before making changes to an XBlock's attributes (since any changes made to the
+    XBlock may get persisted even if validation fails).
     """
     def __init__(self, new_fields_dict, newly_removed_fields, fallback_obj):
+        """
+        Create an instance whose attributes come from new_fields_dict and fallback_obj.
+
+        Arguments:
+        new_fields_dict -- A dictionary of values that will appear as attributes of this object
+        newly_removed_fields -- A list of field names for which we will not use fallback_obj
+        fallback_obj -- An XBlock to use as a provider for any attributes not in new_fields_dict
+        """
         self._new_fields_dict = new_fields_dict
         self._blacklist = newly_removed_fields
         self._fallback_obj = fallback_obj
@@ -123,10 +140,11 @@ class StudioEditableXBlockMixin(object):
             if info["default"] is None:
                 info["default"] = []
             info["default"] = json.dumps(info["default"])
-        if info["type"] == "generic":
+        elif info["type"] == "generic":
             # Convert value to JSON string if we're treating this field generically:
             info["value"] = json.dumps(info["value"])
             info["default"] = json.dumps(info["default"])
+
         if 'values_provider' in field.runtime_options:
             values = field.runtime_options["values_provider"](self)
         else:
@@ -137,24 +155,32 @@ class StudioEditableXBlockMixin(object):
             # Protip: when defining the field, values= can be a callable.
             if isinstance(field.values, dict) and isinstance(field, (Float, Integer)):
                 # e.g. {"min": 0 , "max": 10, "step": .1}
-                info["min"] = field.values["min"]
-                info["max"] = field.values["max"]
-                info["step"] = field.values["step"]
-            else:
-                # e.g. [1, 2, 3] or [ {"display_name": "Always", "value": "always"}, {...}, ... ]
-                if not isinstance(values[0], dict) or "display_name" not in values[0]:
-                    values = [{"display_name": val, "value": val} for val in values]
+                for option in ("min", "max", "step"):
+                    val = field.values.get(option)
+                    if val is None:
+                        raise KeyError("Field is missing required values key '{}'".format(option))
+                    info[option] = val
+            elif isinstance(values[0], dict) and "display_name" in values[0] and "value" in values[0]:
+                # e.g. [ {"display_name": "Always", "value": "always"}, ... ]
+                for value in values:
+                    assert "display_name" in value and "value" in value
                 info['values'] = values
+            else:
+                # e.g. [1, 2, 3] - we need to convert it to the [{"display_name": x, "value": x}] format
+                info['values'] = [{"display_name": unicode(val), "value": val} for val in values]
         if info["type"] in ("list", "set") and field.runtime_options.get('list_values_provider'):
             list_values = field.runtime_options['list_values_provider'](self)
             # list_values must be a list of values or {"display_name": x, "value": y} objects
             # Furthermore, we need to convert all values to JSON since they could be of any type
-            if list_values and (not isinstance(list_values[0], dict) or "display_name" not in list_values[0]):
-                list_values = [json.dumps(val) for val in list_values]
-                list_values = [{"display_name": val, "value": val} for val in list_values]
-            else:
+            if list_values and isinstance(list_values[0], dict) and "display_name" in list_values[0]:
+                # e.g. [ {"display_name": "Always", "value": "always"}, ... ]
                 for entry in list_values:
+                    assert "display_name" in entry and "value" in entry
                     entry["value"] = json.dumps(entry["value"])
+            else:
+                # e.g. [1, 2, 3] - we need to convert it to the [{"display_name": x, "value": x}] format
+                list_values = [json.dumps(val) for val in list_values]
+                list_values = [{"display_name": unicode(val), "value": val} for val in list_values]
             info['list_values'] = list_values
             info['has_list_values'] = True
         return info
@@ -270,9 +296,8 @@ class StudioContainerXBlockMixin(object):
         otherwise just show the normal 'author_preview_view' or 'student_view' preview.
         """
         root_xblock = context.get('root_xblock')
-        is_root = root_xblock and root_xblock.location == self.location
 
-        if is_root:
+        if root_xblock and root_xblock.location == self.location:
             # User has clicked the "View" link. Show an editable preview of this block's children
             return self.author_edit_view(context)
         else:

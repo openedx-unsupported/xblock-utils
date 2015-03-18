@@ -67,9 +67,11 @@ Supported field types:
   ``field_name = String(multiline_editor=True, resettable_editor=False)``
 * String (html):
   ``field_name = String(multiline_editor='html', resettable_editor=False)``
-* Any of the above will use a dropdown menu if they have a pre-defined
-  list of possible values.
-* List of undordered unique values (i.e. sets) drawn from a small set of
+
+Any of the above will use a dropdown menu if they have a pre-defined
+list of possible values.
+
+* List of unordered unique values (i.e. sets) drawn from a small set of
   possible values:
   ``field_name = List(list_style='set', list_values_provider=some_method)``
 
@@ -78,9 +80,9 @@ Supported field types:
   - The ``List`` declaration must also define a ``list_values_provider`` method
     which will be called with the block as its only parameter and which must
     return a list of possible values.
-* Rudimentary support for List, Dict, and any other JSONField-derived field types
+* Rudimentary support for Dict, ordered List, and any other JSONField-derived field types
 
-  - ``list_field = List(display_name="Normal List", default=[])``
+  - ``list_field = List(display_name="Ordered List", default=[])``
   - ``dict_field = Dict(display_name="Normal Dict", default={})``
 
 Supported field options (all field types):
@@ -117,14 +119,14 @@ StudioContainerXBlockMixin
 
     from xblockutils.studio_editable import StudioContainerXBlockMixin
 
-This mixin helps with creating XBlocks that want to allow content
-authors to add/remove/reorder child blocks. By removing any existing
+This mixin helps to create XBlocks that allow content authors to add,
+remove, or reorder child blocks. By removing any existing
 ``author_view`` and adding this mixin, you'll get editable,
-re-orderable, deletable child support in Studio. To enable authors to
-add new children, simply override ``author_edit_view`` and set
-``can_add=True`` when calling ``render_children`` - see the source code.
-To enable authors to add only a limited subset of children requires
-custom HTML.
+re-orderable, and deletable child support in Studio. To enable authors to
+add arbitrary blocks as children, simply override ``author_edit_view`` 
+and set ``can_add=True`` when calling ``render_children`` - see the 
+source code. To restrict authors so they can add only specific types of
+child blocks or a limited number of children requires custom HTML.
 
 An example is the mentoring XBlock: |Screenshot 2|
 
@@ -177,9 +179,17 @@ child\_isinstance
 
 If your XBlock needs to find children/descendants of a particular
 class/mixin, you should use
-``child_isinstance(self, child_usage_id, SomeXBlockClassOrMixin)``
+
+.. code:: python
+
+    child_isinstance(self, child_usage_id, SomeXBlockClassOrMixin)
+
 rather than calling
-``isinstance(self.runtime.get_block(child_usage_id), SomeXBlockClassOrMixin)``.
+
+.. code:: python
+
+    ``isinstance(self.runtime.get_block(child_usage_id), SomeXBlockClassOrMixin)``.
+
 On runtimes such as those in edx-platform, ``child_isinstance`` is
 orders of magnitude faster.
 

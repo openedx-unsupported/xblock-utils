@@ -1,2 +1,5 @@
+*.log
 *.pyc
+.coverage
 xblock_utils.egg-info
+tests.integration.*.png

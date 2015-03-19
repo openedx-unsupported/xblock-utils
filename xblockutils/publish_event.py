@@ -17,27 +17,37 @@
 # along with this program in a file in the toplevel directory called
 # "AGPLv3". If not, see <http://www.gnu.org/licenses/>.
 #
+"""
+PublishEventMixin: A mixin for publishing events from an XBlock
+"""
 
 from xblock.core import XBlock
 
 
 class PublishEventMixin(object):
-    """A mixin for publishing events from an XBlock
+    """
+    A mixin for publishing events from an XBlock
 
-    Reuqires the object to have a runtime.publish method.
+    Requires the object to have a runtime.publish method.
     """
     additional_publish_event_data = {}
 
     @XBlock.json_handler
     def publish_event(self, data, suffix=''):
+        """
+        AJAX handler to allow client-side code to publish a server-side event
+        """
         try:
             event_type = data.pop('event_type')
-        except KeyError as e:
+        except KeyError:
             return {'result': 'error', 'message': 'Missing event_type in JSON data'}
 
         return self.publish_event_from_dict(event_type, data)
 
     def publish_event_from_dict(self, event_type, data):
+        """
+        Combine 'data' with self.additional_publish_event_data and publish an event
+        """
         for key, value in self.additional_publish_event_data.items():
             if key in data:
                 return {'result': 'error', 'message': 'Key should not be in publish_event data: {}'.format(key)}

@@ -10,4 +10,4 @@ test base classes and documentation shared by many XBlocks.
 
 To test the utilities, run::
 
-    nosetests --with-coverage --cover-package xblockutils --cover-html
+    ./run_tests.py

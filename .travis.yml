@@ -1,0 +1,20 @@
+language: python
+python:
+    - "2.7"
+before_install:
+    - "export DISPLAY=:99"
+    - "sh -e /etc/init.d/xvfb start"
+install:
+    - "pip install -e git://github.com/edx/xblock-sdk.git#egg=xblock-sdk"
+    - "pip install -r $VIRTUAL_ENV/src/xblock-sdk/requirements.txt"
+    - "pip install -r $VIRTUAL_ENV/src/xblock-sdk/test-requirements.txt"
+    - "pip install -r requirements.txt"
+script:
+    - pep8 xblockutils --max-line-length=120
+    - pylint xblockutils
+    - python run_tests.py --with-coverage --cover-package=xblockutils
+notifications:
+  email: false
+branches:
+    only:
+        - master

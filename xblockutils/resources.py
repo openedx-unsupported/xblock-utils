@@ -67,7 +67,7 @@ class ResourceLoader(object):
 
         scenarios = []
         if os.path.isdir(scenario_dir):
-            for template in os.listdir(scenario_dir):
+            for template in sorted(os.listdir(scenario_dir)):
                 if not template.endswith('.xml'):
                     continue
                 identifier = template[:-4]

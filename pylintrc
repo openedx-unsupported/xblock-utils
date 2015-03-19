@@ -1,0 +1,25 @@
+[REPORTS]
+reports=no
+
+[FORMAT]
+max-line-length=120
+
+[MESSAGES CONTROL]
+disable=
+	abstract-class-not-used,
+	broad-except,
+	fixme,
+	invalid-name,
+	locally-disabled,
+	maybe-no-member,
+	protected-access,
+	star-args,
+	too-few-public-methods,
+	too-many-public-methods,
+	too-many-ancestors,
+	too-many-arguments,
+	too-many-locals,
+	unused-argument
+
+[SIMILARITIES]
+min-similarity-lines=8

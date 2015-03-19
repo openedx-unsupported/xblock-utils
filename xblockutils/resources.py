@@ -17,6 +17,9 @@
 # along with this program in a file in the toplevel directory called
 # "AGPLv3". If not, see <http://www.gnu.org/licenses/>.
 #
+"""
+Helper class (ResourceLoader) for loading resources used by an XBlock
+"""
 
 
 import os
@@ -38,18 +41,20 @@ class ResourceLoader(object):
         resource_content = pkg_resources.resource_string(self.module_name, resource_path)
         return unicode(resource_content)
 
-    def render_template(self, template_path, context={}):
+    def render_template(self, template_path, context=None):
         """
         Evaluate a template by resource path, applying the provided context
         """
+        context = context or {}
         template_str = self.load_unicode(template_path)
         template = Template(template_str)
         return template.render(Context(context))
 
-    def render_js_template(self, template_path, element_id, context={}):
+    def render_js_template(self, template_path, element_id, context=None):
         """
         Render a js template.
         """
+        context = context or {}
         return u"<script type='text/template' id='{}'>\n{}\n</script>".format(
             element_id,
             self.render_template(template_path, context)

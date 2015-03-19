@@ -17,14 +17,11 @@
 # along with this program in a file in the toplevel directory called
 # "AGPLv3". If not, see <http://www.gnu.org/licenses/>.
 #
+"""
+Base classes for Selenium or bok-choy based integration tests of XBlocks.
+"""
 
-import os
-import sys
 import time
-
-import pkg_resources
-
-from django.template import Context, Template
 
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -35,19 +32,24 @@ from .resources import ResourceLoader
 
 
 class SeleniumBaseTest(SeleniumTest):
-    module_name = None
-    default_css_selector = None
+    """
+    Base class for Selenium integration tests of XBlocks, hosted in the workbench
+    """
+    module_name = None  # You must set this to __name__ in any subclass so ResourceLoader can find scenario XML files
+    default_css_selector = None  # Selector used by go_to_page to return the XBlock DOM element
     relative_scenario_path = 'xml'
     timeout = 10  # seconds
 
     @property
     def _module_name(self):
+        """ Internal method to access module_name with a friendly warning if it's unset """
         if self.module_name is None:
             raise NotImplementedError("Overwrite cls.module_name in your derived class.")
         return self.module_name
 
     @property
     def _default_css_selector(self):
+        """ Internal method to access default_css_selector with a warning if it's unset """
         if self.default_css_selector is None:
             raise NotImplementedError("Overwrite cls.default_css_selector in your derived class.")
         return self.default_css_selector
@@ -72,29 +74,38 @@ class SeleniumBaseTest(SeleniumTest):
         self.assertEqual(header1.text, 'XBlock scenarios')
 
     def wait_until_hidden(self, elem):
+        """ Wait until the DOM element elem is hidden """
         wait = WebDriverWait(elem, self.timeout)
         wait.until(lambda e: not e.is_displayed(), u"{} should be hidden".format(elem.text))
 
     def wait_until_disabled(self, elem):
+        """ Wait until the DOM element elem is disabled """
         wait = WebDriverWait(elem, self.timeout)
         wait.until(lambda e: not e.is_enabled(), u"{} should be disabled".format(elem.text))
 
     def wait_until_clickable(self, elem):
+        """ Wait until the DOM element elem is display and enabled """
         wait = WebDriverWait(elem, self.timeout)
         wait.until(lambda e: e.is_displayed() and e.is_enabled(), u"{} should be clickable".format(elem.text))
 
     def wait_until_text_in(self, text, elem):
+        """ Wait until the specified text appears in the DOM element elem """
         wait = WebDriverWait(elem, self.timeout)
         wait.until(lambda e: text in e.text, u"{} should be in {}".format(text, elem.text))
 
     def wait_until_html_in(self, html, elem):
+        """ Wait until the specified HTML appears in the DOM element elem """
         wait = WebDriverWait(elem, self.timeout)
         wait.until(lambda e: html in e.get_attribute('innerHTML'),
                    u"{} should be in {}".format(html, elem.get_attribute('innerHTML')))
 
     def wait_until_exists(self, selector):
+        """ Wait until the specified selector exists on the page """
         wait = WebDriverWait(self.browser, self.timeout)
-        wait.until(lambda driver: driver.find_element_by_css_selector(selector), u"Selector '{}' should exist.".format(selector))
+        wait.until(
+            lambda driver: driver.find_element_by_css_selector(selector),
+            u"Selector '{}' should exist.".format(selector)
+        )
 
     def go_to_page(self, page_name, css_selector=None, view_name=None):
         """

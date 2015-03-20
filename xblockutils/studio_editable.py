@@ -13,6 +13,7 @@ StudioEditableXBlockMixin to your XBlock.
 import json
 import logging
 
+from django.utils.translation import ugettext
 from xblock.core import XBlock
 from xblock.fields import Scope, JSONField, List, Integer, Float, Boolean, String
 from xblock.exceptions import JsonHandlerError
@@ -107,12 +108,12 @@ class StudioEditableXBlockMixin(object):
         )
         info = {
             'name': field_name,
-            'display_name': field.display_name,
+            'display_name': ugettext(field.display_name) if field.display_name else "",
             'is_set': field.is_set_on(self),
             'default': field.default,
             'value': field.read_from(self),
             'has_values': False,
-            'help': field.help,
+            'help': ugettext(field.help) if field.help else "",
             'allow_reset': field.runtime_options.get('resettable_editor', True),
             'list_values': None,  # Only available for List fields
             'has_list_values': False,  # True if list_values_provider exists, even if it returned no available options

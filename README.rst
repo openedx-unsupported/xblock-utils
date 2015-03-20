@@ -14,7 +14,7 @@ To test the utilities, run::
 
 To get a coverage report, use:
 
-    python run_tests.py --with-coverage --cover-package=xblockutils
+    python run_tests.py --with-coverage --cover-package=xblockutils --cover-html
 
 
 StudioEditableXBlockMixin

@@ -175,11 +175,11 @@ class FancyXBlock(StudioEditableXBlockMixin, XBlock):
     A Studio-editable XBlock with lots of fields and fancy features
     """
     bool_normal = Boolean(display_name="Normal Boolean Field")
-    dict_normal = Dict(display_name="Normal Dictionary Field", default={})
+    dict_normal = Dict(display_name="Normal Dictionary Field")
     float_normal = Float(display_name="Normal Float Field")
     float_values = Float(display_name="Float Field With Values", values=(0, 2.718281, 3.14159,), default=0)
     int_normal = Integer(display_name="Normal Integer Field")
-    int_ranged = Integer(display_name="Ranged Integer Field", min=1, max=9, default=5, step=2)
+    int_ranged = Integer(display_name="Ranged Integer Field", values={"min": 0, "max": 10, "step": 2})
     int_dynamic = Integer(
         display_name="Integer Field With Dynamic Values",
         default=0,
@@ -194,7 +194,7 @@ class FancyXBlock(StudioEditableXBlockMixin, XBlock):
             {"display_name": "Maybe So", "value": -1},
         )
     )
-    list_normal = List(display_name="Normal List", default=[])
+    list_normal = List(display_name="Normal List")
     list_intdefs = List(display_name="Integer List With Default", default=[1, 2, 3, 4, 5])
     list_strdefs = List(display_name="String List With Default", default=['1', '2', '3', '4', '5'])
 
@@ -213,6 +213,11 @@ class FancyXBlock(StudioEditableXBlockMixin, XBlock):
     
     string_normal = String(display_name="Normal String Field")
     string_values = String(display_name="String Field With Values", default="A", values=("A", "B", "C", "D"))
+    string_values_provider = String(
+        display_name="String Field With Dynamic Values",
+        default="",
+        values_provider=lambda self: [unicode(self.scope_ids.usage_id), ""],
+    )
     string_named = String(
         display_name="String Field With Named Values",
         default="AB",
@@ -234,8 +239,8 @@ class FancyXBlock(StudioEditableXBlockMixin, XBlock):
     editable_fields = (
         'bool_normal', 'dict_normal', 'float_normal', 'float_values', 'int_normal', 'int_ranged', 'int_dynamic',
         'int_values', 'list_normal', 'list_intdefs', 'list_strdefs', 'list_set_ints', 'list_set_strings',
-        'string_normal', 'string_values', 'string_named', 'string_dynamic', 'string_multiline',
-        'string_multiline_reset', 'string_html',
+        'string_normal', 'string_values', 'string_values_provider', 'string_named', 'string_dynamic',
+        'string_multiline', 'string_multiline_reset', 'string_html',
     )
 
 
@@ -272,7 +277,7 @@ class TestFancyXBlock_StudioView(StudioEditableBaseTest):
         block.float_normal = 17.0
         block.float_values = 3.14159
         block.int_normal = 10
-        block.int_ranged = 7
+        block.int_ranged = 8
         block.int_dynamic = 0
         block.int_values = -1
         block.list_normal = []
@@ -282,6 +287,7 @@ class TestFancyXBlock_StudioView(StudioEditableBaseTest):
         block.list_set_strings = ["bob"]
         block.string_normal = "A"
         block.string_values = "B"
+        block.string_values_provider = unicode(block.scope_ids.usage_id)
         block.string_named = "BC"
         block.string_dynamic = "U"
         block.string_multiline = "why\nhello\there"
@@ -297,5 +303,9 @@ class TestFancyXBlock_StudioView(StudioEditableBaseTest):
         self.click_save()
         block = self.load_root_xblock()  # Need to reload the block to bypass its cache
         for field_name in FancyXBlock.editable_fields:
-            self.assertEqual(getattr(block, field_name), orig_values[field_name])
+            self.assertEqual(
+                getattr(block, field_name),
+                orig_values[field_name],
+                "{} should be unchanged".format(field_name)
+            )
             self.assertTrue(block.fields[field_name].is_set_on(block))

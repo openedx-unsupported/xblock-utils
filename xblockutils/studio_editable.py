@@ -137,8 +137,6 @@ class StudioEditableXBlockMixin(object):
             raise NotImplementedError("StudioEditableXBlockMixin currently only supports fields derived from JSONField")
         if info["type"] in ("list", "set"):
             info["value"] = [json.dumps(val) for val in info["value"]]
-            if info["default"] is None:
-                info["default"] = []
             info["default"] = json.dumps(info["default"])
         elif info["type"] == "generic":
             # Convert value to JSON string if we're treating this field generically:
@@ -150,16 +148,15 @@ class StudioEditableXBlockMixin(object):
         else:
             values = field.values
         if values and not isinstance(field, Boolean):
-            info['has_values'] = True
             # This field has only a limited number of pre-defined options.
             # Protip: when defining the field, values= can be a callable.
             if isinstance(field.values, dict) and isinstance(field, (Float, Integer)):
                 # e.g. {"min": 0 , "max": 10, "step": .1}
-                for option in ("min", "max", "step"):
-                    val = field.values.get(option)
-                    if val is None:
-                        raise KeyError("Field is missing required values key '{}'".format(option))
-                    info[option] = val
+                for option in field.values:
+                    if option in ("min", "max", "step"):
+                        info[option] = field.values.get(option)
+                    else:
+                        raise KeyError("Invalid 'values' key. Should be like values={'min': 1, 'max': 10, 'step': 1}")
             elif isinstance(values[0], dict) and "display_name" in values[0] and "value" in values[0]:
                 # e.g. [ {"display_name": "Always", "value": "always"}, ... ]
                 for value in values:
@@ -168,6 +165,7 @@ class StudioEditableXBlockMixin(object):
             else:
                 # e.g. [1, 2, 3] - we need to convert it to the [{"display_name": x, "value": x}] format
                 info['values'] = [{"display_name": unicode(val), "value": val} for val in values]
+            info['has_values'] = 'values' in info
         if info["type"] in ("list", "set") and field.runtime_options.get('list_values_provider'):
             list_values = field.runtime_options['list_values_provider'](self)
             # list_values must be a list of values or {"display_name": x, "value": y} objects

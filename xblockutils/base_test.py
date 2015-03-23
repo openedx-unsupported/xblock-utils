@@ -24,54 +24,30 @@ Base classes for Selenium or bok-choy based integration tests of XBlocks.
 import time
 
 from selenium.webdriver.support.ui import WebDriverWait
-
-from workbench import scenarios
+from workbench.runtime import WorkbenchRuntime
+from workbench.scenarios import SCENARIOS, add_xml_scenario, remove_scenario
 from workbench.test.selenium_test import SeleniumTest
 
 from .resources import ResourceLoader
 
 
-class SeleniumBaseTest(SeleniumTest):
+class SeleniumXBlockTest(SeleniumTest):
     """
-    Base class for Selenium integration tests of XBlocks, hosted in the workbench
+    Base class for using the workbench to test XBlocks with Selenium or bok-choy.
+
+    If you want to test an XBlock that's not already installed into the python environment,
+    you can use @XBlock.register_temp_plugin around your test method[s].
     """
-    module_name = None  # You must set this to __name__ in any subclass so ResourceLoader can find scenario XML files
-    default_css_selector = None  # Selector used by go_to_page to return the XBlock DOM element
-    relative_scenario_path = 'xml'
     timeout = 10  # seconds
 
-    @property
-    def _module_name(self):
-        """ Internal method to access module_name with a friendly warning if it's unset """
-        if self.module_name is None:
-            raise NotImplementedError("Overwrite cls.module_name in your derived class.")
-        return self.module_name
-
-    @property
-    def _default_css_selector(self):
-        """ Internal method to access default_css_selector with a warning if it's unset """
-        if self.default_css_selector is None:
-            raise NotImplementedError("Overwrite cls.default_css_selector in your derived class.")
-        return self.default_css_selector
-
     def setUp(self):
-        super(SeleniumBaseTest, self).setUp()
-
-        # Use test scenarios
-        self.browser.get(self.live_server_url)  # Needed to load tests once
-        scenarios.SCENARIOS.clear()
-        loader = ResourceLoader(self._module_name)
-        scenarios_list = loader.load_scenarios_from_path(self.relative_scenario_path, include_identifier=True)
-        for identifier, title, xml in scenarios_list:
-            scenarios.add_xml_scenario(identifier, title, xml)
-            self.addCleanup(scenarios.remove_scenario, identifier)
-
-        # Suzy opens the browser to visit the workbench
-        self.browser.get(self.live_server_url)
-
-        # She knows it's the site by the header
-        header1 = self.browser.find_element_by_css_selector('h1')
-        self.assertEqual(header1.text, 'XBlock scenarios')
+        super(SeleniumXBlockTest, self).setUp()
+        # Delete all scenarios from the workbench:
+        import workbench.urls  # Trigger initial scenario load. pylint: disable=unused-variable
+        SCENARIOS.clear()
+        # Disable CSRF checks on XBlock handlers:
+        import workbench.views
+        workbench.views.handler.csrf_exempt = True
 
     def wait_until_hidden(self, elem):
         """ Wait until the DOM element elem is hidden """
@@ -106,6 +82,75 @@ class SeleniumBaseTest(SeleniumTest):
             lambda driver: driver.find_element_by_css_selector(selector),
             u"Selector '{}' should exist.".format(selector)
         )
+
+    @staticmethod
+    def set_scenario_xml(xml):
+        """ Reset the workbench to have only one scenario with the specified XML """
+        SCENARIOS.clear()
+        add_xml_scenario("test", "Test Scenario", xml)
+
+    def go_to_view(self, view_name='student_view', student_id=None):
+        """
+        Navigate to the page `page_name`, as listed on the workbench home
+        Returns the DOM element on the visited page located by the `css_selector`
+        """
+        url = self.live_server_url + '/scenario/test/{}/'.format(view_name)
+        if student_id:
+            url += '?student={}'.format(student_id)
+        self.browser.get(url)
+        return self.browser.find_element_by_css_selector('.workbench .preview > div.xblock-v1:first-child')
+
+    def load_root_xblock(self):
+        """
+        Load (in Python) the XBlock at the root of the current scenario.
+        """
+        dom_node = self.browser.find_element_by_css_selector('.workbench .preview > div.xblock-v1:first-child')
+        usage_id = dom_node.get_attribute('data-usage')
+        student_id = "none"
+        runtime = WorkbenchRuntime(student_id)
+        return runtime.get_block(usage_id)
+
+
+class SeleniumBaseTest(SeleniumXBlockTest):
+    """
+    Selenium Base Test for loading a whole folder of XML scenarios and then running tests.
+    This is kept for compatibility, but it is recommended that SeleniumXBlockTest be used
+    instead, since it is faster and more flexible (specifically, scenarios are only loaded
+    as needed, and can be defined inline with the tests).
+    """
+    module_name = None  # You must set this to __name__ in any subclass so ResourceLoader can find scenario XML files
+    default_css_selector = None  # Selector used by go_to_page to return the XBlock DOM element
+    relative_scenario_path = 'xml'  # Path from the module (module_name) to the secnario XML files
+
+    @property
+    def _module_name(self):
+        """ Internal method to access module_name with a friendly warning if it's unset """
+        if self.module_name is None:
+            raise NotImplementedError("Overwrite cls.module_name in your derived class.")
+        return self.module_name
+
+    @property
+    def _default_css_selector(self):
+        """ Internal method to access default_css_selector with a warning if it's unset """
+        if self.default_css_selector is None:
+            raise NotImplementedError("Overwrite cls.default_css_selector in your derived class.")
+        return self.default_css_selector
+
+    def setUp(self):
+        super(SeleniumBaseTest, self).setUp()
+        # Use test scenarios:
+        loader = ResourceLoader(self._module_name)
+        scenarios_list = loader.load_scenarios_from_path(self.relative_scenario_path, include_identifier=True)
+        for identifier, title, xml in scenarios_list:
+            add_xml_scenario(identifier, title, xml)
+            self.addCleanup(remove_scenario, identifier)
+
+        # Suzy opens the browser to visit the workbench
+        self.browser.get(self.live_server_url)
+
+        # She knows it's the site by the header
+        header1 = self.browser.find_element_by_css_selector('h1')
+        self.assertEqual(header1.text, 'XBlock scenarios')
 
     def go_to_page(self, page_name, css_selector=None, view_name=None):
         """

@@ -63,13 +63,14 @@
                 <ul class="list-settings list-set">
                   {% for choice in field.list_values %}
                     <li class="list-settings-item">
-                      <label>
-                        <input
-                          type="checkbox"
-                          value="{{choice.value}}"
-                          style="width:auto;height:auto;"
-                          {% if choice.value in field.value %}checked="checked"{% endif %}
-                        >
+                      <input
+                        id="xb-field-edit-{{field.name}}-{{forloop.counter}}"
+                        type="checkbox"
+                        value="{{choice.value}}"
+                        style="width:auto;min-width:auto;height:auto;float:left;margin-top:3px;"
+                        {% if choice.value in field.value %}checked="checked"{% endif %}
+                      >
+                      <label for="xb-field-edit-{{field.name}}-{{forloop.counter}}" style="display:block;margin-left:1.1em;">
                         {{choice.display_name}}
                       </label>
                     </li>

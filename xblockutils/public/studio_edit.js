@@ -52,6 +52,7 @@ function StudioEditableXBlockMixin(runtime, element) {
                 height: '200px',
                 formats: { code: { inline: 'code' } },
                 codemirror: { path: "" + baseUrl + "/js/vendor" },
+                convert_urls: false,
                 plugins: "link codemirror",
                 menubar: false,
                 statusbar: false,

@@ -49,6 +49,11 @@ class SeleniumXBlockTest(SeleniumTest):
         import workbench.views
         workbench.views.handler.csrf_exempt = True
 
+    def wait_until_visible(self, elem):
+        """ Wait until the given element is visible """
+        wait = WebDriverWait(elem, self.timeout)
+        wait.until(lambda e: e.is_displayed(), u"{} should be visible".format(elem.text))
+
     def wait_until_hidden(self, elem):
         """ Wait until the DOM element elem is hidden """
         wait = WebDriverWait(elem, self.timeout)
@@ -89,7 +94,7 @@ class SeleniumXBlockTest(SeleniumTest):
         SCENARIOS.clear()
         add_xml_scenario("test", "Test Scenario", xml)
 
-    def go_to_view(self, view_name='student_view', student_id=None):
+    def go_to_view(self, view_name='student_view', student_id="student_1"):
         """
         Navigate to the page `page_name`, as listed on the workbench home
         Returns the DOM element on the visited page located by the `css_selector`
@@ -100,13 +105,12 @@ class SeleniumXBlockTest(SeleniumTest):
         self.browser.get(url)
         return self.browser.find_element_by_css_selector('.workbench .preview > div.xblock-v1:first-child')
 
-    def load_root_xblock(self):
+    def load_root_xblock(self, student_id="student_1"):
         """
         Load (in Python) the XBlock at the root of the current scenario.
         """
         dom_node = self.browser.find_element_by_css_selector('.workbench .preview > div.xblock-v1:first-child')
         usage_id = dom_node.get_attribute('data-usage')
-        student_id = "none"
         runtime = WorkbenchRuntime(student_id)
         return runtime.get_block(usage_id)
 

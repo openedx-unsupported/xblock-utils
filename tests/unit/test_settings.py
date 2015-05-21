@@ -122,6 +122,7 @@ class TextThemableXBlockMixin(unittest.TestCase):
             patched_resource_loader.assert_called_with(package_name)
 
     @ddt.data(
+        ('dummy_block', ['']),
         ('dummy_block', ['public/themes/lms.css']),
         ('other_block', ['public/themes/lms.css', 'public/themes/lms.part2.css']),
         ('dummy_app.dummy_block', ['typography.css', 'icons.css']),
@@ -138,3 +139,13 @@ class TextThemableXBlockMixin(unittest.TestCase):
                 patched_load_unicode.assert_any_call(location)
 
             self.assertEqual(patched_load_unicode.call_count, len(locations))
+
+    @ddt.data(None, {}, {'locations': ['red.css']})
+    def test_invalid_default_theme_config(self, theme_config):
+        xblock = DummyXBlockWithSettings(self.runtime_mock, scope_ids=Mock())
+        xblock.default_theme_config = theme_config
+        self.service_mock.get_settings_bucket = Mock(return_value={})
+        fragment = MagicMock()
+        with patch("xblockutils.settings.ResourceLoader.load_unicode") as patched_load_unicode:
+            xblock.include_theme_files(fragment)
+            patched_load_unicode.assert_not_called()

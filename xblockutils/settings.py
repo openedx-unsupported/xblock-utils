@@ -82,6 +82,10 @@ class ThemableXBlockMixin(object):
         Gets theme configuration and renders theme css into fragment
         """
         theme = self.get_theme()
-        theme_package, theme_files = theme['package'], theme['locations']
+        if not theme or 'package' not in theme:
+            return
+
+        theme_package, theme_files = theme.get('package', None), theme.get('locations', [])
+        resource_loader = ResourceLoader(theme_package)
         for theme_file in theme_files:
-            fragment.add_css(ResourceLoader(theme_package).load_unicode(theme_file))
+            fragment.add_css(resource_loader.load_unicode(theme_file))

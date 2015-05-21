@@ -195,3 +195,15 @@ orders of magnitude faster.
 
 .. |Screenshot 1| image:: https://cloud.githubusercontent.com/assets/945577/6341782/7d237966-bb83-11e4-9344-faa647056999.png
 .. |Screenshot 2| image:: https://cloud.githubusercontent.com/assets/945577/6341803/d0195ec4-bb83-11e4-82f6-8052c9f70690.png
+
+XBlockWithSettingsMixin
+-----------------------
+
+This mixin provides access to instance-wide XBlock-specific configuration settings.
+See [wiki page](https://github.com/edx/xblock-utils/wiki/Settings-and-theme-support#accessing-xblock-specific-settings) for details
+
+ThemableXBlockMixin
+-------------------
+
+This mixin provides XBlock theming capabilities built on top of XBlock-specific settings.
+See [wiki page](https://github.com/edx/xblock-utils/wiki/Settings-and-theme-support#theming-support) for details

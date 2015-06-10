@@ -46,6 +46,7 @@ function StudioEditableXBlockMixin(runtime, element) {
         if (type == 'html' && tinyMceAvailable) {
             if ($field.tinymce())
                 $field.tinymce().remove(); // Stale instance from a previous dialog. Delete it to avoid interference.
+            tinyMCE.baseURL = baseUrl + "/js/vendor/tinymce/js/tinymce";
             $field.tinymce({
                 theme: 'modern',
                 skin: 'studio-tmce4',

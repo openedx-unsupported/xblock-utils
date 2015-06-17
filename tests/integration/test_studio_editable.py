@@ -29,12 +29,12 @@ class TestEditableXBlock_StudioView(StudioEditableBaseTest):
     """
     Test the Studio View created for EditableXBlock
     """
-    @XBlock.register_temp_plugin(EditableXBlock, "editable")
-    def setUp(self):
-        super(TestEditableXBlock_StudioView, self).setUp()
+
+    def set_up_root_block(self):
         self.set_scenario_xml('<editable />')
         self.go_to_view("studio_view")
         self.fix_js_environment()
+        return self.load_root_xblock()
 
     def assert_unchanged(self, block, orig_field_values=None, explicitly_set=False):
         """
@@ -48,21 +48,23 @@ class TestEditableXBlock_StudioView(StudioEditableBaseTest):
             self.assertEqual(getattr(block, field_name), expected_value)
             self.assertEqual(block.fields[field_name].is_set_on(block), explicitly_set)
 
+    @XBlock.register_temp_plugin(EditableXBlock, "editable")
     def test_no_changes_with_defaults(self):
         """
         If we load the edit form and then save right away, there should be no changes.
         """
-        block = self.load_root_xblock()
+        block = self.set_up_root_block()
         orig_values = {field_name: getattr(block, field_name) for field_name in EditableXBlock.editable_fields}
         self.click_save()
         self.assert_unchanged(block, orig_values)
 
+    @XBlock.register_temp_plugin(EditableXBlock, "editable")
     def test_no_changes_with_values_set(self):
         """
         If the XBlock already has explicit values set, and we load the edit form and then save
         right away, there should be no changes.
         """
-        block = self.load_root_xblock()
+        block = self.set_up_root_block()
         block.color = "green"
         block.count = 5
         block.comment = "Hello"
@@ -76,12 +78,13 @@ class TestEditableXBlock_StudioView(StudioEditableBaseTest):
         block = self.load_root_xblock()  # Need to reload the block to bypass its cache
         self.assert_unchanged(block, orig_values, explicitly_set=True)
 
+    @XBlock.register_temp_plugin(EditableXBlock, "editable")
     def test_explicit_overrides(self):
         """
         Test that we can override the defaults with the same value as the default, and that the
         value will be saved explicitly.
         """
-        block = self.load_root_xblock()
+        block = self.set_up_root_block()
         self.assert_unchanged(block)
 
         field_names = EditableXBlock.editable_fields
@@ -99,11 +102,12 @@ class TestEditableXBlock_StudioView(StudioEditableBaseTest):
         self.click_save()
         self.assert_unchanged(block, explicitly_set=True)
 
+    @XBlock.register_temp_plugin(EditableXBlock, "editable")
     def test_set_and_reset(self):
         """
         Test that we can set values, save, then reset to defaults.
         """
-        block = self.load_root_xblock()
+        block = self.set_up_root_block()
         self.assert_unchanged(block)
 
         for field_name in EditableXBlock.editable_fields:
@@ -126,6 +130,7 @@ class TestEditableXBlock_StudioView(StudioEditableBaseTest):
         block = self.load_root_xblock()  # Need to reload the block to bypass its cache
         self.assert_unchanged(block)
 
+    @XBlock.register_temp_plugin(EditableXBlock, "editable")
     def test_invalid_data(self):
         """
         Test that we get notified when there's a problem with our data.
@@ -135,6 +140,8 @@ class TestEditableXBlock_StudioView(StudioEditableBaseTest):
             self.assertEqual(notification[0], "error")
             self.assertEqual(notification[1]["title"], "Unable to update settings")
             self.assertEqual(notification[1]["message"], expected_message)
+
+        block = self.set_up_root_block()
 
         color_control = self.get_element_for_field('color')
         color_control.clear()
@@ -210,7 +217,7 @@ class FancyXBlock(StudioEditableXBlockMixin, XBlock):
         list_values_provider=fancy_list_values_provider_b,
         default=["alex"],
     )
-    
+
     string_normal = String(display_name="Normal String Field")
     string_values = String(display_name="String Field With Values", default="A", values=("A", "B", "C", "D"))
     string_values_provider = String(
@@ -248,30 +255,32 @@ class TestFancyXBlock_StudioView(StudioEditableBaseTest):
     """
     Test the Studio View created for FancyXBlock
     """
-    @XBlock.register_temp_plugin(FancyXBlock, "fancy")
-    def setUp(self):
-        super(TestFancyXBlock_StudioView, self).setUp()
-        self.set_scenario_xml("<fancy/>")
+
+    def set_up_root_block(self):
+        self.set_scenario_xml('<fancy />')
         self.go_to_view("studio_view")
         self.fix_js_environment()
+        return self.load_root_xblock()
 
+    @XBlock.register_temp_plugin(FancyXBlock, "fancy")
     def test_no_changes_with_defaults(self):
         """
         If we load the edit form and then save right away, there should be no changes.
         """
-        block = self.load_root_xblock()
+        block = self.set_up_root_block()
         orig_values = {field_name: getattr(block, field_name) for field_name in FancyXBlock.editable_fields}
         self.click_save()
         for field_name in FancyXBlock.editable_fields:
             self.assertEqual(getattr(block, field_name), orig_values[field_name])
             self.assertFalse(block.fields[field_name].is_set_on(block))
 
+    @XBlock.register_temp_plugin(FancyXBlock, "fancy")
     def test_no_changes_with_values_set(self):
         """
         If the XBlock already has explicit values set, and we load the edit form and then save
         right away, there should be no changes.
         """
-        block = self.load_root_xblock()
+        block = self.set_up_root_block()
         block.bool_normal = True
         block.dict_normal = {"more": "cowbell"}
         block.float_normal = 17.0

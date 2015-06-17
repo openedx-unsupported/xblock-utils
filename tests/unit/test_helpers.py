@@ -31,18 +31,16 @@ class TestChildIsInstance(unittest.TestCase):
     """
     Test child_isinstance helper method, in the workbench runtime.
     """
+
     @XBlock.register_temp_plugin(GoldenRetrieverXBlock, "gr")
     @XBlock.register_temp_plugin(CatXBlock, "cat")
     @XBlock.register_temp_plugin(BasicXBlock, "block")
-    def setUp(self):
-        super(TestChildIsInstance, self).setUp()
-        self.runtime = WorkbenchRuntime()
-        self.root_id = self.runtime.parse_xml_string('<block> <block><cat/><gr/></block> <cat/> <gr/> </block>')
-
     def test_child_isinstance(self):
         """
         Check that child_isinstance() works on direct children
         """
+        self.runtime = WorkbenchRuntime()
+        self.root_id = self.runtime.parse_xml_string('<block> <block><cat/><gr/></block> <cat/> <gr/> </block>')
         root = self.runtime.get_block(self.root_id)
         self.assertFalse(child_isinstance(root, root.children[0], DogXBlock))
         self.assertFalse(child_isinstance(root, root.children[0], GoldenRetrieverXBlock))
@@ -56,10 +54,15 @@ class TestChildIsInstance(unittest.TestCase):
         self.assertTrue(child_isinstance(root, root.children[2], DogXBlock))
         self.assertTrue(child_isinstance(root, root.children[2], GoldenRetrieverXBlock))
 
+    @XBlock.register_temp_plugin(GoldenRetrieverXBlock, "gr")
+    @XBlock.register_temp_plugin(CatXBlock, "cat")
+    @XBlock.register_temp_plugin(BasicXBlock, "block")
     def test_child_isinstance_descendants(self):
         """
         Check that child_isinstance() works on deeper descendants
         """
+        self.runtime = WorkbenchRuntime()
+        self.root_id = self.runtime.parse_xml_string('<block> <block><cat/><gr/></block> <cat/> <gr/> </block>')
         root = self.runtime.get_block(self.root_id)
         block = root.runtime.get_block(root.children[0])
         self.assertIsInstance(block, BasicXBlock)

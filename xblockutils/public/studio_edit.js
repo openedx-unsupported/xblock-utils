@@ -4,6 +4,7 @@ function StudioEditableXBlockMixin(runtime, element) {
     
     var fields = [];
     var tinyMceAvailable = (typeof $.fn.tinymce !== 'undefined'); // Studio includes a copy of tinyMCE and its jQuery plugin
+    var datepickerAvailable = (typeof $.fn.datepicker !== 'undefined'); // Studio includes datepicker jQuery plugin
 
     $(element).find('.field-data-control').each(function() {
         var $field = $(this);
@@ -64,6 +65,11 @@ function StudioEditableXBlockMixin(runtime, element) {
                     ed.on('change', fieldChanged);
                 }
             });
+        }
+
+        if (type == 'datepicker' && datepickerAvailable) {
+            $field.datepicker('destroy');
+            $field.datepicker({dateFormat: "m/d/yy"});
         }
     });
 

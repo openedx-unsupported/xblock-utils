@@ -15,7 +15,7 @@ import logging
 
 from django.utils.translation import ugettext
 from xblock.core import XBlock
-from xblock.fields import Scope, JSONField, List, Integer, Float, Boolean, String
+from xblock.fields import Scope, JSONField, List, Integer, Float, Boolean, String, DateTime
 from xblock.exceptions import JsonHandlerError
 from xblock.fragment import Fragment
 from xblock.validation import Validation
@@ -104,6 +104,7 @@ class StudioEditableXBlockMixin(object):
             (Boolean, 'boolean'),
             (String, 'string'),
             (List, 'list'),
+            (DateTime, 'datepicker'),
             (JSONField, 'generic'),  # This is last so as a last resort we display a text field w/ the JSON string
         )
         info = {
@@ -143,6 +144,11 @@ class StudioEditableXBlockMixin(object):
             # Convert value to JSON string if we're treating this field generically:
             info["value"] = json.dumps(info["value"])
             info["default"] = json.dumps(info["default"])
+        elif info["type"] == "datepicker":
+            if info["value"]:
+                info["value"] = info["value"].strftime("%m/%d/%Y")
+            if info["default"]:
+                info["default"] = info["default"].strftime("%m/%d/%Y")
 
         if 'values_provider' in field.runtime_options:
             values = field.runtime_options["values_provider"](self)

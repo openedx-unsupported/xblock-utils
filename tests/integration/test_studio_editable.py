@@ -1,5 +1,7 @@
+import datetime
+import pytz
 from xblock.core import XBlock
-from xblock.fields import Boolean, Dict, Float, Integer, List, String
+from xblock.fields import Boolean, Dict, Float, Integer, List, String, DateTime
 from xblock.validation import ValidationMessage
 from xblockutils.studio_editable import StudioEditableXBlockMixin
 from xblockutils.studio_editable_test import StudioEditableBaseTest
@@ -12,7 +14,8 @@ class EditableXBlock(StudioEditableXBlockMixin, XBlock):
     color = String(default="red")
     count = Integer(default=42)
     comment = String(default="")
-    editable_fields = ('color', 'count', 'comment')
+    date = DateTime(default=datetime.datetime(2014, 5, 14, tzinfo=pytz.UTC))
+    editable_fields = ('color', 'count', 'comment', 'date')
 
     def validate_field_data(self, validation, data):
         """
@@ -68,6 +71,7 @@ class TestEditableXBlock_StudioView(StudioEditableBaseTest):
         block.color = "green"
         block.count = 5
         block.comment = "Hello"
+        block.date = datetime.datetime(2014, 6, 17, tzinfo=pytz.UTC)
         block.save()
         orig_values = {field_name: getattr(block, field_name) for field_name in EditableXBlock.editable_fields}
         # Reload the page:
@@ -111,9 +115,15 @@ class TestEditableXBlock_StudioView(StudioEditableBaseTest):
         self.assert_unchanged(block)
 
         for field_name in EditableXBlock.editable_fields:
+            if field_name == 'date':
+                continue
             color_control = self.get_element_for_field(field_name)
             color_control.clear()
             color_control.send_keys('1000')
+
+        date_control = self.get_element_for_field('date')
+        date_control.clear()
+        date_control.send_keys("7/5/2015")
 
         self.click_save()
 
@@ -122,6 +132,7 @@ class TestEditableXBlock_StudioView(StudioEditableBaseTest):
         self.assertEqual(block.color, '1000')
         self.assertEqual(block.count, 1000)
         self.assertEqual(block.comment, '1000')
+        self.assertEqual(block.date, datetime.datetime(2015, 7, 5, 0, 0, 0, tzinfo=pytz.UTC))
 
         for field_name in EditableXBlock.editable_fields:
             self.click_reset_for_field(field_name)

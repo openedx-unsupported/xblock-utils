@@ -1,21 +1,32 @@
 import datetime
+import textwrap
+import mock
 import pytz
 from xblock.core import XBlock
 from xblock.fields import Boolean, Dict, Float, Integer, List, String, DateTime
+from xblock.fragment import Fragment
 from xblock.validation import ValidationMessage
-from xblockutils.studio_editable import StudioEditableXBlockMixin
-from xblockutils.studio_editable_test import StudioEditableBaseTest
+from tests.integration.utils import render_template
+from xblockutils.studio_editable import StudioEditableXBlockMixin, StudioContainerWithNestedXBlocksMixin, \
+    NestedXBlockSpec
+from xblockutils.studio_editable_test import StudioEditableBaseTest, StudioContainerWithNestedXBlocksBaseTest
 
 
 class EditableXBlock(StudioEditableXBlockMixin, XBlock):
     """
     A basic Studio-editable XBlock (for use in tests)
     """
+    CATEGORY = "editable"
+    STUDIO_LABEL = "Editable Block"
+
     color = String(default="red")
     count = Integer(default=42)
     comment = String(default="")
     date = DateTime(default=datetime.datetime(2014, 5, 14, tzinfo=pytz.UTC))
     editable_fields = ('color', 'count', 'comment', 'date')
+
+    def student_view(self, context):
+        return Fragment()
 
     def validate_field_data(self, validation, data):
         """
@@ -261,6 +272,9 @@ class FancyXBlock(StudioEditableXBlockMixin, XBlock):
         'string_multiline', 'string_multiline_reset', 'string_html',
     )
 
+    def student_view(self, context):
+        return Fragment()
+
 
 class TestFancyXBlock_StudioView(StudioEditableBaseTest):
     """
@@ -329,3 +343,109 @@ class TestFancyXBlock_StudioView(StudioEditableBaseTest):
                 "{} should be unchanged".format(field_name)
             )
             self.assertTrue(block.fields[field_name].is_set_on(block))
+
+
+class FancyBlockShim(object):
+    CATEGORY = "fancy"
+    STUDIO_LABEL = "Fancy Block"
+
+
+class XBlockWithNested(StudioContainerWithNestedXBlocksMixin, XBlock):
+    @property
+    def allowed_nested_blocks(self):
+        return [
+            EditableXBlock,
+            NestedXBlockSpec(FancyBlockShim, single_instance=True)
+        ]
+
+
+class XBlockWithDisabledNested(StudioContainerWithNestedXBlocksMixin, XBlock):
+    @property
+    def allowed_nested_blocks(self):
+        return [
+            NestedXBlockSpec(EditableXBlock, disabled=True, disabled_reason="Some reason"),
+            NestedXBlockSpec(FancyBlockShim, disabled=False, disabled_reason="Irrelevant")
+        ]
+
+
+class StudioContainerWithNestedXBlocksTest(StudioContainerWithNestedXBlocksBaseTest):
+    def setUp(self):
+        super(StudioContainerWithNestedXBlocksTest, self).setUp()
+        patcher = mock.patch(
+            'workbench.runtime.WorkbenchRuntime.render_template', mock.Mock(side_effect=render_template)
+        )
+        patcher.start()
+
+        self.addCleanup(patcher.stop)
+
+    def _check_button(self, button, category, label, single, disabled, disabled_reason=''):
+        self.assertEqual(button.get_attribute('data-category'), category)
+        self.assertEqual(button.text, label)
+        self.assertEqual(button.get_attribute('data-single-instance'), str(single).lower())
+        self._assert_disabled(button, disabled)
+        self.assertEqual(button.get_attribute('title'), disabled_reason)
+
+    def _assert_disabled(self, button, disabled):
+        if disabled:
+            self.assertEqual(button.get_attribute('disabled'), 'true')
+        else:
+            self.assertEqual(button.get_attribute('disabled'), None)
+
+    def set_up_root_block(self, scenario, view):
+        self.set_scenario_xml(scenario)
+        self.go_to_view(view)
+        self.fix_js_environment()
+        return self.load_root_xblock()
+
+    @XBlock.register_temp_plugin(XBlockWithNested, "nested")
+    def test_author_edit_view_nested(self):
+        self.set_up_root_block("<nested />", "author_edit_view")
+
+        add_buttons = self.get_add_buttons()
+        self.assertEqual(len(add_buttons), 2)
+        button_editable, button_fancy = add_buttons
+        self._check_button(button_editable, EditableXBlock.CATEGORY, EditableXBlock.STUDIO_LABEL, False, False)
+        self._check_button(button_fancy, FancyBlockShim.CATEGORY, FancyBlockShim.STUDIO_LABEL, True, False)
+
+    @XBlock.register_temp_plugin(XBlockWithDisabledNested, "nested")
+    def test_author_edit_view_nested_with_disabled(self):
+        self.set_up_root_block("<nested />", "author_edit_view")
+
+        add_buttons = self.get_add_buttons()
+        self.assertEqual(len(add_buttons), 2)
+        button_editable, button_fancy = add_buttons
+        self._check_button(
+            button_editable, EditableXBlock.CATEGORY, EditableXBlock.STUDIO_LABEL, False, True, "Some reason"
+        )
+        self._check_button(button_fancy, FancyBlockShim.CATEGORY, FancyBlockShim.STUDIO_LABEL, False, False)
+
+    @XBlock.register_temp_plugin(XBlockWithNested, "nested")
+    def test_can_add_blocks(self):
+        self.set_up_root_block("<nested />", "author_edit_view")
+        button_editable, button_fancy = self.get_add_buttons()
+
+        self._assert_disabled(button_editable, False)
+        button_editable.click()
+        self._assert_disabled(button_editable, False)
+        button_editable.click()
+        self._assert_disabled(button_editable, False)
+
+        self._assert_disabled(button_fancy, False)
+        button_fancy.click()
+        self._assert_disabled(button_fancy, True)
+
+    @XBlock.register_temp_plugin(XBlockWithNested, "nested")
+    @XBlock.register_temp_plugin(FancyXBlock, "fancy")
+    @XBlock.register_temp_plugin(EditableXBlock, "editable")
+    def test_initial_state_with_blocks(self):
+        scenario = textwrap.dedent("""
+        <nested>
+            <editable />
+            <fancy />
+        </nested>
+        """)
+        self.set_up_root_block(scenario, "author_edit_view")
+
+        button_editable, button_fancy = self.get_add_buttons()
+        self._assert_disabled(button_editable, False)
+        self._assert_disabled(button_fancy, True)

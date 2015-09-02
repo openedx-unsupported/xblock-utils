@@ -16,7 +16,7 @@ import logging
 from django.utils.translation import ugettext
 from xblock.core import XBlock
 from xblock.fields import Scope, JSONField, List, Integer, Float, Boolean, String, DateTime
-from xblock.exceptions import JsonHandlerError
+from xblock.exceptions import JsonHandlerError, NoSuchViewError
 from xblock.fragment import Fragment
 from xblock.validation import Validation
 
@@ -276,15 +276,20 @@ class StudioContainerXBlockMixin(object):
         """
         contents = []
 
+        child_context = {'reorderable_items': set()}
+        if context:
+            child_context.update(context)
+
         for child_id in self.children:
             child = self.runtime.get_block(child_id)
             if can_reorder:
-                context['reorderable_items'].add(child.scope_ids.usage_id)
-            rendered_child = child.render('author_view' if hasattr(child, 'author_view') else 'student_view', context)
+                child_context['reorderable_items'].add(child.scope_ids.usage_id)
+            view_to_render = 'author_view' if hasattr(child, 'author_view') else 'student_view'
+            rendered_child = child.render(view_to_render, child_context)
             fragment.add_frag_resources(rendered_child)
 
             contents.append({
-                'id': child.location.to_deprecated_string(),
+                'id': unicode(child.scope_ids.usage_id),
                 'content': rendered_child.content
             })
 
@@ -323,3 +328,151 @@ class StudioContainerXBlockMixin(object):
         not editing this block's children.
         """
         return self.student_view(context)
+
+
+class NestedXBlockSpec(object):
+    """
+    Class that allows detailed specification of allowed nested XBlocks. For use with
+    StudioContainerWithNestedXBlocksMixin.allowed_nested_blocks
+    """
+    def __init__(self, block, single_instance=False, disabled=False, disabled_reason=None):
+        self._block = block
+        self._single_instance = single_instance
+        self._disabled = disabled
+        self._disabled_reason = disabled_reason
+
+    @property
+    def category(self):
+        """ Block category - used as a computer-readable name of an XBlock """
+        return self._block.CATEGORY
+
+    @property
+    def label(self):
+        """ Block label - used as human-readable name of an XBlock """
+        return self._block.STUDIO_LABEL
+
+    @property
+    def single_instance(self):
+        """ If True, only allow single nested instance of Xblock """
+        return self._single_instance
+
+    @property
+    def disabled(self):
+        """
+        If True, renders add buttons disabled - only use when XBlock can't be added at all (i.e. not available).
+        To allow single instance of XBlock use single_instance property
+        """
+        return self._disabled
+
+    @property
+    def disabled_reason(self):
+        """
+        If block is disabled this property is used as add button title, giving some hint about why it is disabled
+        """
+        return self._disabled_reason
+
+
+class XBlockWithPreviewMixin(object):
+    """
+    An XBlock mixin providing simple preview view. It is to be used with StudioContainerWithNestedXBlocksMixin to
+    avoid adding studio wrappers (title, edit button, etc.) to a block when it is rendered as child in parent's
+    author_preview_view
+    """
+    def preview_view(self, context):
+        """
+        Preview view - used by StudioContainerWithNestedXBlocksMixin to render nested xblocks in preview context.
+        Default implementation uses author_view if available, otherwise falls back to student_view
+        Child classes can override this method to control their presentation in preview context
+        """
+        view_to_render = 'author_view' if hasattr(self, 'author_view') else 'student_view'
+        renderer = getattr(self, view_to_render)
+        return renderer(context)
+
+
+class StudioContainerWithNestedXBlocksMixin(StudioContainerXBlockMixin):
+    """
+    An XBlock mixin providing interface for specifying allowed nested blocks and adding/previewing them in Studio.
+    """
+    has_children = True
+    CHILD_PREVIEW_TEMPLATE = "templates/default_preview_view.html"
+
+    @property
+    def loader(self):  # pylint: disable=no-self-use
+        """
+        Loader for loading and rendering assets stored in child XBlock package
+        """
+        return loader
+
+    @property
+    def allowed_nested_blocks(self):  # pylint: disable=no-self-use
+        """
+        Returns a list of allowed nested XBlocks. Each item can be either
+        * An XBlock class
+        * A NestedXBlockSpec
+
+        If XBlock class is used it is assumed that this XBlock is enabled and allows multiple instances.
+        NestedXBlockSpec allows explicitly setting disabled/enabled state, disabled reason (if any) and single/multiple
+        instances
+        """
+        return []
+
+    def get_nested_blocks_spec(self):
+        """
+        Converts allowed_nested_blocks items to NestedXBlockSpec to provide common interface
+        """
+        return [
+            block_spec if isinstance(block_spec, NestedXBlockSpec) else NestedXBlockSpec(block_spec)
+            for block_spec in self.allowed_nested_blocks
+        ]
+
+    def author_edit_view(self, context):
+        """
+        View for adding/editing nested blocks
+        """
+        fragment = Fragment()
+
+        self.render_children(context, fragment, can_reorder=True, can_add=False)
+        fragment.add_content(
+            loader.render_template('templates/add_buttons.html', {'child_blocks': self.get_nested_blocks_spec()})
+        )
+        fragment.add_javascript(loader.load_unicode('public/studio_container.js'))
+        fragment.initialize_js('StudioContainerXBlockWithNestedXBlocksMixin')
+        return fragment
+
+    def author_preview_view(self, context):
+        """
+        View for previewing contents in studio.
+        """
+        children_contents = []
+
+        fragment = Fragment()
+        for child_id in self.children:
+            child = self.runtime.get_block(child_id)
+            view_to_render = 'preview_view' if hasattr(child, 'preview_view') else 'student_view'
+            child_fragment = self._render_child_fragment(child, context, view_to_render)
+            fragment.add_frag_resources(child_fragment)
+            children_contents.append(child_fragment.content)
+
+        render_context = {
+            'block': self,
+            'children_contents': children_contents
+        }
+        render_context.update(context)
+        fragment.add_content(self.loader.render_template(self.CHILD_PREVIEW_TEMPLATE, render_context))
+        return fragment
+
+    def _render_child_fragment(self, child, context, view='student_view'):
+        """
+        Helper method to overcome html block rendering quirks
+        """
+        try:
+            child_fragment = child.render(view, context)
+        except NoSuchViewError:
+            if child.scope_ids.block_type == 'html' and getattr(self.runtime, 'is_author_mode', False):
+                # html block doesn't support preview_view, and if we use student_view Studio will wrap
+                # it in HTML that we don't want in the preview. So just render its HTML directly:
+                child_fragment = Fragment(child.data)
+            else:
+                child_fragment = child.render('student_view', context)
+
+        return child_fragment

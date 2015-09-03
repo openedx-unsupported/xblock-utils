@@ -437,7 +437,13 @@ class StudioContainerWithNestedXBlocksMixin(StudioContainerXBlockMixin):
         """
         fragment = Fragment()
 
+        if 'wrap_children' in context:
+            fragment.add_content(context['wrap_children']['head'])
+
         self.render_children(context, fragment, can_reorder=True, can_add=False)
+
+        if 'wrap_children' in context:
+            fragment.add_content(context['wrap_children']['tail'])
         fragment.add_content(
             loader.render_template('templates/add_buttons.html', {'child_blocks': self.get_nested_blocks_spec()})
         )

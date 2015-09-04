@@ -355,7 +355,7 @@ class XBlockWithNested(StudioContainerWithNestedXBlocksMixin, XBlock):
     def allowed_nested_blocks(self):
         return [
             EditableXBlock,
-            NestedXBlockSpec(FancyBlockShim, single_instance=True)
+            NestedXBlockSpec(FancyBlockShim, single_instance=True, boilerplate="fancy-boiler")
         ]
 
 
@@ -378,12 +378,13 @@ class StudioContainerWithNestedXBlocksTest(StudioContainerWithNestedXBlocksBaseT
 
         self.addCleanup(patcher.stop)
 
-    def _check_button(self, button, category, label, single, disabled, disabled_reason=''):
+    def _check_button(self, button, category, label, single, disabled, disabled_reason='', boilerplate=None):
         self.assertEqual(button.get_attribute('data-category'), category)
         self.assertEqual(button.text, label)
         self.assertEqual(button.get_attribute('data-single-instance'), str(single).lower())
         self._assert_disabled(button, disabled)
         self.assertEqual(button.get_attribute('title'), disabled_reason)
+        self.assertEqual(button.get_attribute('data-boilerplate'), boilerplate)
 
     def _assert_disabled(self, button, disabled):
         if disabled:
@@ -405,7 +406,9 @@ class StudioContainerWithNestedXBlocksTest(StudioContainerWithNestedXBlocksBaseT
         self.assertEqual(len(add_buttons), 2)
         button_editable, button_fancy = add_buttons
         self._check_button(button_editable, EditableXBlock.CATEGORY, EditableXBlock.STUDIO_LABEL, False, False)
-        self._check_button(button_fancy, FancyBlockShim.CATEGORY, FancyBlockShim.STUDIO_LABEL, True, False)
+        self._check_button(
+            button_fancy, FancyBlockShim.CATEGORY, FancyBlockShim.STUDIO_LABEL, True, False, boilerplate="fancy-boiler"
+        )
 
     @XBlock.register_temp_plugin(XBlockWithDisabledNested, "nested")
     def test_author_edit_view_nested_with_disabled(self):

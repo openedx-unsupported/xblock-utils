@@ -335,11 +335,12 @@ class NestedXBlockSpec(object):
     Class that allows detailed specification of allowed nested XBlocks. For use with
     StudioContainerWithNestedXBlocksMixin.allowed_nested_blocks
     """
-    def __init__(self, block, single_instance=False, disabled=False, disabled_reason=None):
+    def __init__(self, block, single_instance=False, disabled=False, disabled_reason=None, boilerplate=None):
         self._block = block
         self._single_instance = single_instance
         self._disabled = disabled
         self._disabled_reason = disabled_reason
+        self._boilerplate = boilerplate
 
     @property
     def category(self):
@@ -370,6 +371,11 @@ class NestedXBlockSpec(object):
         If block is disabled this property is used as add button title, giving some hint about why it is disabled
         """
         return self._disabled_reason
+
+    @property
+    def boilerplate(self):
+        """ Boilerplate - if not None and not empty used as data-boilerplate attribute value """
+        return self._boilerplate
 
 
 class XBlockWithPreviewMixin(object):
@@ -431,7 +437,13 @@ class StudioContainerWithNestedXBlocksMixin(StudioContainerXBlockMixin):
         """
         fragment = Fragment()
 
+        if 'wrap_children' in context:
+            fragment.add_content(context['wrap_children']['head'])
+
         self.render_children(context, fragment, can_reorder=True, can_add=False)
+
+        if 'wrap_children' in context:
+            fragment.add_content(context['wrap_children']['tail'])
         fragment.add_content(
             loader.render_template('templates/add_buttons.html', {'child_blocks': self.get_nested_blocks_spec()})
         )

@@ -11,6 +11,7 @@
              {% if block_spec.disabled %}
               disabled="disabled" title="{{ block_spec.disabled_reason }}"
              {% endif %}
+             {% if block_spec.boilerplate %} data-boilerplate="{{ block_spec.boilerplate }}"  {% endif %}
               >
             {{ block_spec.label }}
           </a>

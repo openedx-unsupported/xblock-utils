@@ -14,6 +14,7 @@ function StudioEditableXBlockMixin(runtime, element) {
         fields.push({
             name: $wrapper.data('field-name'),
             isSet: function() { return $wrapper.hasClass('is-set'); },
+            hasEditor: function() { return tinyMceAvailable && $field.tinymce(); },
             val: function() {
                 var val = $field.val();
                 // Cast values to the appropriate type so that we send nice clean JSON over the wire:
@@ -31,6 +32,9 @@ function StudioEditableXBlockMixin(runtime, element) {
                         val = JSON.parse(val); // TODO: handle parse errors
                 }
                 return val;
+            },
+            removeEditor: function() {
+                $field.tinymce().remove();
             }
         });
         var fieldChanged = function() {
@@ -45,8 +49,6 @@ function StudioEditableXBlockMixin(runtime, element) {
             $resetButton.removeClass('active').addClass('inactive');
         });
         if (type == 'html' && tinyMceAvailable) {
-            if ($field.tinymce())
-                $field.tinymce().remove(); // Stale instance from a previous dialog. Delete it to avoid interference.
             tinyMCE.baseURL = baseUrl + "/js/vendor/tinymce/js/tinymce";
             $field.tinymce({
                 theme: 'modern',
@@ -82,6 +84,7 @@ function StudioEditableXBlockMixin(runtime, element) {
         fields.push({
             name: $wrapper.data('field-name'),
             isSet: function() { return $wrapper.hasClass('is-set'); },
+            hasEditor: function() { return false; },
             val: function() {
                 var val = [];
                 $checkboxes.each(function() {
@@ -146,11 +149,24 @@ function StudioEditableXBlockMixin(runtime, element) {
             } else {
                 notSet.push(field.name);
             }
+            // Remove TinyMCE instances to make sure jQuery does not try to access stale instances
+            // when loading editor for another block:
+            if (field.hasEditor()) {
+                field.removeEditor();
+            }
         }
         studio_submit({values: values, defaults: notSet});
     });
 
     $(element).find('.cancel-button').bind('click', function(e) {
+        // Remove TinyMCE instances to make sure jQuery does not try to access stale instances
+        // when loading editor for another block:
+        for (var i in fields) {
+            var field = fields[i];
+            if (field.hasEditor()) {
+                field.removeEditor();
+            }
+        }
         e.preventDefault();
         runtime.notify('cancel', {});
     });

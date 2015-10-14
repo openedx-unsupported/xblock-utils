@@ -39,6 +39,17 @@ class EditableXBlock(StudioEditableXBlockMixin, XBlock):
             validation.add(ValidationMessage(ValidationMessage.ERROR, u"No swearing allowed"))
 
 
+class UnawareXBlock(XBlock):
+    """
+    A naive XBlock for use in tests
+    """
+
+    color = String(default="red")
+
+    def student_view(self, context):
+        return Fragment()
+
+
 class TestEditableXBlock_StudioView(StudioEditableBaseTest):
     """
     Test the Studio View created for EditableXBlock
@@ -368,6 +379,14 @@ class XBlockWithDisabledNested(StudioContainerWithNestedXBlocksMixin, XBlock):
         ]
 
 
+class XBlockWithOverriddenNested(StudioContainerWithNestedXBlocksMixin, XBlock):
+    @property
+    def allowed_nested_blocks(self):
+        return [
+            NestedXBlockSpec(UnawareXBlock, category='unaware', label='Unaware Block')
+        ]
+
+
 class StudioContainerWithNestedXBlocksTest(StudioContainerWithNestedXBlocksBaseTest):
     def setUp(self):
         super(StudioContainerWithNestedXBlocksTest, self).setUp()
@@ -452,3 +471,14 @@ class StudioContainerWithNestedXBlocksTest(StudioContainerWithNestedXBlocksBaseT
         button_editable, button_fancy = self.get_add_buttons()
         self._assert_disabled(button_editable, False)
         self._assert_disabled(button_fancy, True)
+
+    @XBlock.register_temp_plugin(XBlockWithOverriddenNested, "overrider")
+    @XBlock.register_temp_plugin(UnawareXBlock, "unaware")
+    def test_unaware_nested(self):
+        scenario = textwrap.dedent("""
+        <overrider />
+        """)
+        self.set_up_root_block(scenario, "author_edit_view")
+        button_unaware = self.get_add_buttons()[0]
+        self._assert_disabled(button_unaware, False)
+        self.assertEqual(button_unaware.text, 'Unaware Block')

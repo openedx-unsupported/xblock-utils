@@ -335,22 +335,30 @@ class NestedXBlockSpec(object):
     Class that allows detailed specification of allowed nested XBlocks. For use with
     StudioContainerWithNestedXBlocksMixin.allowed_nested_blocks
     """
-    def __init__(self, block, single_instance=False, disabled=False, disabled_reason=None, boilerplate=None):
+    def __init__(
+            self, block, single_instance=False, disabled=False, disabled_reason=None, boilerplate=None,
+            category=None, label=None,
+    ):
         self._block = block
         self._single_instance = single_instance
         self._disabled = disabled
         self._disabled_reason = disabled_reason
         self._boilerplate = boilerplate
+        # Some blocks may not be nesting-aware, but can be nested anyway with a bit of help.
+        # For example, if you wanted to include an XBlock from a different project that didn't
+        # yet use XBlock utils, you could specify the category and studio label here.
+        self._category = category
+        self._label = label
 
     @property
     def category(self):
         """ Block category - used as a computer-readable name of an XBlock """
-        return self._block.CATEGORY
+        return self._category or self._block.CATEGORY
 
     @property
     def label(self):
         """ Block label - used as human-readable name of an XBlock """
-        return self._block.STUDIO_LABEL
+        return self._label or self._block.STUDIO_LABEL
 
     @property
     def single_instance(self):

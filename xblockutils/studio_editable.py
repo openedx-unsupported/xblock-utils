@@ -468,8 +468,7 @@ class StudioContainerWithNestedXBlocksMixin(StudioContainerXBlockMixin):
         fragment = Fragment()
         for child_id in self.children:
             child = self.runtime.get_block(child_id)
-            view_to_render = 'preview_view' if hasattr(child, 'preview_view') else 'student_view'
-            child_fragment = self._render_child_fragment(child, context, view_to_render)
+            child_fragment = self._render_child_fragment(child, context, 'preview_view')
             fragment.add_frag_resources(child_fragment)
             children_contents.append(child_fragment.content)
 

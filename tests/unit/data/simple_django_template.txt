@@ -1,4 +1,4 @@
-This is a simple django template example.
+This is a simple template example.
 
 This template can make use of the following context variables:
 Name: {{name}}

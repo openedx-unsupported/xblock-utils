@@ -20,11 +20,13 @@
 
 import unittest
 
+from mock import patch, DEFAULT
+
 from xblockutils.resources import ResourceLoader
 
 
 expected_string = u"""\
-This is a simple django template example.
+This is a simple template example.
 
 This template can make use of the following context variables:
 Name: {{name}}
@@ -44,7 +46,7 @@ example_context = {
 
 
 expected_filled_template = u"""\
-This is a simple django template example.
+This is a simple template example.
 
 This template can make use of the following context variables:
 Name: This is a fine name
@@ -98,9 +100,21 @@ class TestResourceLoader(unittest.TestCase):
         s = ResourceLoader("tests.unit.data").load_unicode("simple_django_template.txt")
         self.assertEquals(s, expected_string)
 
-    def test_render_template(self):
+    def test_render_django_template(self):
+        loader = ResourceLoader(__name__)
+        s = loader.render_django_template("data/simple_django_template.txt", example_context)
+        self.assertEquals(s, expected_filled_template)
+
+    def test_render_mako_template(self):
+        loader = ResourceLoader(__name__)
+        s = loader.render_mako_template("data/simple_mako_template.txt", example_context)
+        self.assertEquals(s, expected_filled_template)
+
+    @patch('warnings.warn', DEFAULT)
+    def test_render_template_deprecated(self, mock_warn):
         loader = ResourceLoader(__name__)
         s = loader.render_template("data/simple_django_template.txt", example_context)
+        self.assertTrue(mock_warn.called)
         self.assertEquals(s, expected_filled_template)
 
     def test_render_js_template(self):

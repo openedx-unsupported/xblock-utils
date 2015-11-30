@@ -35,7 +35,7 @@
                   </option>
                 {% endfor %}
               </select>
-            {% elif field.type == "string" %}
+            {% elif field.type == "string" or field.type == "datepicker" %}
               <input
                 type="text"
                 class="field-data-control"
@@ -93,7 +93,7 @@
             {% endif %}
           </div>
           {% if field.help %}
-            <span class="tip setting-help"> {{ field.help }} </span>
+            <span class="tip setting-help"> {{ field.help|safe }} </span>
           {% endif %}
         </li>
       {% endfor %}

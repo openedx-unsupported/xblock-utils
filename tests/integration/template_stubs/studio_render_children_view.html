@@ -1,0 +1,15 @@
+{% if can_reorder %}
+    <ol class="reorderable-container">
+{% endif %}
+    {% for item in items %}
+        <!-- studio-xblock-wrapper is injected in actual studio somewhere else, but we need it for testing -->
+        <div class="studio-xblock-wrapper" data-locator="{{item.id}}">
+            {{ item.content|safe }}
+        </div>
+    {% endfor %}
+{% if can_reorder %}
+    </ol>
+{% endif %}
+{% if can_add %}
+<div class="add-xblock-component new-component-item adding"></div>
+{% endif %}

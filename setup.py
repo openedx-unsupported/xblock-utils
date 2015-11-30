@@ -35,7 +35,7 @@ def package_data(pkg, root_list):
 
 setup(
     name='xblock-utils',
-    version='0.1a0',
+    version='v1.0.0',
     description='Various utilities for XBlocks',
     packages=[
         'xblockutils',

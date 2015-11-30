@@ -1,3 +1,4 @@
+from selenium.common.exceptions import NoSuchElementException
 from xblock.core import XBlock
 from xblock.fields import Boolean, Dict, Float, Integer, List, String
 from xblock.validation import ValidationMessage
@@ -234,13 +235,17 @@ class FancyXBlock(StudioEditableXBlockMixin, XBlock):
     string_multiline = String(display_name="Multiline", multiline_editor=True, allow_reset=False)
     string_multiline_reset = String(display_name="Multiline", multiline_editor=True)
     string_html = String(display_name="Multiline", multiline_editor='html', allow_reset=False)
+    string_with_help = String(
+        display_name="String Field with Help Text",
+        help="Learn more about <a class='field_help_link' href='https://en.wikipedia.org/wiki/Color'>colors</a>."
+    )
     # Note: The HTML editor won't work in Workbench because it depends on Studio's TinyMCE
 
     editable_fields = (
         'bool_normal', 'dict_normal', 'float_normal', 'float_values', 'int_normal', 'int_ranged', 'int_dynamic',
         'int_values', 'list_normal', 'list_intdefs', 'list_strdefs', 'list_set_ints', 'list_set_strings',
         'string_normal', 'string_values', 'string_values_provider', 'string_named', 'string_dynamic',
-        'string_multiline', 'string_multiline_reset', 'string_html',
+        'string_multiline', 'string_multiline_reset', 'string_html', 'string_with_help'
     )
 
 
@@ -293,6 +298,7 @@ class TestFancyXBlock_StudioView(StudioEditableBaseTest):
         block.string_multiline = "why\nhello\there"
         block.string_multiline_reset = "indubitably"
         block.string_html = "<strong>Testing!</strong>"
+        block.string_with_help = "Red"
         block.save()
 
         orig_values = {field_name: getattr(block, field_name) for field_name in FancyXBlock.editable_fields}
@@ -309,3 +315,14 @@ class TestFancyXBlock_StudioView(StudioEditableBaseTest):
                 "{} should be unchanged".format(field_name)
             )
             self.assertTrue(block.fields[field_name].is_set_on(block))
+
+    @XBlock.register_temp_plugin(FancyXBlock, "fancy")
+    def test_html_in_help(self):
+        """
+        If we include HTML in the help text for a field, the HTML should be displayed in the rendered page
+        """
+        block = self.set_up_root_block()
+        try:
+            self.browser.find_element_by_class_name('field_help_link')
+        except NoSuchElementException:
+            self.fail("HTML anchor tag missing from field help text")

@@ -36,6 +36,10 @@ It can also do some fancy things with them:
 Default value if name is empty: {{name|default:"Default Name"}}
 Length of the list: {{items|length}}
 Items of the list:{% for item in items %} {{item}}{% endfor %}
+
+Although it is simple, it can also contain non-ASCII characters:
+
+Thé Fütüré øf Ønlïné Édüçätïøn Ⱡσяєм ι# Før änýøné, änýwhéré, änýtïmé Ⱡσяєм #
 """
 
 
@@ -56,6 +60,10 @@ It can also do some fancy things with them:
 Default value if name is empty: This is a fine name
 Length of the list: 7
 Items of the list: 1 2 3 4 a b c
+
+Although it is simple, it can also contain non-ASCII characters:
+
+Thé Fütüré øf Ønlïné Édüçätïøn Ⱡσяєм ι# Før änýøné, änýwhéré, änýtïmé Ⱡσяєм #
 """
 
 example_id = "example-unique-id"

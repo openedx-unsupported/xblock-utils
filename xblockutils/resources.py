@@ -44,7 +44,7 @@ class ResourceLoader(object):
         Gets the content of a resource
         """
         resource_content = pkg_resources.resource_string(self.module_name, resource_path)
-        return unicode(resource_content)
+        return unicode(resource_content, 'utf-8')
 
     def render_django_template(self, template_path, context=None):
         """

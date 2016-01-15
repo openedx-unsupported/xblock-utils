@@ -12,3 +12,7 @@ Items of the list:\
  ${item}\
 % endfor
 
+
+Although it is simple, it can also contain non-ASCII characters:
+
+Thé Fütüré øf Ønlïné Édüçätïøn Ⱡσяєм ι# Før änýøné, änýwhéré, änýtïmé Ⱡσяєм #

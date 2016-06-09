@@ -106,6 +106,16 @@ class TestEditableXBlock_StudioView(StudioEditableBaseTest):
         self.assert_unchanged(block, orig_values, explicitly_set=True)
 
     @XBlock.register_temp_plugin(EditableXBlock, "editable")
+    def test_no_i18n(self):
+        """
+        Test that the studio_view doesn't call block.ugettext since the block hasn't indicated
+        @XBlock.wants("i18n") or @XBlock.needs("i18n")
+        """
+        with mock.patch.object(EditableXBlock, "ugettext") as mock_ugettext:
+            self.set_up_root_block()
+            mock_ugettext.assert_not_called()
+
+    @XBlock.register_temp_plugin(EditableXBlock, "editable")
     def test_explicit_overrides(self):
         """
         Test that we can override the defaults with the same value as the default, and that the
@@ -211,6 +221,7 @@ def fancy_list_values_provider_b(block):
     return [{"display_name": "Robert", "value": "bob"}, {"display_name": "Alexandra", "value": "alex"}]
 
 
+@XBlock.wants("i18n")
 class FancyXBlock(StudioEditableXBlockMixin, XBlock):
     """
     A Studio-editable XBlock with lots of fields and fancy features
@@ -302,6 +313,19 @@ class TestFancyXBlock_StudioView(StudioEditableBaseTest):
         self.go_to_view("studio_view")
         self.fix_js_environment()
         return self.load_root_xblock()
+
+    @XBlock.register_temp_plugin(FancyXBlock, "fancy")
+    def test_i18n(self):
+        """
+        Test that field names and help text get translated using the XBlock runtime's ugettext
+        method.
+        """
+        with mock.patch.object(FancyXBlock, "ugettext", side_effect=lambda text: text[::-1]):
+            self.set_up_root_block()
+        bool_field = self.browser.find_element_by_css_selector('li[data-field-name=bool_normal]')
+        self.assertIn("Normal Boolean Field"[::-1], bool_field.text)
+        string_with_help_field = self.browser.find_element_by_css_selector('li[data-field-name=string_with_help]')
+        self.assertIn("Learn more about"[::-1], string_with_help_field.text)
 
     @XBlock.register_temp_plugin(FancyXBlock, "fancy")
     def test_no_changes_with_defaults(self):

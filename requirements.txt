@@ -3,4 +3,4 @@
 # XBlock
 # This is not in/from PyPi, since it moves fast
 
--e git+https://github.com/edx/XBlock.git@tag-master-2015-05-22#egg=XBlock
+-e git+https://github.com/edx/XBlock.git@xblock-0.4.10#egg=XBlock==0.4.10

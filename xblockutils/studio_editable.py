@@ -13,7 +13,6 @@ StudioEditableXBlockMixin to your XBlock.
 import json
 import logging
 
-from django.utils.translation import ugettext
 from xblock.core import XBlock
 from xblock.fields import Scope, JSONField, List, Integer, Float, Boolean, String, DateTime
 from xblock.exceptions import JsonHandlerError, NoSuchViewError
@@ -107,6 +106,14 @@ class StudioEditableXBlockMixin(object):
             (DateTime, 'datepicker'),
             (JSONField, 'generic'),  # This is last so as a last resort we display a text field w/ the JSON string
         )
+        if self.service_declaration("i18n"):
+            ugettext = self.ugettext
+        else:
+
+            def ugettext(text):
+                """ Dummy ugettext method that doesn't do anything """
+                return text
+
         info = {
             'name': field_name,
             'display_name': ugettext(field.display_name) if field.display_name else "",

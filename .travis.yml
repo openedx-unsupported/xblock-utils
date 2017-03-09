@@ -1,6 +1,6 @@
 language: python
 addons:
-    firefox "52.0esr"
+    firefox "latest-nightly"
 python:
     - "2.7"
 before_install:

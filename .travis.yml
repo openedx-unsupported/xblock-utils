@@ -1,6 +1,6 @@
 language: python
 addons:
-    firefox "latest-nightly"
+    firefox "52.0esr"
 python:
     - "2.7"
 before_install:
@@ -17,6 +17,8 @@ install:
     - "mkdir geckodriver"
     - "tar -xzf geckodriver-v0.15.0-linux64.tar.gz -C geckodriver"
     - "export PATH=$PATH:$PWD/geckodriver"
+    - "tar -xjf /tmp/firefox-52.0.tar.bz2 --directory /tmp"
+    - "export PATH="/tmp/firefox:$PATH"
 script:
     - pep8 xblockutils --max-line-length=120
     - pylint xblockutils

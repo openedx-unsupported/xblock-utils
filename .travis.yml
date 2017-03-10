@@ -1,4 +1,6 @@
 language: python
+addons:
+    firefox: "52.0esr"
 python:
     - "2.7"
 before_install:
@@ -11,6 +13,10 @@ install:
     - "pip install -r requirements.txt"
     - "pip install -r test_requirements.txt"
     - "mkdir var"
+    - "wget https://github.com/mozilla/geckodriver/releases/download/v0.15.0/geckodriver-v0.15.0-linux64.tar.gz"
+    - "mkdir geckodriver"
+    - "tar -xzf geckodriver-v0.15.0-linux64.tar.gz -C geckodriver"
+    - "export PATH=$PATH:$PWD/geckodriver"
 script:
     - pep8 xblockutils --max-line-length=120
     - pylint xblockutils

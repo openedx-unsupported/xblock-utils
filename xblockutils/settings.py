@@ -17,8 +17,9 @@ class XBlockWithSettingsMixin(object):
         block_settings_key: string - XBlock settings is essentially a dictionary-like object (key-value storage).
                                      Each XBlock must provide a key to look its settings up in this storage.
                                      Settings Service uses `block_settings_key` attribute to get the XBlock settings key
+                                     If the `block_settings_key` is not provided the XBlock class name will be used.
     """
-    block_settings_key = None
+    # block_settings_key = "XBlockName"  # (Optional)
 
     def get_xblock_settings(self, default=None):
         """

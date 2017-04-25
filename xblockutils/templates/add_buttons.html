@@ -6,7 +6,7 @@
     <ul class="new-component-type">
       {% for block_spec in child_blocks %}
         <li>
-          <a href="#" class="single-template add-xblock-component-button"
+          <button href="#" class="single-template add-xblock-component-button"
              data-category="{{ block_spec.category }}" data-single-instance="{{ block_spec.single_instance|lower }}"
              {% if block_spec.disabled %}
               disabled="disabled" title="{{ block_spec.disabled_reason }}"
@@ -14,7 +14,7 @@
              {% if block_spec.boilerplate %} data-boilerplate="{{ block_spec.boilerplate }}"  {% endif %}
               >
             {{ block_spec.label }}
-          </a>
+          </button>
         </li>
       {% endfor %}
     </ul>

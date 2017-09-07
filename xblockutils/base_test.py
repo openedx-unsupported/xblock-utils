@@ -166,6 +166,9 @@ class SeleniumBaseTest(SeleniumXBlockTest):
 
         self.browser.get(self.live_server_url)
         target_url = self.browser.find_element_by_link_text(page_name).get_attribute('href')
+        if '://' not in target_url:
+            # Recent versions of webdriver require an absolute URL:
+            target_url = self.live_server_url + target_url
         if view_name:
             target_url += '{}/'.format(view_name)
         self.browser.get(target_url)

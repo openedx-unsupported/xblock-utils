@@ -35,8 +35,7 @@ class XBlockWithSettingsMixin(object):
         settings_service = self.runtime.service(self, "settings")
         if settings_service:
             return settings_service.get_settings_bucket(self, default=default)
-        else:
-            return default
+        return default
 
 
 class ThemableXBlockMixin(object):

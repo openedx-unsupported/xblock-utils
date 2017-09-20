@@ -317,8 +317,7 @@ class StudioContainerXBlockMixin(object):
         if root_xblock and root_xblock.location == self.location:
             # User has clicked the "View" link. Show an editable preview of this block's children
             return self.author_edit_view(context)
-        else:
-            return self.author_preview_view(context)
+        return self.author_preview_view(context)
 
     def author_edit_view(self, context):
         """

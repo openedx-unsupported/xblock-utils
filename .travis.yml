@@ -16,6 +16,10 @@ install:
 env:
     - TOX_ENV=django18
     - TOX_ENV=django111
+matrix:
+  include:
+    - python: 2.7
+      env: TOX_ENV=quality
 script:
     - tox -e $TOX_ENV
 notifications:

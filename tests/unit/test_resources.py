@@ -19,8 +19,11 @@
 #
 
 import unittest
-
+import gettext
 from mock import patch, DEFAULT
+from pkg_resources import resource_filename
+
+from django.utils.translation import get_language, to_locale
 
 from xblockutils.resources import ResourceLoader
 
@@ -66,6 +69,27 @@ Although it is simple, it can also contain non-ASCII characters:
 Thé Fütüré øf Ønlïné Édüçätïøn Ⱡσяєм ι# Før änýøné, änýwhéré, änýtïmé Ⱡσяєм #
 """
 
+expected_not_translated_template = u"""\
+
+Translate 1
+
+Translate 2
+
+Multi-line translation
+with variable: This is a fine name
+
+"""
+
+expected_translated_template = u"""\
+
+tRaNsLaTe !
+
+Translate 2
+
+mUlTi_LiNe TrAnSlAtIoN: This is a fine name
+
+"""
+
 example_id = "example-unique-id"
 
 expected_filled_js_template = u"""\
@@ -99,6 +123,25 @@ expected_scenarios_with_identifiers = [
 expected_scenarios = [(t, c) for (i, t, c) in expected_scenarios_with_identifiers]
 
 
+class MockI18nService(object):
+    """
+    I18n service used for testing translations.
+    """
+    def __init__(self):
+
+        locale_dir = 'data/translations'
+        locale_path = resource_filename(__name__, locale_dir)
+        domain = 'text'
+        self.mock_translator = gettext.translation(
+            domain,
+            locale_path,
+            ['eo'],
+        )
+
+    def __getattr__(self, name):
+        return getattr(self.mock_translator, name)
+
+
 class TestResourceLoader(unittest.TestCase):
     def test_load_unicode(self):
         s = ResourceLoader(__name__).load_unicode("data/simple_django_template.txt")
@@ -112,6 +155,17 @@ class TestResourceLoader(unittest.TestCase):
         loader = ResourceLoader(__name__)
         s = loader.render_django_template("data/simple_django_template.txt", example_context)
         self.assertEquals(s, expected_filled_template)
+
+    def test_render_django_template_translated(self):
+        loader = ResourceLoader(__name__)
+        s = loader.render_django_template("data/trans_django_template.txt",
+                                          context=example_context,
+                                          i18n_service=MockI18nService())
+        self.assertEquals(s, expected_translated_template)
+
+        # Test that the language changes were reverted
+        s = loader.render_django_template("data/trans_django_template.txt", example_context)
+        self.assertEquals(s, expected_not_translated_template)
 
     def test_render_mako_template(self):
         loader = ResourceLoader(__name__)

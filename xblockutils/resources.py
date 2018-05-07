@@ -28,7 +28,8 @@ import warnings
 
 import pkg_resources
 
-from django.template import Context, Template
+import django
+from django.template import Context, Template, Engine, base as TemplateBase
 
 from mako.template import Template as MakoTemplate
 from mako.lookup import TemplateLookup as MakoTemplateLookup
@@ -46,14 +47,38 @@ class ResourceLoader(object):
         resource_content = pkg_resources.resource_string(self.module_name, resource_path)
         return unicode(resource_content, 'utf-8')
 
-    def render_django_template(self, template_path, context=None):
+    def render_django_template(self, template_path, context=None, i18n_service=None):
         """
-        Evaluate a django template by resource path, applying the provided context
+        Evaluate a django template by resource path, applying the provided context.
         """
         context = context or {}
+        context['_i18n_service'] = i18n_service
+        libraries = {
+            'i18n': 'xblockutils.templatetags.i18n',
+        }
+
+        # For django 1.8, we have to load the libraries manually, and restore them once the template is rendered.
+        _libraries = None
+        if django.VERSION[0] == 1 and django.VERSION[1] == 8:
+            _libraries = TemplateBase.libraries.copy()
+            for library_name in libraries:
+                library = TemplateBase.import_library(libraries[library_name])
+                if library:
+                    TemplateBase.libraries[library_name] = library
+            engine = Engine()
+        else:
+            # Django>1.8 Engine can load the extra templatetag libraries itself
+            engine = Engine(libraries=libraries)
+
         template_str = self.load_unicode(template_path)
-        template = Template(template_str)
-        return template.render(Context(context))
+        template = Template(template_str, engine=engine)
+        rendered = template.render(Context(context))
+
+        # Restore the original TemplateBase.libraries
+        if _libraries is not None:
+            TemplateBase.libraries = _libraries
+
+        return rendered
 
     def render_mako_template(self, template_path, context=None):
         """

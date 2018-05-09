@@ -68,7 +68,11 @@ class ResourceLoader(object):
             engine = Engine()
         else:
             # Django>1.8 Engine can load the extra templatetag libraries itself
-            engine = Engine(libraries=libraries)
+            # but we have to override the default installed libraries.
+            from django.template.backends.django import get_installed_libraries
+            installed_libraries = get_installed_libraries()
+            installed_libraries.update(libraries)
+            engine = Engine(libraries=installed_libraries)
 
         template_str = self.load_unicode(template_path)
         template = Template(template_str, engine=engine)

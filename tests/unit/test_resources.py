@@ -90,6 +90,12 @@ mUlTi_LiNe TrAnSlAtIoN: This is a fine name
 
 """
 
+expected_localized_template = u"""\
+
+1000
+1000
+"""
+
 example_id = "example-unique-id"
 
 expected_filled_js_template = u"""\
@@ -166,6 +172,14 @@ class TestResourceLoader(unittest.TestCase):
         # Test that the language changes were reverted
         s = loader.render_django_template("data/trans_django_template.txt", example_context)
         self.assertEquals(s, expected_not_translated_template)
+
+    def test_render_django_template_localized(self):
+        # Test that default template tags like l10n are loaded
+        loader = ResourceLoader(__name__)
+        s = loader.render_django_template("data/l10n_django_template.txt",
+                                          context=example_context,
+                                          i18n_service=MockI18nService())
+        self.assertEquals(s, expected_localized_template)
 
     def test_render_mako_template(self):
         loader = ResourceLoader(__name__)

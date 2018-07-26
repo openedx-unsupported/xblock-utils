@@ -10,11 +10,11 @@ test base classes and documentation shared by many XBlocks.
 
 To test the utilities, run::
 
-    python run_tests.py
+    make test
 
-To get a coverage report, use:
+To get a coverage report, use::
 
-    python run_tests.py --with-coverage --cover-package=xblockutils --cover-html
+    tox -- --cover-html
 
 
 StudioEditableXBlockMixin
@@ -92,8 +92,8 @@ Supported field options (all field types):
   XBlock source code <https://github.com/edx/XBlock/blob/master/xblock/fields.py>`__:
   
   - A finite set of elements: ``[1, 2, 3]``
-  - A finite set of elements where the display names differ from the values
-    ::
+  - A finite set of elements where the display names differ from the values::
+
         [
             {"display_name": "Always", "value": "always"},
             {"display_name": "Past Due", "value": "past_due"},

@@ -12,9 +12,8 @@ install:
     - "mkdir geckodriver"
     - "tar -xzf geckodriver-v0.15.0-linux64.tar.gz -C geckodriver"
     - "export PATH=$PATH:$PWD/geckodriver"
-    - "pip install tox"
+    - "pip install -r requirements/travis.txt"
 env:
-    - TOX_ENV=django18
     - TOX_ENV=django111
 matrix:
   include:
@@ -27,3 +26,12 @@ notifications:
 branches:
     only:
         - master
+deploy:
+  provider: pypi
+  user: edx
+  password:
+    secure: celTh9NJzWzxRMCo+uXDkmFIvQ1uvqBuDHwW/hVcN0gO9Ph0ubDRfXoH9LuVbtDJzMJ1r6O4DjFQU8Icd0bBDxUhIZ7+z/Alilz4ETCEsffLl6ZzRXvQdd+7pWhYavuyut52ImfFLhjsWuVYVmE+aybc1sPY6r7DTfbYz8E+aXM=
+  distributions: sdist bdist_wheel
+  on:
+    tags: true
+    condition: "$TOXENV = quality"

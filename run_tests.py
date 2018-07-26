@@ -19,4 +19,6 @@ if __name__ == "__main__":
     if not paths:
         paths = ["tests/"]
     options = [arg for arg in args if arg not in paths]
+    if not os.path.exists('var'):
+        os.makedirs('var')
     execute_from_command_line([sys.argv[0], "test"] + paths + options)

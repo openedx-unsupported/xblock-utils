@@ -23,9 +23,6 @@ script:
     - tox -e $TOX_ENV
 notifications:
   email: false
-branches:
-    only:
-        - master
 deploy:
   provider: pypi
   user: edx

@@ -1,0 +1,9 @@
+# Requirements for test runs
+
+-r base.txt                         # Package dependencies
+
+-e git+https://github.com/edx/xblock-sdk.git@48cb0d5066a1f5ab8eecba41bb3d63c78c985a81#egg=xblock-sdk==0.1.5
+ddt
+mock
+pycodestyle
+readme_renderer

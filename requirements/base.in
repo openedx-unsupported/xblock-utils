@@ -1,0 +1,5 @@
+# Core requirements for using this package
+
+futures ; python_version == "2.7"   # via s3transfer
+mako                                # Used by xblockutils.resources
+XBlock

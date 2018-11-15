@@ -89,6 +89,9 @@ class StudioEditableXBlockMixin(object):
             if field_info is not None:
                 context["fields"].append(field_info)
         fragment.content = loader.render_template('templates/studio_edit.html', context)
+
+        fragment.add_css_url(self.runtime.local_resource_url(self, 'static/css/tabs.css'))
+
         fragment.add_javascript(loader.load_unicode('public/studio_edit.js'))
         fragment.initialize_js('StudioEditableXBlockMixin')
         return fragment

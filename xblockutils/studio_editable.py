@@ -13,6 +13,7 @@ StudioEditableXBlockMixin to your XBlock.
 import json
 import logging
 
+import pkg_resources
 from xblock.core import XBlock
 from xblock.fields import Scope, JSONField, List, Integer, Float, Boolean, String, DateTime
 from xblock.exceptions import JsonHandlerError, NoSuchViewError
@@ -90,7 +91,7 @@ class StudioEditableXBlockMixin(object):
                 context["fields"].append(field_info)
         fragment.content = loader.render_template('templates/studio_edit.html', context)
 
-        fragment.add_css_url(self.runtime.local_resource_url(self, 'public/tabs.css'))
+        fragment.add_css(pkg_resources.resource_string(__name__, 'public/tabs.css'))
 
         fragment.add_javascript(loader.load_unicode('public/studio_edit.js'))
         fragment.initialize_js('StudioEditableXBlockMixin')

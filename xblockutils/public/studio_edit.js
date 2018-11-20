@@ -8,14 +8,14 @@ function initializeTabs() {
         lastOpenEditingTab = 2;
     }
     // Initialize JQuery UI Tabs, and activates the appropriate tab.
-    $(".openassessment_editor_content_and_tabs", this.element)
+    $(".editor_content_and_tabs", this.element)
         .tabs({
             active: lastOpenEditingTab
         });
 }
 
 function saveTabState() {
-    var tabElement = $(".openassessment_editor_content_and_tabs", this.element);
+    var tabElement = $(".editor_content_and_tabs", this.element);
     OpenAssessment.lastOpenEditingTab = tabElement.tabs('option', 'active');
 }
 

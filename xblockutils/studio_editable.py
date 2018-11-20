@@ -71,13 +71,18 @@ class StudioEditableXBlockMixin(object):
     An XBlock mixin to provide a configuration UI for an XBlock in Studio.
     """
     editable_fields = ()  # Set this to a list of the names of fields to appear in the editor
+    is_editable = False  # Set this to True to show Editor tab in XBlock Edit page
 
     def studio_view(self, context):
         """
         Render a form for editing this XBlock
         """
         fragment = Fragment()
-        context = {'fields': []}
+        context = {
+            'fields': [],
+            'is_editable': self.is_editable
+        }
+
         # Build a list of all the fields that can be edited:
         for field_name in self.editable_fields:
             field = self.fields[field_name]

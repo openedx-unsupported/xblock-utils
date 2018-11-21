@@ -18,13 +18,10 @@
             <div id="settings_editor_wrapper" class="editor_content_wrapper">
                 <ul class="list-input settings-list">
                     {% for field in fields %}
-                        <li
-                                class="field comp-setting-entry metadata_entry {% if field.is_set %}is-set{% endif %}"
-                                data-field-name="{{ field.name }}"
-                                data-default="
-
-                                        {% if field.type == 'boolean' %}{{ field.default|yesno:'1,0' }}{% else %}{{ field.default|default_if_none:"" }}{% endif %}"
-                                data-cast="{{ field.type }}"
+                        <li class="field comp-setting-entry metadata_entry {% if field.is_set %}is-set{% endif %}"
+                            data-field-name="{{ field.name }}"
+                            data-default="{% if field.type == 'boolean' %}{{ field.default|yesno:'1,0' }}{% else %}{{ field.default|default_if_none:"" }}{% endif %}"
+                            data-cast="{{ field.type }}"
                         >
                             <div class="wrapper-comp-setting{% if field.type == "set" %} metadata-list-enum {% endif %}">
                                 <label class="label setting-label"
@@ -61,19 +58,16 @@
                                             type="text"
                                             class="field-data-control"
                                             id="xb-field-edit-{{ field.name }}"
-                                            value="{{ field.value|default_if_none:""}}"
+                                            value="{{field.value|default_if_none:""}}"
                                     >
                                 {% elif field.type == "integer" or field.type == "float" %}
-                                    <input
-                                            type="number"
-                                            class="field-data-control"
-                                            id="xb-field-edit-{{ field.name }}"
-                                            {% if field.step %}
-                                            step="{{ field.step }}" {% elif field.type == "integer" %}
-                                            step=1 {% endif %}
-                                            {% if field.max %} max="{{ field.max }}" {% endif %}
-                                            {% if field.min %} min="{{ field.min }}" {% endif %}
-                                            value="{{ field.value|default_if_none:""}}"
+                                    <input type="number"
+                                           class="field-data-control"
+                                           id="xb-field-edit-{{ field.name }}"
+                                           {% if field.step %} step="{{field.step}}" {% elif field.type == "integer" %} step=1 {% endif %}
+                                           {% if field.max %} max="{{field.max}}" {% endif %}
+                                           {% if field.min %} min="{{field.min}}" {% endif %}
+                                           value="{{field.value|default_if_none:""}}"
                                     >
                                 {% elif field.type == "text" or field.type == "html" %}
                                     <textarea class="field-data-control" data-field-name="{{ field.name }}"
@@ -131,10 +125,10 @@
             </div>
 
             <div id="editor_editor_wrapper" class="editor_content_wrapper">
+                Some content
             </div>
         </div>
     </div>
-
 
     <div class="xblock-actions">
         <ul>

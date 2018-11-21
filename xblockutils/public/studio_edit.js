@@ -2,13 +2,13 @@
 
 var lastOpenEditingTab;
 
-function initializeTabs() {
+function initializeTabs(element) {
     // If this is the first editor that the user has opened, default to the prompt view.
     if (typeof(lastOpenEditingTab) === "undefined") {
         lastOpenEditingTab = 2;
     }
     // Initialize JQuery UI Tabs, and activates the appropriate tab.
-    $(".editor_content_and_tabs", this.element)
+    $(".editor_content_and_tabs", element)
         .tabs({
             active: lastOpenEditingTab
         });
@@ -16,7 +16,7 @@ function initializeTabs() {
 
 function saveTabState() {
     var tabElement = $(".editor_content_and_tabs", this.element);
-    OpenAssessment.lastOpenEditingTab = tabElement.tabs('option', 'active');
+    lastOpenEditingTab = tabElement.tabs('option', 'active');
 }
 
 function StudioEditableXBlockMixin(runtime, element) {
@@ -26,7 +26,7 @@ function StudioEditableXBlockMixin(runtime, element) {
     var tinyMceAvailable = (typeof $.fn.tinymce !== 'undefined'); // Studio includes a copy of tinyMCE and its jQuery plugin
     var datepickerAvailable = (typeof $.fn.datepicker !== 'undefined'); // Studio includes datepicker jQuery plugin
 
-    initializeTabs();
+    initializeTabs(element);
 
     $(element).find('.field-data-control').each(function() {
         var $field = $(this);
@@ -70,6 +70,7 @@ function StudioEditableXBlockMixin(runtime, element) {
             $wrapper.removeClass('is-set');
             $resetButton.removeClass('active').addClass('inactive');
         });
+        saveTabState();
         if (type == 'html' && tinyMceAvailable) {
             tinyMCE.baseURL = baseUrl + "/js/vendor/tinymce/js/tinymce";
             $field.tinymce({
@@ -190,6 +191,7 @@ function StudioEditableXBlockMixin(runtime, element) {
             }
         }
         e.preventDefault();
+        saveTabState();
         runtime.notify('cancel', {});
     });
 }

@@ -97,8 +97,8 @@ class StudioEditableXBlockMixin(object):
         fragment.content = loader.render_template('templates/studio_edit.html', context)
 
         fragment.add_css(pkg_resources.resource_string(__name__, 'public/tabs.css'))
-
         fragment.add_javascript(loader.load_unicode('public/studio_edit.js'))
+
         fragment.initialize_js('StudioEditableXBlockMixin')
         return fragment
 

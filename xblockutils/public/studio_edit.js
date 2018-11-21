@@ -1,32 +1,28 @@
 /* Javascript for StudioEditableXBlockMixin. */
 
-var lastOpenEditingTab;
-
-function initializeTabs(element) {
-    // If this is the first editor that the user has opened, default to the prompt view.
-    if (typeof(lastOpenEditingTab) === "undefined") {
-        lastOpenEditingTab = 2;
-    }
-    // Initialize JQuery UI Tabs, and activates the appropriate tab.
-    $(".editor_content_and_tabs", element)
-        .tabs({
-            active: lastOpenEditingTab
-        });
-}
-
-function saveTabState() {
-    var tabElement = $(".editor_content_and_tabs", this.element);
-    lastOpenEditingTab = tabElement.tabs('option', 'active');
-}
-
 function StudioEditableXBlockMixin(runtime, element) {
     "use strict";
     
     var fields = [];
     var tinyMceAvailable = (typeof $.fn.tinymce !== 'undefined'); // Studio includes a copy of tinyMCE and its jQuery plugin
     var datepickerAvailable = (typeof $.fn.datepicker !== 'undefined'); // Studio includes datepicker jQuery plugin
+    var data = $('#xb-field-edit-data').val();
+    var editor;
 
-    initializeTabs(element);
+    $(".editor_content_and_tabs", element).tabs({
+        active: 0,
+        activate: function (event, ui) {
+            if (ui.newTab.index() === 1 && editor === undefined) {
+                editor = CodeMirror.fromTextArea($("#html5-textarea", element)[0], {
+                    mode: "xml",
+                    lineNumbers: true,
+                    matchBrackets: true,
+                    lineWrapping: true,
+                });
+                editor.getDoc().setValue(data);
+            }
+        }
+    });
 
     $(element).find('.field-data-control').each(function() {
         var $field = $(this);
@@ -70,7 +66,6 @@ function StudioEditableXBlockMixin(runtime, element) {
             $wrapper.removeClass('is-set');
             $resetButton.removeClass('active').addClass('inactive');
         });
-        saveTabState();
         if (type == 'html' && tinyMceAvailable) {
             tinyMCE.baseURL = baseUrl + "/js/vendor/tinymce/js/tinymce";
             $field.tinymce({
@@ -191,7 +186,6 @@ function StudioEditableXBlockMixin(runtime, element) {
             }
         }
         e.preventDefault();
-        saveTabState();
         runtime.notify('cancel', {});
     });
 }

@@ -71,7 +71,8 @@ class StudioEditableXBlockMixin(object):
     An XBlock mixin to provide a configuration UI for an XBlock in Studio.
     """
     editable_fields = ()  # Set this to a list of the names of fields to appear in the editor
-    is_editable = False  # Set this to True to show Editor tab in XBlock Edit page
+    tabs_templates_dir = ''  # This dir will hold a template named `<tab_name>.html` for each tab in tabs below.
+    studio_tabs = []  # The name of the tabs you want to add in studio edit view
 
     def studio_view(self, context):
         """
@@ -80,7 +81,8 @@ class StudioEditableXBlockMixin(object):
         fragment = Fragment()
         context = {
             'fields': [],
-            'is_editable': self.is_editable
+            'tabs': self.studio_tabs,
+            'templates_dir': self.tabs_templates_dir,
         }
 
         # Build a list of all the fields that can be edited:

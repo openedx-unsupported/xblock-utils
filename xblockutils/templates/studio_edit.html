@@ -8,14 +8,16 @@
                     class="title modal_window_title">{% trans "Open Response Assessment" %}</h6>
                 <ul class="editor_modes action_list action_modes editor_tabs">
                     <li class="view-button editor_tab">
-                        <a href="#settings_editor_wrapper">{% trans "Settings" %}</a>
+                        <a href="#settings_wrapper">{% trans "Settings" %}</a>
                     </li>
-                    <li class="view-button editor_tab">
-                        <a href="#editor_editor_wrapper">{% trans "Editor" %}</a>
-                    </li>
+                    {% for tab in tabs %}
+                        <li class="view-button editor_tab">
+                            <a href="#{{ tab }}_wrapper">{{ tab }}</a>
+                        </li>
+                    {% endfor %}
                 </ul>
             </div>
-            <div id="settings_editor_wrapper" class="editor_content_wrapper">
+            <div id="settings_wrapper" class="editor_content_wrapper">
                 <ul class="list-input settings-list">
                     {% for field in fields %}
                         <li class="field comp-setting-entry metadata_entry {% if field.is_set %}is-set{% endif %}"
@@ -124,9 +126,13 @@
                 </ul>
             </div>
 
-            <div id="editor_editor_wrapper" class="editor_content_wrapper">
-                <textarea id="html5-textarea">{{ self.data }}</textarea>
-            </div>
+            {% for tab in tabs %}
+                <div id="{{ tab }}_wrapper" class="{{ tab }}_content_wrapper">
+                {% with ""|add:templates_dir|add:tab|add:".html" as template %}
+                    {% include template %}
+                {% endwith %}
+                </div>
+            {% endfor %}
         </div>
     </div>
 

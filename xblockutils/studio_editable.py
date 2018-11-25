@@ -12,6 +12,7 @@ StudioEditableXBlockMixin to your XBlock.
 
 import json
 import logging
+import os
 
 import pkg_resources
 from xblock.core import XBlock
@@ -81,8 +82,7 @@ class StudioEditableXBlockMixin(object):
         fragment = Fragment()
         context = {
             'fields': [],
-            'tabs': self.studio_tabs,
-            'templates_dir': self.tabs_templates_dir,
+            'tabs': self.render_tabs(),
         }
 
         # Build a list of all the fields that can be edited:
@@ -103,6 +103,12 @@ class StudioEditableXBlockMixin(object):
 
         fragment.initialize_js('StudioEditableXBlockMixin')
         return fragment
+
+    def render_tabs(self, context=None):
+        if self.studio_tabs:
+            raise NotImplementedError
+
+        return {}
 
     def _make_field_info(self, field_name, field):
         """

@@ -10,7 +10,7 @@
                     <li class="view-button editor_tab">
                         <a href="#settings_wrapper">{% trans "Settings" %}</a>
                     </li>
-                    {% for tab in tabs %}
+                    {% for tab in tabs.keys %}
                         <li class="view-button editor_tab">
                             <a href="#{{ tab }}_wrapper">{{ tab }}</a>
                         </li>
@@ -126,11 +126,9 @@
                 </ul>
             </div>
 
-            {% for tab in tabs %}
+            {% for tab, content in tabs.items %}
                 <div id="{{ tab }}_wrapper" class="{{ tab }}_content_wrapper">
-                {% with ""|add:templates_dir|add:tab|add:".html" as template %}
-                    {% include template %}
-                {% endwith %}
+                {{ content | safe }}
                 </div>
             {% endfor %}
         </div>

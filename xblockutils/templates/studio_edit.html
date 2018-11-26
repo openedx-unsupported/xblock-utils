@@ -128,7 +128,7 @@
 
             {% for tab, content in tabs.items %}
                 <div id="{{ tab }}_wrapper" class="{{ tab }}_content_wrapper">
-                {{ content | safe }}
+                {{ content }}
                 </div>
             {% endfor %}
         </div>

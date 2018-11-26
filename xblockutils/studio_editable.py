@@ -105,19 +105,40 @@ class StudioEditableXBlockMixin(object):
         return fragment
 
     def fetch_tabs(self, context=None):
-        if self.studio_tabs and hasattr(self, 'loader'):
-            return {
-                tab: self.loader.render_template(
-                    os.path.join(self.tabs_templates_dir, '%s.html' % tab), context)
-                for tab in self.studio_tabs
-            }
+        """
+        Fetch and render the defined tabs' templates from the child XBlock.
 
-        elif not hasattr(self, 'loader'):
+        In order for this to be able to render the templates, the child XBlock
+        must define its renderer in a property format. Otherwise, this will
+        return an empty html instead of the template content.
+
+        If we failed to locate the template (either because of an incorrect
+        value of tabs_templates_dir or that a template doesn't exist) we will
+        put an empty value for that template.
+
+        :param context: The context templates are using.
+        :return: A dict holding the tabs names and their rendered HTML templates.
+        """
+        if not hasattr(self, 'loader'):
             log.warning(
                 'Unable to load your tabs templates. Define `loader` in your XBlock and try again.'
             )
+            return {
+                tab: '<p>Couldn\'t load template!</p>' for tab in self.studio_tabs
+            }
 
-        return {tab: '' for tab in self.studio_tabs}
+        tabs = {}
+        for tab in self.studio_tabs:
+            template_name = tab + '.html'
+            template_path = os.path.join(self.tabs_templates_dir, template_name)
+
+            try:
+                tabs[tab] = self.loader.render_template(template_path, context)
+            except IOError as e:
+                log.error(e)
+                tabs[tab] = '<p>Template not found</p>'
+
+        return tabs
 
     def _make_field_info(self, field_name, field):
         """

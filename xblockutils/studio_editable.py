@@ -82,7 +82,7 @@ class StudioEditableXBlockMixin(object):
         fragment = Fragment()
         context = {
             'fields': [],
-            'tabs': self.render_tabs(),
+            'tabs': self.fetch_tabs(),
         }
 
         # Build a list of all the fields that can be edited:
@@ -104,11 +104,20 @@ class StudioEditableXBlockMixin(object):
         fragment.initialize_js('StudioEditableXBlockMixin')
         return fragment
 
-    def render_tabs(self, context=None):
-        if self.studio_tabs:
-            raise NotImplementedError
+    def fetch_tabs(self, context=None):
+        if self.studio_tabs and hasattr(self, 'loader'):
+            return {
+                tab: self.loader.render_template(
+                    os.path.join(self.tabs_templates_dir, '%s.html' % tab), context)
+                for tab in self.studio_tabs
+            }
 
-        return {}
+        elif not hasattr(self, 'loader'):
+            log.warning(
+                'Unable to load your tabs templates. Define `loader` in your XBlock and try again.'
+            )
+
+        return {tab: '' for tab in self.studio_tabs}
 
     def _make_field_info(self, field_name, field):
         """

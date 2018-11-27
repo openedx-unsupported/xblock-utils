@@ -11,7 +11,7 @@
                         <a href="#settings_wrapper">{% trans "Settings" %}</a>
                     </li>
                     {% for tab in tabs.keys %}
-                        <li class="view-button editor_tab">
+                        <li class="view-button editor_tab" id="{{ tab }}-tab">
                             <a href="#{{ tab }}_wrapper">{{ tab }}</a>
                         </li>
                     {% endfor %}

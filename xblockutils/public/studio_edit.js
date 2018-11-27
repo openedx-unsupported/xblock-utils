@@ -6,23 +6,8 @@ function StudioEditableXBlockMixin(runtime, element) {
     var fields = [];
     var tinyMceAvailable = (typeof $.fn.tinymce !== 'undefined'); // Studio includes a copy of tinyMCE and its jQuery plugin
     var datepickerAvailable = (typeof $.fn.datepicker !== 'undefined'); // Studio includes datepicker jQuery plugin
-    var data = $('#xb-field-edit-data').val();
-    var editor;
 
-    $(".editor_content_and_tabs", element).tabs({
-        active: 0,
-        activate: function (event, ui) {
-            if (ui.newTab.index() === 1 && editor === undefined) {
-                editor = CodeMirror.fromTextArea($("#html5-textarea", element)[0], {
-                    mode: "xml",
-                    lineNumbers: true,
-                    matchBrackets: true,
-                    lineWrapping: true,
-                });
-                editor.getDoc().setValue(data);
-            }
-        }
-    });
+    $(".editor_content_and_tabs", element).tabs({active: 0});
 
     $(element).find('.field-data-control').each(function() {
         var $field = $(this);

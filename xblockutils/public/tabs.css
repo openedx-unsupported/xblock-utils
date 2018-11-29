@@ -96,58 +96,14 @@
 	-moz-transition: height 1s ease-in-out 0
 }
 
-#xblock-editor #ai_training_examples {
-	margin: 5px 20px 10px 10px;
-	height: 300px;
-	width: calc(100% - 20px);
-	resize: none;
-	font: inherit;
-	line-height: 110%;
-	font-size: 80%;
-	padding: 5px 10px
-}
-
 #xblock-editor label {
 	padding-right: 10px
-}
-
-#xblock-editor .xblock_actions {
-	background-color: #c8c9cb;
-	position: absolute;
-	width: 100%;
-	bottom: 0
-}
-
-#xblock-editor .action.expand-collapse {
-	float: left
-}
-
-#xblock-editor .action.expand-collapse .ui-toggle-expansion {
-	color: #626365;
-	cursor: pointer
-}
-
-#xblock-editor .action.expand-collapse .ui-toggle-expansion:hover {
-	color: #838486;
-	cursor: pointer
-}
-
-#xblock-editor #oa_rubric_editor_wrapper .wrapper-comp-settings {
-	display: block
 }
 
 .wrapper-comp-settings label input {
 	font-size: 11px;
 	float: right;
 	width: 70%
-}
-
-#xblock-editor hr {
-	background-color: transparent;
-	color: #424243;
-	height: 1px;
-	border: 0px;
-	clear: both
 }
 
 #xblock-editor .wrapper-comp-settings .list-input.settings-list .field.comp-setting-entry select {

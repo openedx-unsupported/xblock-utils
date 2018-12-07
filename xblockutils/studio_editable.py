@@ -12,7 +12,6 @@ StudioEditableXBlockMixin to your XBlock.
 
 import json
 import logging
-import os
 
 import pkg_resources
 from xblock.core import XBlock
@@ -106,7 +105,7 @@ class StudioEditableXBlockMixin(object):
 
     def fetch_tabs(self, context=None):
         """
-        Fetch and render the defined tabs' templates from the child XBlock.
+        Fetch and render the defined tabs' templates from this XBlock.
 
         In order for this to be able to render the templates, the child XBlock
         must define its renderer in a property format. Otherwise, this will
@@ -119,24 +118,16 @@ class StudioEditableXBlockMixin(object):
         :param context: The context templates are using.
         :return: A dict holding the tabs names and their rendered HTML templates.
         """
-        if not hasattr(self, 'loader'):
-            log.warning(
-                'Unable to load your tabs templates. Define `loader` in your XBlock and try again.'
-            )
-            return {
-                tab: '<p>Couldn\'t load template!</p>' for tab in self.studio_tabs
-            }
-
         tabs = {}
         for tab in self.studio_tabs:
-            template_name = tab + '.html'
-            template_path = os.path.join(self.tabs_templates_dir, template_name)
-
             try:
-                tabs[tab] = self.loader.render_template(template_path, context)
-            except IOError as e:
+                template_method_name = 'studio_{}_tab_view'.format(tab)
+                template_method = getattr(self, template_method_name)
+
+                tabs[tab] = template_method()
+            except AttributeError as e:
                 log.error(e)
-                tabs[tab] = '<p>Template not found</p>'
+                tabs[tab] = '<p>Template couldn\'t be loaded</p>'
 
         return tabs
 
@@ -466,7 +457,7 @@ class StudioContainerWithNestedXBlocksMixin(StudioContainerXBlockMixin):
     @property
     def loader(self):  # pylint: disable=no-self-use
         """
-        Loader for loading and rendering assets stored in child XBlock package
+        Loader for loading and rendering assets stored in this XBlock's package
         """
         return loader
 

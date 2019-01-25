@@ -79,6 +79,21 @@ class StudioEditableXBlockMixin(object):
     # The name of the tabs you want to add in studio edit view
     studio_tabs = []
 
+    def __init__(self, *args, **kwargs):
+        """
+        Initialize mixin.
+
+        Store a gettext method, if available.
+        """
+        super(StudioEditableXBlockMixin, self).__init__(*args, **kwargs)
+        if self.service_declaration("i18n"):
+            self._ = self.ugettext
+        else:
+            def ugettext(text):
+                """ Dummy ugettext method that doesn't do anything """
+                return text
+            self._ = ugettext
+
     def all_editable_fields(self):
         """
         Returns all the editable field names.
@@ -114,31 +129,22 @@ class StudioEditableXBlockMixin(object):
         fragment.initialize_js('StudioEditableXBlockMixin')
         return fragment
 
-    def fetch_tabs(self, context=None):
+    def fetch_tabs(self):
         """
-        Fetch and render the defined tabs' templates from this XBlock.
-
-        In order for this to be able to render the templates, the child XBlock
-        must define its renderer in a property format. Otherwise, this will
-        return an empty html instead of the template content.
-
-        If we failed to locate the template (either because of an incorrect
-        value of tabs_templates_dir or that a template doesn't exist) we will
-        put an empty value for that template.
+        Render the defined tab views from this XBlock.
 
         :param context: The context templates are using.
-        :return: A dict holding the tabs names and their rendered HTML templates.
+        :returns: A dict holding the tabs names and their rendered HTML templates.
         """
         tabs = {}
         for tab in self.studio_tabs:
             try:
                 template_method_name = 'studio_{}_tab_view'.format(tab)
                 template_method = getattr(self, template_method_name)
-
                 tabs[tab] = template_method()
             except AttributeError as e:
                 log.error(e)
-                tabs[tab] = '<p>Template couldn\'t be loaded</p>'
+                tabs[tab] = self._('Template could not be loaded.')
 
         return tabs
 
@@ -155,22 +161,14 @@ class StudioEditableXBlockMixin(object):
             (DateTime, 'datepicker'),
             (JSONField, 'generic'),  # This is last so as a last resort we display a text field w/ the JSON string
         )
-        if self.service_declaration("i18n"):
-            ugettext = self.ugettext
-        else:
-
-            def ugettext(text):
-                """ Dummy ugettext method that doesn't do anything """
-                return text
-
         info = {
             'name': field_name,
-            'display_name': ugettext(field.display_name) if field.display_name else "",
+            'display_name': self._(field.display_name) if field.display_name else "",
             'is_set': field.is_set_on(self),
             'default': field.default,
             'value': field.read_from(self),
             'has_values': False,
-            'help': ugettext(field.help) if field.help else "",
+            'help': self._(field.help) if field.help else "",
             'allow_reset': field.runtime_options.get('resettable_editor', True),
             'list_values': None,  # Only available for List fields
             'has_list_values': False,  # True if list_values_provider exists, even if it returned no available options

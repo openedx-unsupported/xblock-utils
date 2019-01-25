@@ -70,9 +70,20 @@ class StudioEditableXBlockMixin(object):
     """
     An XBlock mixin to provide a configuration UI for an XBlock in Studio.
     """
-    editable_fields = ()  # Set this to a list of the names of fields to appear in the editor
-    tabs_templates_dir = ''  # This dir will hold a template named `<tab_name>.html` for each tab in tabs below.
-    studio_tabs = []  # The name of the tabs you want to add in studio edit view
+    # Set this to the list of the names of fields to appear in the Settings tab
+    editable_fields = ()
+
+    # Set this to a list of the names of fields which will appear in the studio_tabs
+    studio_tabs_fields = ()
+
+    # The name of the tabs you want to add in studio edit view
+    studio_tabs = []  
+
+    def all_editable_fields(self):
+        """
+        Returns all the editable field names.
+        """
+        return {self.editable_fields + self.studio_tabs_fields}
 
     def studio_view(self, context):
         """
@@ -242,7 +253,7 @@ class StudioEditableXBlockMixin(object):
         """
         values = {}  # dict of new field values we are updating
         to_reset = []  # list of field names to delete from this XBlock
-        for field_name in self.editable_fields:
+        for field_name in self.all_editable_fields():
             field = self.fields[field_name]
             if field_name in data['values']:
                 if isinstance(field, JSONField):

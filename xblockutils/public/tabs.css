@@ -79,7 +79,7 @@
 }
 
 #xblock-editor .editor_content_wrapper {
-	height: calc(100% - 42px);
+  height: 333px;
 	width: 100%;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;

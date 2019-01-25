@@ -98,7 +98,7 @@ class StudioEditableXBlockMixin(object):
         """
         Returns all the editable field names.
         """
-        return set([x for x in (self.editable_fields + self.studio_tabs_fields)])
+        return set([x for x in self.editable_fields + self.studio_tabs_fields])
 
     def studio_view(self, context):
         """

@@ -77,13 +77,13 @@ class StudioEditableXBlockMixin(object):
     studio_tabs_fields = ()
 
     # The name of the tabs you want to add in studio edit view
-    studio_tabs = []  
+    studio_tabs = []
 
     def all_editable_fields(self):
         """
         Returns all the editable field names.
         """
-        return {self.editable_fields + self.studio_tabs_fields}
+        return set([x for x in (self.editable_fields + self.studio_tabs_fields)])
 
     def studio_view(self, context):
         """

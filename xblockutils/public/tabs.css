@@ -106,6 +106,10 @@
 	width: 70%
 }
 
-#xblock-editor .wrapper-comp-settings .list-input.settings-list .field.comp-setting-entry select {
+#xblock-editor.wrapper-comp-settings .list-input.settings-list {
+  height: 333px;
+}
+
+#xblock-editor.wrapper-comp-settings .list-input.settings-list .field.comp-setting-entry select {
 	padding: 5px
 }

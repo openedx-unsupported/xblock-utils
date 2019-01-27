@@ -1,9 +1,9 @@
 #xblock-editor {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 #xblock-editor .editor_content_and_tabs {
-	height: calc(100% - 55px);
+  height: calc(100% - 55px);
 }
 
 #xblock-editor #editor_window_title {
@@ -15,19 +15,19 @@
 }
 
 #xblock-editor input[type=number] {
-	background-image: -moz-linear-gradient(#F2F2F2, #fff);
-	background-image: -webkit-linear-gradient(#F2F2F2, #fff);
-	background-image: linear, false, #F2F2F2, #fff;
-	width: 45%
+  background-image: -moz-linear-gradient(#F2F2F2, #fff);
+  background-image: -webkit-linear-gradient(#F2F2F2, #fff);
+  background-image: linear, false, #F2F2F2, #fff;
+  width: 45%
 }
 
 #xblock-editor #editor_header,
 .xblock-editor .xblock-actions {
-	background-color: #e5e5e5;
+  background-color: #e5e5e5;
 }
 
 #xblock-editor #editor_header .editor_tabs {
-	width: calc(50% - 55px);
+  width: calc(50% - 55px);
   display: inline-block;
   text-align: right;
   vertical-align: middle;
@@ -35,70 +35,70 @@
 
 #xblock-editor #editor_header .editor_tabs .editor_tab {
   display: inline-block;
-	margin-left: 10px;
+  margin-left: 10px;
   padding: 0;
 
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	-ms-border-radius: 5px;
-	-o-border-radius: 5px;
-	border-radius: 5px;
-	box-shadow: none;
-	border: 0;
-	text-align: center;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  box-shadow: none;
+  border: 0;
+  text-align: center;
 }
 
 #xblock-editor #editor_header .editor_tabs .editor_tab a {
-	padding: 5px 10px;
-	text-transform: uppercase;
-	outline-color: transparent
+  padding: 5px 10px;
+  text-transform: uppercase;
+  outline-color: transparent
 }
 
 #xblock-editor #editor_header .editor_tabs .ui-state-default.editor_tab {
-	background: #e5e5e5
+  background: #e5e5e5
 }
 
 #xblock-editor #editor_header .editor_tabs .ui-state-default.editor_tab a {
-	color: #424243
+  color: #424243
 }
 
 #xblock-editor #editor_header .editor_tabs .ui-state-active.editor_tab,
 #xblock-editor #editor_header .editor_tabs .ui-state-active.ui-state-default.editor_tab:hover {
-	background: #626365
+  background: #626365
 }
 
 #xblock-editor #editor_header .editor_tabs .ui-state-active.editor_tab a,
 #xblock-editor #editor_header .editor_tabs .ui-state-active.ui-state-default.editor_tab:hover a {
-	color: #fff
+  color: #fff
 }
 
 #xblock-editor #editor_header .editor_tabs .ui-state-default.editor_tab:hover {
-	background-color: rgba(164, 165, 168, .75)
+  background-color: rgba(164, 165, 168, .75)
 }
 
 #xblock-editor .editor_content_wrapper {
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	-ms-border-radius: 3px;
-	-o-border-radius: 3px;
-	border-radius: 3px;
-	background-color: #fff;
-	overflow-y: scroll;
-	bottom: 0;
-	transition: height 1s ease-in-out 0;
-	-webkit-transition: height 1s ease-in-out 0;
-	-moz-transition: height 1s ease-in-out 0;
-	border: none
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #fff;
+  overflow-y: scroll;
+  bottom: 0;
+  transition: height 1s ease-in-out 0;
+  -webkit-transition: height 1s ease-in-out 0;
+  -moz-transition: height 1s ease-in-out 0;
+  border: none
 }
 
 #xblock-editor label {
-	padding-right: 10px
+  padding-right: 10px
 }
 
 .wrapper-comp-settings label input {
-	font-size: 11px;
-	float: right;
-	width: 70%
+  font-size: 11px;
+  float: right;
+  width: 70%
 }
 
 #xblock-editor.wrapper-comp-settings .list-input.settings-list {
@@ -106,5 +106,5 @@
 }
 
 #xblock-editor.wrapper-comp-settings .list-input.settings-list .field.comp-setting-entry select {
-	padding: 5px
+  padding: 5px
 }

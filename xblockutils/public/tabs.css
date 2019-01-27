@@ -1,15 +1,17 @@
 #xblock-editor {
 	margin-bottom: 0;
-	height: 100%
 }
 
 #xblock-editor .editor_content_and_tabs {
-	width: 100%;
-	height: calc(100% - 55px)
+	height: calc(100% - 55px);
 }
 
 #xblock-editor #editor_window_title {
-	float: left
+  width: 47%;
+  padding: 0;
+  margin: 10px 20px 20px 20px;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 #xblock-editor input[type=number] {
@@ -19,26 +21,23 @@
 	width: 45%
 }
 
-#xblock-editor #editor_header {
+#xblock-editor #editor_header,
+.xblock-editor .xblock-actions {
 	background-color: #e5e5e5;
-	width: 100%;
-	top: 0;
-	height: 42px
 }
 
 #xblock-editor #editor_header .editor_tabs {
-	width: 35%;
-	min-width: 190px;
-	max-width: 360px;
-	float: right
+	width: calc(50% - 55px);
+  display: inline-block;
+  text-align: right;
+  vertical-align: middle;
 }
 
 #xblock-editor #editor_header .editor_tabs .editor_tab {
-	float: right;
-	padding: 0;
-	width: 29%;
-	margin: 0 2%;
-	height: 35px;
+  display: inline-block;
+	margin-left: 10px;
+  padding: 0;
+
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	-ms-border-radius: 5px;
@@ -46,12 +45,11 @@
 	border-radius: 5px;
 	box-shadow: none;
 	border: 0;
-	text-align: center
+	text-align: center;
 }
 
 #xblock-editor #editor_header .editor_tabs .editor_tab a {
-	padding: 8px 0 0;
-	width: 100%;
+	padding: 5px 10px;
 	text-transform: uppercase;
 	outline-color: transparent
 }
@@ -79,8 +77,6 @@
 }
 
 #xblock-editor .editor_content_wrapper {
-  height: 333px;
-	width: 100%;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	-ms-border-radius: 3px;
@@ -89,7 +85,6 @@
 	background-color: #fff;
 	overflow-y: scroll;
 	bottom: 0;
-	z-index: 11;
 	transition: height 1s ease-in-out 0;
 	-webkit-transition: height 1s ease-in-out 0;
 	-moz-transition: height 1s ease-in-out 0;

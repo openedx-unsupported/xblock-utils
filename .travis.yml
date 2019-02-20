@@ -1,11 +1,30 @@
 language: python
-addons:
-    firefox: "52.0esr"
+dist: xenial  # required for Python >= 3.7 (travis-ci/travis-ci#9069)
 python:
     - 2.7
-before_install:
-    - "export DISPLAY=:99"
-    - "sh -e /etc/init.d/xvfb start"
+    - 3.6
+    - 3.7
+env:
+    - TOXENV=django111
+    - TOXENV=django20
+    - TOXENV=django21
+matrix:
+  include:
+    - python: 2.7
+      env: TOXENV=quality
+  exclude:
+    - python: 2.7
+      env: TOXENV=django20
+    - python: 2.7
+      env: TOXENV=django21
+  allow_failures:
+    - python: 3.6
+    - python: 3.7
+
+services:
+  - xvfb
+addons:
+    firefox: "52.0esr"
 install:
     - "mkdir var"
     - "wget https://github.com/mozilla/geckodriver/releases/download/v0.15.0/geckodriver-v0.15.0-linux64.tar.gz"
@@ -13,16 +32,8 @@ install:
     - "tar -xzf geckodriver-v0.15.0-linux64.tar.gz -C geckodriver"
     - "export PATH=$PATH:$PWD/geckodriver"
     - "pip install -r requirements/travis.txt"
-env:
-    - TOX_ENV=django111
-matrix:
-  include:
-    - python: 2.7
-      env: TOX_ENV=quality
 script:
-    - tox -e $TOX_ENV
-notifications:
-  email: false
+    - tox -e $TOXENV
 deploy:
   provider: pypi
   user: edx
@@ -32,3 +43,5 @@ deploy:
   on:
     tags: true
     condition: "$TOXENV = quality"
+notifications:
+  email: false

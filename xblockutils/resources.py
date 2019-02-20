@@ -28,6 +28,8 @@ import warnings
 
 import pkg_resources
 
+from six import text_type
+
 import django
 from django.template import Context, Template, Engine, base as TemplateBase
 
@@ -45,7 +47,7 @@ class ResourceLoader(object):
         Gets the content of a resource
         """
         resource_content = pkg_resources.resource_string(self.module_name, resource_path)
-        return unicode(resource_content, 'utf-8')
+        return resource_content.decode('utf-8')
 
     def render_django_template(self, template_path, context=None, i18n_service=None):
         """
@@ -131,7 +133,7 @@ class ResourceLoader(object):
                 identifier = template[:-4]
                 title = identifier.replace('_', ' ').title()
                 template_path = os.path.join(relative_scenario_dir, template)
-                scenario = unicode(self.render_template(template_path, {"url_name": identifier}))
+                scenario = text_type(self.render_template(template_path, {"url_name": identifier}))
                 if not include_identifier:
                     scenarios.append((title, scenario))
                 else:

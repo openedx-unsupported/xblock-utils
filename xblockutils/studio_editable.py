@@ -13,6 +13,8 @@ StudioEditableXBlockMixin to your XBlock.
 import json
 import logging
 
+from six import text_type
+
 from xblock.core import XBlock
 from xblock.fields import Scope, JSONField, List, Integer, Float, Boolean, String, DateTime
 from xblock.exceptions import JsonHandlerError, NoSuchViewError
@@ -178,7 +180,7 @@ class StudioEditableXBlockMixin(object):
                 info['values'] = values
             else:
                 # e.g. [1, 2, 3] - we need to convert it to the [{"display_name": x, "value": x}] format
-                info['values'] = [{"display_name": unicode(val), "value": val} for val in values]
+                info['values'] = [{"display_name": text_type(val), "value": val} for val in values]
             info['has_values'] = 'values' in info
         if info["type"] in ("list", "set") and field.runtime_options.get('list_values_provider'):
             list_values = field.runtime_options['list_values_provider'](self)
@@ -192,7 +194,7 @@ class StudioEditableXBlockMixin(object):
             else:
                 # e.g. [1, 2, 3] - we need to convert it to the [{"display_name": x, "value": x}] format
                 list_values = [json.dumps(val) for val in list_values]
-                list_values = [{"display_name": unicode(val), "value": val} for val in list_values]
+                list_values = [{"display_name": text_type(val), "value": val} for val in list_values]
             info['list_values'] = list_values
             info['has_list_values'] = True
         return info
@@ -296,7 +298,7 @@ class StudioContainerXBlockMixin(object):
             fragment.add_frag_resources(rendered_child)
 
             contents.append({
-                'id': unicode(child.scope_ids.usage_id),
+                'id': text_type(child.scope_ids.usage_id),
                 'content': rendered_child.content
             })
 

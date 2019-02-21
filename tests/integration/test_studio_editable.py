@@ -2,6 +2,7 @@ import datetime
 import textwrap
 import mock
 import pytz
+from six import text_type
 from selenium.common.exceptions import NoSuchElementException
 from xblock.core import XBlock
 from xblock.fields import Boolean, Dict, Float, Integer, List, String, DateTime
@@ -268,7 +269,7 @@ class FancyXBlock(StudioEditableXBlockMixin, XBlock):
     string_values_provider = String(
         display_name="String Field With Dynamic Values",
         default="",
-        values_provider=lambda self: [unicode(self.scope_ids.usage_id), ""],
+        values_provider=lambda self: [text_type(self.scope_ids.usage_id), ""],
     )
     string_named = String(
         display_name="String Field With Named Values",
@@ -361,7 +362,7 @@ class TestFancyXBlock_StudioView(StudioEditableBaseTest):
         block.list_set_strings = ["bob"]
         block.string_normal = "A"
         block.string_values = "B"
-        block.string_values_provider = unicode(block.scope_ids.usage_id)
+        block.string_values_provider = text_type(block.scope_ids.usage_id)
         block.string_named = "BC"
         block.string_dynamic = "U"
         block.string_multiline = "why\nhello\there"

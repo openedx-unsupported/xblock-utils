@@ -1,6 +1,7 @@
 """
 Tests for StudioEditableXBlockMixin
 """
+from __future__ import absolute_import
 from selenium.webdriver.support.ui import WebDriverWait
 from xblockutils.base_test import SeleniumXBlockTest
 

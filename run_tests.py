@@ -4,6 +4,7 @@
 Run tests for XBlock-utils
 """
 
+from __future__ import absolute_import
 import os
 import sys
 

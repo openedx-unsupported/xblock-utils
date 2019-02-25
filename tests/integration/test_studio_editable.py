@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 import datetime
 import textwrap
 import mock
@@ -12,6 +13,7 @@ from tests.integration.utils import render_template
 from xblockutils.studio_editable import StudioEditableXBlockMixin, StudioContainerWithNestedXBlocksMixin, \
     NestedXBlockSpec
 from xblockutils.studio_editable_test import StudioEditableBaseTest, StudioContainerWithNestedXBlocksBaseTest
+from six.moves import range
 
 
 class EditableXBlock(StudioEditableXBlockMixin, XBlock):
@@ -217,6 +219,7 @@ class TestEditableXBlock_StudioView(StudioEditableBaseTest):
 
 def fancy_list_values_provider_a(block):
     return [1, 2, 3, 4, 5]
+
 
 def fancy_list_values_provider_b(block):
     return [{"display_name": "Robert", "value": "bob"}, {"display_name": "Alexandra", "value": "alex"}]

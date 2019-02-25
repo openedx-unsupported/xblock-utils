@@ -22,6 +22,7 @@ Helper class (ResourceLoader) for loading resources used by an XBlock
 """
 
 
+from __future__ import absolute_import
 import os
 import sys
 import warnings

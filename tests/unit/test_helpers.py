@@ -1,6 +1,7 @@
 """
 Tests for helpers.py
 """
+from __future__ import absolute_import
 import unittest
 from workbench.runtime import WorkbenchRuntime
 from xblock.core import XBlock

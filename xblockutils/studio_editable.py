@@ -10,9 +10,11 @@ StudioEditableXBlockMixin to your XBlock.
 
 # Imports ###########################################################
 
+from __future__ import absolute_import
 import json
 import logging
 
+import six
 from six import text_type
 
 from xblock.core import XBlock
@@ -226,7 +228,7 @@ class StudioEditableXBlockMixin(object):
         )
         self.validate_field_data(validation, preview_data)
         if validation:
-            for field_name, value in values.iteritems():
+            for field_name, value in six.iteritems(values):
                 setattr(self, field_name, value)
             for field_name in to_reset:
                 self.fields[field_name].delete_from(self)

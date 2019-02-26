@@ -5,6 +5,7 @@
 """
 This module contains a mixins that allows third party XBlocks to access Settings Service in edX LMS.
 """
+from __future__ import absolute_import
 from xblockutils.resources import ResourceLoader
 
 

@@ -8,44 +8,39 @@
 appdirs==1.4.3
 backports.os==0.1.1
 binaryornot==0.4.4        # via cookiecutter
-bleach==2.1.3             # via readme-renderer
-certifi==2018.4.16        # via requests
-cffi==1.11.5              # via cmarkgfm
+bleach==3.1.0             # via readme-renderer
+certifi==2019.3.9         # via requests
 chardet==3.0.4            # via binaryornot, requests
-cmarkgfm==0.4.2           # via readme-renderer
 cookiecutter==0.9.0
-ddt==1.2.0
-django-nose==1.4.5
+ddt==1.2.1
+django-nose==1.4.6
 docutils==0.14            # via readme-renderer
 enum34==1.1.6
-fs==2.0.25
+fs==2.4.5
 funcsigs==1.0.2           # via mock
-future==0.16.0
+future==0.17.1
 futures==3.2.0 ; python_version == "2.7"
-html5lib==1.0.1           # via bleach
-idna==2.7                 # via requests
-jinja2==2.10              # via cookiecutter
-lazy==1.3
-lxml==4.2.3
-mako==1.0.7
-markupsafe==1.0
-mock==2.0.0
+idna==2.8                 # via requests
+jinja2==2.10.1            # via cookiecutter
+lazy==1.4
+lxml==4.3.3
+mako==1.0.10
+markupsafe==1.1.1
+mock==3.0.5
 nose==1.3.7               # via django-nose
-pbr==4.2.0                # via mock
-pycodestyle==2.4.0
-pycparser==2.18           # via cffi
-pygments==2.2.0           # via readme-renderer
-pypng==0.0.18
-python-dateutil==2.7.3
-pytz==2018.5
-pyyaml==3.13
-readme-renderer==21.0
-requests==2.19.1
+pycodestyle==2.5.0
+pygments==2.4.0           # via readme-renderer
+pypng==0.0.19
+python-dateutil==2.8.0
+pytz==2019.1
+pyyaml==5.1
+readme-renderer==24.0
+requests==2.22.0
 simplejson==3.16.0
-six==1.11.0
-typing==3.6.4
-urllib3==1.23             # via requests
-web-fragments==0.2.2
-webencodings==0.5.1       # via html5lib
-webob==1.8.2
-xblock==1.2.1
+six==1.12.0
+typing==3.6.6
+urllib3==1.25.2           # via requests
+web-fragments==0.3.0
+webencodings==0.5.1       # via bleach
+webob==1.8.5
+xblock==1.2.2

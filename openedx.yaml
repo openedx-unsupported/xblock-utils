@@ -2,6 +2,9 @@
 # http://open-edx-proposals.readthedocs.io/en/latest/oeps/oep-0002.html#specification
 
 nick: xbu
-oeps: {}
-owner: edx/teaching-and-learning
-track-pulls: true
+owner: unknown
+oeps:
+    oep-7: true
+    oep-18: true
+tags:
+    - library

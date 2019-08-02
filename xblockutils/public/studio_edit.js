@@ -63,6 +63,7 @@ function StudioEditableXBlockMixin(runtime, element) {
                 toolbar_items_size: 'small',
                 toolbar: "formatselect | styleselect | bold italic underline forecolor wrapAsCode | bullist numlist outdent indent blockquote | link unlink | code",
                 resize: "both",
+                extended_valid_elements : 'i[class],span[class]',
                 setup : function(ed) {
                     ed.on('change', fieldChanged);
                 }

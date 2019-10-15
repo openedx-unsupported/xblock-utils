@@ -35,6 +35,9 @@ class ProxyTransNode(Node):
         if i18n_service:
             # Cache the original translation object to reduce overhead
             if language not in self._translations:
+                from django.utils import translation
+                translation.activate('en')
+                language = get_language()
                 self._translations[language] = trans_real.DjangoTranslation(language)
 
             translation = trans_real.translation(language)

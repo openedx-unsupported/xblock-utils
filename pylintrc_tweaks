@@ -1,0 +1,9 @@
+# pylintrc tweaks for use with edx_lint.
+[MASTER]
+ignore = .tox,migrations,tests,.pycharm_helpers
+load-plugins = edx_lint.pylint,pylint_django,pylint_celery
+
+[MESSAGES CONTROL]
+# Disable unicode-format-string until we can agree to turn it on.
+disable+ =
+    useless-object-inheritance,

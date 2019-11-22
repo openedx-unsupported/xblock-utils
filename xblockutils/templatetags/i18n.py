@@ -44,7 +44,7 @@ class ProxyTransNode(Node):
 
         # Revert to original translation object
         if language in self._translations:
-            trans_real._translations[language] = self._translations[language]
+            trans_real._translations[language] = self._translations[language]  # pylint: disable=protected-access
             # Re-activate the current language to reset translation caches
             trans_real.activate(language)
 

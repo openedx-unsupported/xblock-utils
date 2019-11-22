@@ -44,7 +44,7 @@ class SeleniumXBlockTest(SeleniumTest):
     def setUp(self):
         super(SeleniumXBlockTest, self).setUp()
         # Delete all scenarios from the workbench:
-        import workbench.urls  # Trigger initial scenario load. pylint: disable=unused-variable
+        import workbench.urls  # Trigger initial scenario load.
         SCENARIOS.clear()
         # Disable CSRF checks on XBlock handlers:
         import workbench.views

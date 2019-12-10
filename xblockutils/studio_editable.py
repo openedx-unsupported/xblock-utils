@@ -11,8 +11,8 @@ StudioEditableXBlockMixin to your XBlock.
 # Imports ###########################################################
 
 from __future__ import absolute_import
-import json
 import logging
+import simplejson as json
 
 import six
 from six import text_type
@@ -92,12 +92,12 @@ class StudioEditableXBlockMixin(object):
             field_info = self._make_field_info(field_name, field)
             if field_info is not None:
                 context["fields"].append(field_info)
-        fragment.content = loader.render_template('templates/studio_edit.html', context)
+        fragment.content = loader.render_django_template('templates/studio_edit.html', context)
         fragment.add_javascript(loader.load_unicode('public/studio_edit.js'))
         fragment.initialize_js('StudioEditableXBlockMixin')
         return fragment
 
-    def _make_field_info(self, field_name, field):
+    def _make_field_info(self, field_name, field):  # pylint: disable=too-many-statements
         """
         Create the information that the template needs to render a form field for this field.
         """
@@ -120,11 +120,13 @@ class StudioEditableXBlockMixin(object):
 
         info = {
             'name': field_name,
+            # pylint: disable=translation-of-non-string
             'display_name': ugettext(field.display_name) if field.display_name else "",
             'is_set': field.is_set_on(self),
             'default': field.default,
             'value': field.read_from(self),
             'has_values': False,
+            # pylint: disable=translation-of-non-string
             'help': ugettext(field.help) if field.help else "",
             'allow_reset': field.runtime_options.get('resettable_editor', True),
             'list_values': None,  # Only available for List fields
@@ -202,7 +204,7 @@ class StudioEditableXBlockMixin(object):
         return info
 
     @XBlock.json_handler
-    def submit_studio_edits(self, data, suffix=''):
+    def submit_studio_edits(self, data, suffix=''):  # pylint: disable=unused-argument
         """
         AJAX handler for studio_view() Save button
         """
@@ -244,7 +246,6 @@ class StudioEditableXBlockMixin(object):
         # Example:
         # if "name" in data:
         #     data["name"] = data["name"].strip()
-        pass
 
     def validate_field_data(self, validation, data):
         """
@@ -259,7 +260,6 @@ class StudioEditableXBlockMixin(object):
         # Example:
         # if data.count <=0:
         #     validation.add(ValidationMessage(ValidationMessage.ERROR, u"Invalid count"))
-        pass
 
     def validate(self):
         """
@@ -421,14 +421,14 @@ class StudioContainerWithNestedXBlocksMixin(StudioContainerXBlockMixin):
     CHILD_PREVIEW_TEMPLATE = "templates/default_preview_view.html"
 
     @property
-    def loader(self):  # pylint: disable=no-self-use
+    def loader(self):
         """
         Loader for loading and rendering assets stored in child XBlock package
         """
         return loader
 
     @property
-    def allowed_nested_blocks(self):  # pylint: disable=no-self-use
+    def allowed_nested_blocks(self):
         """
         Returns a list of allowed nested XBlocks. Each item can be either
         * An XBlock class
@@ -463,7 +463,10 @@ class StudioContainerWithNestedXBlocksMixin(StudioContainerXBlockMixin):
         if 'wrap_children' in context:
             fragment.add_content(context['wrap_children']['tail'])
         fragment.add_content(
-            loader.render_template('templates/add_buttons.html', {'child_blocks': self.get_nested_blocks_spec()})
+            loader.render_django_template(
+                'templates/add_buttons.html',
+                {'child_blocks': self.get_nested_blocks_spec()}
+            )
         )
         fragment.add_javascript(loader.load_unicode('public/studio_container.js'))
         fragment.initialize_js('StudioContainerXBlockWithNestedXBlocksMixin')
@@ -487,7 +490,7 @@ class StudioContainerWithNestedXBlocksMixin(StudioContainerXBlockMixin):
             'children_contents': children_contents
         }
         render_context.update(context)
-        fragment.add_content(self.loader.render_template(self.CHILD_PREVIEW_TEMPLATE, render_context))
+        fragment.add_content(self.loader.render_django_template(self.CHILD_PREVIEW_TEMPLATE, render_context))
         return fragment
 
     def _render_child_fragment(self, child, context, view='student_view'):

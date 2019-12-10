@@ -65,7 +65,7 @@ class ResourceLoader(object):
         if django.VERSION[0] == 1 and django.VERSION[1] == 8:
             _libraries = TemplateBase.libraries.copy()
             for library_name in libraries:
-                library = TemplateBase.import_library(libraries[library_name])
+                library = TemplateBase.import_library(libraries[library_name])  # pylint: disable=no-member
                 if library:
                     TemplateBase.libraries[library_name] = library
             engine = Engine()
@@ -113,7 +113,7 @@ class ResourceLoader(object):
         context = context or {}
         return u"<script type='text/template' id='{}'>\n{}\n</script>".format(
             element_id,
-            self.render_template(template_path, context)
+            self.render_django_template(template_path, context)
         )
 
     def load_scenarios_from_path(self, relative_scenario_dir, include_identifier=False):
@@ -134,7 +134,7 @@ class ResourceLoader(object):
                 identifier = template[:-4]
                 title = identifier.replace('_', ' ').title()
                 template_path = os.path.join(relative_scenario_dir, template)
-                scenario = text_type(self.render_template(template_path, {"url_name": identifier}))
+                scenario = text_type(self.render_django_template(template_path, {"url_name": identifier}))
                 if not include_identifier:
                     scenarios.append((title, scenario))
                 else:

@@ -34,7 +34,7 @@ class PublishEventMixin(object):
     additional_publish_event_data = {}
 
     @XBlock.json_handler
-    def publish_event(self, data, suffix=''):
+    def publish_event(self, data, suffix=''):  # pylint: disable=unused-argument
         """
         AJAX handler to allow client-side code to publish a server-side event
         """

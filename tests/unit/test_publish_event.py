@@ -20,7 +20,7 @@
 
 from __future__ import absolute_import
 import unittest
-import json
+import simplejson as json
 
 from xblockutils.publish_event import PublishEventMixin
 
@@ -33,7 +33,7 @@ class RequestMock(object):
     method = "POST"
 
     def __init__(self, data):
-        self.body = json.dumps(data)
+        self.body = json.dumps(data).encode('utf-8')
 
 
 class RuntimeMock(object):

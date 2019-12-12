@@ -1,7 +1,6 @@
 # Requirements for test runs
 
--r base.in                         # Package dependencies
--r travis.in
+-r base.txt                         # Package dependencies
 
 -e git+https://github.com/edx/xblock-sdk.git@c541e4fee8c90647b136f75b404e55c04c8b67f4#egg=xblock-sdk==0.1.7
 ddt

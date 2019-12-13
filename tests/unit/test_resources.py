@@ -152,27 +152,27 @@ class MockI18nService(object):
 class TestResourceLoader(unittest.TestCase):
     def test_load_unicode(self):
         s = ResourceLoader(__name__).load_unicode("data/simple_django_template.txt")
-        self.assertEquals(s, expected_string)
+        self.assertEqual(s, expected_string)
 
     def test_load_unicode_from_another_module(self):
         s = ResourceLoader("tests.unit.data").load_unicode("simple_django_template.txt")
-        self.assertEquals(s, expected_string)
+        self.assertEqual(s, expected_string)
 
     def test_render_django_template(self):
         loader = ResourceLoader(__name__)
         s = loader.render_django_template("data/simple_django_template.txt", example_context)
-        self.assertEquals(s, expected_filled_template)
+        self.assertEqual(s, expected_filled_template)
 
     def test_render_django_template_translated(self):
         loader = ResourceLoader(__name__)
         s = loader.render_django_template("data/trans_django_template.txt",
                                           context=example_context,
                                           i18n_service=MockI18nService())
-        self.assertEquals(s, expected_translated_template)
+        self.assertEqual(s, expected_translated_template)
 
         # Test that the language changes were reverted
         s = loader.render_django_template("data/trans_django_template.txt", example_context)
-        self.assertEquals(s, expected_not_translated_template)
+        self.assertEqual(s, expected_not_translated_template)
 
     def test_render_django_template_localized(self):
         # Test that default template tags like l10n are loaded
@@ -180,31 +180,31 @@ class TestResourceLoader(unittest.TestCase):
         s = loader.render_django_template("data/l10n_django_template.txt",
                                           context=example_context,
                                           i18n_service=MockI18nService())
-        self.assertEquals(s, expected_localized_template)
+        self.assertEqual(s, expected_localized_template)
 
     def test_render_mako_template(self):
         loader = ResourceLoader(__name__)
         s = loader.render_mako_template("data/simple_mako_template.txt", example_context)
-        self.assertEquals(s, expected_filled_template)
+        self.assertEqual(s, expected_filled_template)
 
     @patch('warnings.warn', DEFAULT)
     def test_render_template_deprecated(self, mock_warn):
         loader = ResourceLoader(__name__)
         s = loader.render_template("data/simple_django_template.txt", example_context)
         self.assertTrue(mock_warn.called)
-        self.assertEquals(s, expected_filled_template)
+        self.assertEqual(s, expected_filled_template)
 
     def test_render_js_template(self):
         loader = ResourceLoader(__name__)
         s = loader.render_js_template("data/simple_django_template.txt", example_id, example_context)
-        self.assertEquals(s, expected_filled_js_template)
+        self.assertEqual(s, expected_filled_js_template)
 
     def test_load_scenarios(self):
         loader = ResourceLoader(__name__)
         scenarios = loader.load_scenarios_from_path("data")
-        self.assertEquals(scenarios, expected_scenarios)
+        self.assertEqual(scenarios, expected_scenarios)
 
     def test_load_scenarios_with_identifiers(self):
         loader = ResourceLoader(__name__)
         scenarios = loader.load_scenarios_from_path("data", include_identifier=True)
-        self.assertEquals(scenarios, expected_scenarios_with_identifiers)
+        self.assertEqual(scenarios, expected_scenarios_with_identifiers)

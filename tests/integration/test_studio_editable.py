@@ -7,7 +7,7 @@ from six import text_type
 from selenium.common.exceptions import NoSuchElementException
 from xblock.core import XBlock
 from xblock.fields import Boolean, Dict, Float, Integer, List, String, DateTime
-from xblock.fragment import Fragment
+from web_fragments.fragment import Fragment
 from xblock.validation import ValidationMessage
 from tests.integration.utils import render_template
 from xblockutils.studio_editable import StudioEditableXBlockMixin, StudioContainerWithNestedXBlocksMixin, \

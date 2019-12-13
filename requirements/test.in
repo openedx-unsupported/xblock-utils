@@ -7,5 +7,6 @@ ddt
 edx-lint
 mock
 pycodestyle
+pytest-django
 readme_renderer
 selenium

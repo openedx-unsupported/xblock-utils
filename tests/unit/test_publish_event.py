@@ -57,10 +57,10 @@ class TestPublishEventMixin(unittest.TestCase):
         self.assertFalse(block.last_call)
 
     def assert_success(self, response):
-        self.assertEquals(json.loads(response.body)['result'], 'success')
+        self.assertEqual(json.loads(response.body)['result'], 'success')
 
     def assert_error(self, response):
-        self.assertEquals(json.loads(response.body)['result'], 'error')
+        self.assertEqual(json.loads(response.body)['result'], 'error')
 
     def test_error_when_no_event_type(self):
         block = ObjectUnderTest()
@@ -80,7 +80,7 @@ class TestPublishEventMixin(unittest.TestCase):
         response = block.publish_event(RequestMock(data))
 
         self.assert_success(response)
-        self.assertEquals(block.runtime.last_call, (block, "test.event.uncustomized", event_data))
+        self.assertEqual(block.runtime.last_call, (block, "test.event.uncustomized", event_data))
 
     def test_publish_event_with_additional_data(self):
         block = ObjectUnderTest()
@@ -96,7 +96,7 @@ class TestPublishEventMixin(unittest.TestCase):
         expected_data.update(block.additional_publish_event_data)
 
         self.assert_success(response)
-        self.assertEquals(block.runtime.last_call, (block, "test.event.customized", expected_data))
+        self.assertEqual(block.runtime.last_call, (block, "test.event.customized", expected_data))
 
     def test_publish_event_fails_with_duplicate_data(self):
         block = ObjectUnderTest()

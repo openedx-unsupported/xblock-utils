@@ -20,7 +20,7 @@ from six import text_type
 from xblock.core import XBlock
 from xblock.fields import Scope, JSONField, List, Integer, Float, Boolean, String, DateTime
 from xblock.exceptions import JsonHandlerError, NoSuchViewError
-from xblock.fragment import Fragment
+from web_fragments.fragment import Fragment
 from xblock.validation import Validation
 
 from xblockutils.resources import ResourceLoader
@@ -297,7 +297,7 @@ class StudioContainerXBlockMixin(object):
                 child_context['reorderable_items'].add(child.scope_ids.usage_id)
             view_to_render = 'author_view' if hasattr(child, 'author_view') else 'student_view'
             rendered_child = child.render(view_to_render, child_context)
-            fragment.add_frag_resources(rendered_child)
+            fragment.add_fragment_resources(rendered_child)
 
             contents.append({
                 'id': text_type(child.scope_ids.usage_id),
@@ -482,7 +482,7 @@ class StudioContainerWithNestedXBlocksMixin(StudioContainerXBlockMixin):
         for child_id in self.children:
             child = self.runtime.get_block(child_id)
             child_fragment = self._render_child_fragment(child, context, 'preview_view')
-            fragment.add_frag_resources(child_fragment)
+            fragment.add_fragment_resources(child_fragment)
             children_contents.append(child_fragment.content)
 
         render_context = {

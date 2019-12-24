@@ -66,7 +66,7 @@ def is_requirement(line):
 
 
 README = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
-VERSION = '1.2.3'
+VERSION = '1.2.4'
 
 if sys.argv[-1] == 'tag':
     print("Tagging the version on github:")
@@ -89,12 +89,14 @@ setup(
     url='https://github.com/edx/xblock-utils',
     classifiers=[
         'Framework :: Django :: 1.11',
+        'Framework :: Django :: 2.0',
+        'Framework :: Django :: 2.1',
+        'Framework :: Django :: 2.2',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: Implementation :: CPython',
     ],
 

@@ -4,73 +4,66 @@
 #
 #    make upgrade
 #
--e git+https://github.com/edx/xblock-sdk.git@c541e4fee8c90647b136f75b404e55c04c8b67f4#egg=xblock-sdk==0.1.7
-appdirs==1.4.3
-astroid==1.6.6
-atomicwrites==1.3.0
-attrs==19.3.0
-backports.functools-lru-cache==1.6.1
-backports.os==0.1.1
-bleach==3.1.0
-click-log==0.3.2
-click==7.0
-configparser==4.0.2
-contextlib2==0.6.0.post1
-ddt==1.2.2
-django==1.11.26
-docutils==0.15.2
-edx-lint==1.4.1
-enum34==1.1.6
-filelock==3.0.12
-fs==2.4.11
-funcsigs==1.0.2
-future==0.18.2
-futures==3.3.0 ; python_version == "2.7"
-importlib-metadata==1.3.0
-isort==4.3.21
-lazy-object-proxy==1.4.3
-lxml==4.4.2
-mako==1.1.0
-markupsafe==1.1.1
-mccabe==0.6.1
-mock==3.0.5
-more-itertools==5.0.0
-packaging==19.2
-pathlib2==2.3.5
-pip-tools==4.3.0
-pluggy==0.13.1
-py==1.8.0
-pycodestyle==2.5.0
-pygments==2.5.2
-pylint-celery==0.3
-pylint-django==0.11.1
-pylint-plugin-utils==0.6
-pylint==1.9.5
-pyparsing==2.4.5
-pytest-django==3.7.0
-pytest==4.6.7
-python-dateutil==2.8.1
-pytz==2019.3
-pyyaml==5.2
-readme-renderer==24.0
-scandir==1.10.0
-selenium==3.141.0
-simplejson==3.17.0
-singledispatch==3.4.0.3
-six==1.13.0
-toml==0.10.0
-tox-battery==0.5.1
-tox==3.14.2
-typing==3.7.4.1
-urllib3==1.25.7
-virtualenv==16.7.8
-wcwidth==0.1.7
-web-fragments==0.3.1
-webencodings==0.5.1
-webob==1.8.5
-wrapt==1.11.2
-xblock==1.2.9
-zipp==0.6.0
+-e git+https://github.com/edx/xblock-sdk.git@c541e4fee8c90647b136f75b404e55c04c8b67f4#egg=xblock-sdk==0.1.7  # via -r requirements/test.txt
+appdirs==1.4.3            # via -r requirements/test.txt, -r requirements/travis.txt, fs, virtualenv
+astroid==2.3.3            # via -r requirements/test.txt, pylint, pylint-celery
+attrs==19.3.0             # via -r requirements/test.txt, pytest
+bleach==3.1.3             # via -r requirements/test.txt, readme-renderer
+click-log==0.3.2          # via -r requirements/test.txt, edx-lint
+click==7.1.1              # via -r requirements/pip-tools.txt, -r requirements/test.txt, click-log, edx-lint, pip-tools
+ddt==1.3.0                # via -r requirements/test.txt
+distlib==0.3.0            # via -r requirements/travis.txt, virtualenv
+django==2.2.11            # via -r requirements/test.txt, xblock-sdk
+docutils==0.16            # via -r requirements/test.txt, readme-renderer
+edx-lint==1.4.1           # via -r requirements/test.txt
+filelock==3.0.12          # via -r requirements/travis.txt, tox, virtualenv
+fs==2.4.11                # via -r requirements/test.txt, xblock
+importlib-metadata==1.5.0  # via -r requirements/test.txt, -r requirements/travis.txt, importlib-resources, pluggy, pytest, tox, virtualenv
+importlib-resources==1.3.1  # via -r requirements/travis.txt, virtualenv
+isort==4.3.21             # via -r requirements/test.txt, pylint
+lazy-object-proxy==1.4.3  # via -r requirements/test.txt, astroid
+lxml==4.5.0               # via -r requirements/test.txt, xblock
+mako==1.1.2               # via -r requirements/test.txt
+markupsafe==1.1.1         # via -r requirements/test.txt, mako, xblock
+mccabe==0.6.1             # via -r requirements/test.txt, pylint
+mock==3.0.5               # via -r requirements/test.txt
+more-itertools==8.2.0     # via -r requirements/test.txt, pytest
+packaging==20.3           # via -r requirements/test.txt, -r requirements/travis.txt, pytest, tox
+pathlib2==2.3.5           # via -r requirements/test.txt, pytest
+pip-tools==4.5.1          # via -r requirements/pip-tools.txt
+pluggy==0.13.1            # via -r requirements/test.txt, -r requirements/travis.txt, pytest, tox
+py==1.8.1                 # via -r requirements/test.txt, -r requirements/travis.txt, pytest, tox
+pycodestyle==2.5.0        # via -r requirements/test.txt
+pygments==2.6.1           # via -r requirements/test.txt, readme-renderer
+pylint-celery==0.3        # via -r requirements/test.txt, edx-lint
+pylint-django==2.0.11     # via -r requirements/test.txt, edx-lint
+pylint-plugin-utils==0.6  # via -r requirements/test.txt, pylint-celery, pylint-django
+pylint==2.4.2             # via -r requirements/test.txt, edx-lint, pylint-celery, pylint-django, pylint-plugin-utils
+pyparsing==2.4.6          # via -r requirements/test.txt, -r requirements/travis.txt, packaging
+pytest-django==3.8.0      # via -r requirements/test.txt
+pytest==5.4.1             # via -r requirements/test.txt, pytest-django
+python-dateutil==2.8.1    # via -r requirements/test.txt, xblock
+pytz==2019.3              # via -r requirements/test.txt, django, fs, xblock
+pyyaml==5.3               # via -r requirements/test.txt, xblock
+readme-renderer==25.0     # via -r requirements/test.txt
+selenium==3.141.0         # via -r requirements/test.txt
+simplejson==3.17.0        # via -r requirements/test.txt
+six==1.14.0               # via -r requirements/pip-tools.txt, -r requirements/test.txt, -r requirements/travis.txt, astroid, bleach, edx-lint, fs, mock, packaging, pathlib2, pip-tools, python-dateutil, readme-renderer, tox, virtualenv, xblock
+sqlparse==0.3.1           # via -r requirements/test.txt, django
+toml==0.10.0              # via -r requirements/travis.txt, tox
+tox-battery==0.5.2        # via -r requirements/travis.txt
+tox==3.14.5               # via -r requirements/travis.txt, tox-battery
+typed-ast==1.4.1          # via -r requirements/test.txt, astroid
+typing==3.7.4.1           # via -r requirements/test.txt, fs
+urllib3==1.25.8           # via -r requirements/test.txt, selenium
+virtualenv==20.0.10       # via -r requirements/travis.txt, tox
+wcwidth==0.1.8            # via -r requirements/test.txt, pytest
+web-fragments==0.3.1      # via -r requirements/test.txt, xblock
+webencodings==0.5.1       # via -r requirements/test.txt, bleach
+webob==1.8.6              # via -r requirements/test.txt, xblock
+wrapt==1.11.2             # via -r requirements/test.txt, astroid
+xblock==1.2.9             # via -r requirements/test.txt
+zipp==1.2.0               # via -r requirements/test.txt, -r requirements/travis.txt, importlib-metadata, importlib-resources
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools

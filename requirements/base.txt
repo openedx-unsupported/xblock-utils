@@ -5,23 +5,19 @@
 #    make upgrade
 #
 appdirs==1.4.3            # via fs
-backports.os==0.1.1       # via fs
-enum34==1.1.6             # via fs
 fs==2.4.11                # via xblock
-future==0.18.2            # via backports.os
-futures==3.3.0 ; python_version == "2.7"
-lxml==4.4.2               # via xblock
-mako==1.1.0
+lxml==4.5.0               # via xblock
+mako==1.1.2               # via -r requirements/base.in
 markupsafe==1.1.1         # via mako, xblock
 python-dateutil==2.8.1    # via xblock
 pytz==2019.3              # via fs, xblock
-pyyaml==5.2               # via xblock
-simplejson==3.17.0
-six==1.13.0               # via fs, python-dateutil, xblock
+pyyaml==5.3               # via xblock
+simplejson==3.17.0        # via -r requirements/base.in
+six==1.14.0               # via fs, python-dateutil, xblock
 typing==3.7.4.1           # via fs
-web-fragments==0.3.1
-webob==1.8.5              # via xblock
-xblock==1.2.9
+web-fragments==0.3.1      # via -r requirements/base.in, xblock
+webob==1.8.6              # via xblock
+xblock==1.2.9             # via -r requirements/base.in
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools

@@ -4,66 +4,57 @@
 #
 #    make upgrade
 #
--e git+https://github.com/edx/xblock-sdk.git@c541e4fee8c90647b136f75b404e55c04c8b67f4#egg=xblock-sdk==0.1.7
-appdirs==1.4.3
-astroid==1.6.6            # via pylint, pylint-celery
-atomicwrites==1.3.0       # via pytest
+-e git+https://github.com/edx/xblock-sdk.git@c541e4fee8c90647b136f75b404e55c04c8b67f4#egg=xblock-sdk==0.1.7  # via -r requirements/test.in
+appdirs==1.4.3            # via -r requirements/base.txt, fs
+astroid==2.3.3            # via pylint, pylint-celery
 attrs==19.3.0             # via pytest
-backports.functools-lru-cache==1.6.1  # via astroid, isort, pylint
-backports.os==0.1.1
-bleach==3.1.0             # via readme-renderer
+bleach==3.1.3             # via readme-renderer
 click-log==0.3.2          # via edx-lint
-click==7.0                # via click-log, edx-lint
-configparser==4.0.2       # via importlib-metadata, pylint
-contextlib2==0.6.0.post1  # via importlib-metadata
-ddt==1.2.2
-docutils==0.15.2          # via readme-renderer
-edx-lint==1.4.1
-enum34==1.1.6
-fs==2.4.11
-funcsigs==1.0.2           # via mock, pytest
-future==0.18.2
-futures==3.3.0 ; python_version == "2.7"
-importlib-metadata==1.3.0  # via pluggy, pytest
+click==7.1.1              # via click-log, edx-lint
+ddt==1.3.0                # via -r requirements/test.in
+docutils==0.16            # via readme-renderer
+edx-lint==1.4.1           # via -r requirements/test.in
+fs==2.4.11                # via -r requirements/base.txt, xblock
+importlib-metadata==1.5.0  # via pluggy, pytest
 isort==4.3.21             # via pylint
 lazy-object-proxy==1.4.3  # via astroid
-lxml==4.4.2
-mako==1.1.0
-markupsafe==1.1.1
+lxml==4.5.0               # via -r requirements/base.txt, xblock
+mako==1.1.2               # via -r requirements/base.txt
+markupsafe==1.1.1         # via -r requirements/base.txt, mako, xblock
 mccabe==0.6.1             # via pylint
-mock==3.0.5
-more-itertools==5.0.0     # via pytest, zipp
-packaging==19.2           # via pytest
-pathlib2==2.3.5           # via importlib-metadata, pytest, pytest-django
+mock==3.0.5               # via -r requirements/test.in
+more-itertools==8.2.0     # via pytest
+packaging==20.3           # via pytest
+pathlib2==2.3.5           # via pytest
 pluggy==0.13.1            # via pytest
-py==1.8.0                 # via pytest
-pycodestyle==2.5.0
-pygments==2.5.2           # via readme-renderer
+py==1.8.1                 # via pytest
+pycodestyle==2.5.0        # via -r requirements/test.in
+pygments==2.6.1           # via readme-renderer
 pylint-celery==0.3        # via edx-lint
-pylint-django==0.11.1     # via edx-lint
+pylint-django==2.0.11     # via edx-lint
 pylint-plugin-utils==0.6  # via pylint-celery, pylint-django
-pylint==1.9.5             # via edx-lint, pylint-celery, pylint-django, pylint-plugin-utils
-pyparsing==2.4.5          # via packaging
-pytest-django==3.7.0
-pytest==4.6.7             # via pytest-django
-python-dateutil==2.8.1
-pytz==2019.3
-pyyaml==5.2
-readme-renderer==24.0
-scandir==1.10.0           # via pathlib2
-selenium==3.141.0
-simplejson==3.17.0
-singledispatch==3.4.0.3   # via astroid, pylint
-six==1.13.0
-typing==3.7.4.1
-urllib3==1.25.7           # via selenium
-wcwidth==0.1.7            # via pytest
-web-fragments==0.3.1
+pylint==2.4.2             # via edx-lint, pylint-celery, pylint-django, pylint-plugin-utils
+pyparsing==2.4.6          # via packaging
+pytest-django==3.8.0      # via -r requirements/test.in
+pytest==5.4.1             # via pytest-django
+python-dateutil==2.8.1    # via -r requirements/base.txt, xblock
+pytz==2019.3              # via -r requirements/base.txt, django, fs, xblock
+pyyaml==5.3               # via -r requirements/base.txt, xblock
+readme-renderer==25.0     # via -r requirements/test.in
+selenium==3.141.0         # via -r requirements/test.in
+simplejson==3.17.0        # via -r requirements/base.txt
+six==1.14.0               # via -r requirements/base.txt, astroid, bleach, edx-lint, fs, mock, packaging, pathlib2, python-dateutil, readme-renderer, xblock
+sqlparse==0.3.1           # via django
+typed-ast==1.4.1          # via astroid
+typing==3.7.4.1           # via -r requirements/base.txt, fs
+urllib3==1.25.8           # via selenium
+wcwidth==0.1.8            # via pytest
+web-fragments==0.3.1      # via -r requirements/base.txt, xblock
 webencodings==0.5.1       # via bleach
-webob==1.8.5
+webob==1.8.6              # via -r requirements/base.txt, xblock
 wrapt==1.11.2             # via astroid
-xblock==1.2.9
-zipp==0.6.0               # via importlib-metadata
+xblock==1.2.9             # via -r requirements/base.txt
+zipp==1.2.0               # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools

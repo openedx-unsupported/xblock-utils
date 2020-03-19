@@ -11,7 +11,7 @@ mako==1.1.2               # via -r requirements/base.in
 markupsafe==1.1.1         # via mako, xblock
 python-dateutil==2.8.1    # via xblock
 pytz==2019.3              # via fs, xblock
-pyyaml==5.3               # via xblock
+pyyaml==5.3.1             # via xblock
 simplejson==3.17.0        # via -r requirements/base.in
 six==1.14.0               # via fs, python-dateutil, xblock
 typing==3.7.4.1           # via fs

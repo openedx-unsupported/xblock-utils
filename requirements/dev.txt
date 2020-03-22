@@ -56,7 +56,7 @@ tox==3.14.5               # via -r requirements/travis.txt, tox-battery
 typed-ast==1.4.1          # via -r requirements/test.txt, astroid
 typing==3.7.4.1           # via -r requirements/test.txt, fs
 urllib3==1.25.8           # via -r requirements/test.txt, selenium
-virtualenv==20.0.12       # via -r requirements/travis.txt, tox
+virtualenv==20.0.13       # via -r requirements/travis.txt, tox
 wcwidth==0.1.8            # via -r requirements/test.txt, pytest
 web-fragments==0.3.1      # via -r requirements/test.txt, xblock
 webencodings==0.5.1       # via -r requirements/test.txt, bleach

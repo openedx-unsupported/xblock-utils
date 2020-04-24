@@ -40,7 +40,7 @@ pytest==5.4.1             # via pytest-django
 python-dateutil==2.8.1    # via -r requirements/base.txt, xblock
 pytz==2019.3              # via -r requirements/base.txt, django, fs, xblock
 pyyaml==5.3.1             # via -r requirements/base.txt, xblock
-readme-renderer==25.0     # via -r requirements/test.in
+readme-renderer==26.0     # via -r requirements/test.in
 selenium==3.141.0         # via -r requirements/test.in
 simplejson==3.17.0        # via -r requirements/base.txt
 six==1.14.0               # via -r requirements/base.txt, astroid, bleach, edx-lint, fs, mock, packaging, pathlib2, python-dateutil, readme-renderer, xblock

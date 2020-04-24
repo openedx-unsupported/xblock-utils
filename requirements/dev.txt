@@ -45,7 +45,7 @@ pytest==5.4.1             # via -r requirements/test.txt, pytest-django
 python-dateutil==2.8.1    # via -r requirements/test.txt, xblock
 pytz==2019.3              # via -r requirements/test.txt, django, fs, xblock
 pyyaml==5.3.1             # via -r requirements/test.txt, xblock
-readme-renderer==25.0     # via -r requirements/test.txt
+readme-renderer==26.0     # via -r requirements/test.txt
 selenium==3.141.0         # via -r requirements/test.txt
 simplejson==3.17.0        # via -r requirements/test.txt
 six==1.14.0               # via -r requirements/pip-tools.txt, -r requirements/test.txt, -r requirements/travis.txt, astroid, bleach, edx-lint, fs, mock, packaging, pathlib2, pip-tools, python-dateutil, readme-renderer, tox, virtualenv, xblock

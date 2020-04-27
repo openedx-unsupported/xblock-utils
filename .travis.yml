@@ -2,15 +2,10 @@ language: python
 dist: xenial  # required for Python >= 3.7 (travis-ci/travis-ci#9069)
 python:
     - 3.5
+    - 3.8
 env:
-    - TOXENV=django111
-    - TOXENV=django20
-    - TOXENV=django21
     - TOXENV=django22
-matrix:
-  include:
-    - python: 3.5
-      env: TOXENV=quality
+    - TOXENV=quality
 
 services:
   - xvfb

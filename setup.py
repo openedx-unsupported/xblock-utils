@@ -66,7 +66,7 @@ def is_requirement(line):
 
 
 README = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
-VERSION = '2.0.0'
+VERSION = '2.1.0'
 
 if sys.argv[-1] == 'tag':
     print("Tagging the version on github:")

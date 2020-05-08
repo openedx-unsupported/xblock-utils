@@ -6,11 +6,6 @@ python:
 env:
     - TOXENV=django22
     - TOXENV=quality
-
-matrix:
-  allow_failures:
-    - python: 3.8
-
 services:
   - xvfb
 addons:

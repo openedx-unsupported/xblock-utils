@@ -66,7 +66,7 @@ def is_requirement(line):
 
 
 README = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
-VERSION = '2.1.0'
+VERSION = '2.1.1'
 
 if sys.argv[-1] == 'tag':
     print("Tagging the version on github:")
@@ -92,6 +92,7 @@ setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: Implementation :: CPython',
     ],
 

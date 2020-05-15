@@ -5,13 +5,13 @@
 #    make upgrade
 #
 -e git+https://github.com/edx/xblock-sdk.git@446e979bad1f3bf7f891787b32d5b2e7620b2f23#egg=xblock-sdk==0.1.9  # via -r requirements/test.txt
-appdirs==1.4.3            # via -r requirements/test.txt, -r requirements/travis.txt, fs, virtualenv
+appdirs==1.4.4            # via -r requirements/test.txt, -r requirements/travis.txt, fs, virtualenv
 astroid==2.3.3            # via -r requirements/test.txt, pylint, pylint-celery
 attrs==19.3.0             # via -r requirements/test.txt, pytest
 bleach==3.1.5             # via -r requirements/test.txt, readme-renderer
 click-log==0.3.2          # via -r requirements/test.txt, edx-lint
 click==7.1.2              # via -r requirements/pip-tools.txt, -r requirements/test.txt, click-log, edx-lint, pip-tools
-ddt==1.4.0                # via -r requirements/test.txt
+ddt==1.4.1                # via -r requirements/test.txt
 distlib==0.3.0            # via -r requirements/travis.txt, virtualenv
 django==2.2.12            # via -r requirements/test.txt, xblock-sdk
 docutils==0.16            # via -r requirements/test.txt, readme-renderer
@@ -33,7 +33,7 @@ pathlib2==2.3.5           # via -r requirements/test.txt, pytest
 pip-tools==5.1.2          # via -r requirements/pip-tools.txt
 pluggy==0.13.1            # via -r requirements/test.txt, -r requirements/travis.txt, pytest, tox
 py==1.8.1                 # via -r requirements/test.txt, -r requirements/travis.txt, pytest, tox
-pycodestyle==2.5.0        # via -r requirements/test.txt
+pycodestyle==2.6.0        # via -r requirements/test.txt
 pygments==2.6.1           # via -r requirements/test.txt, readme-renderer
 pylint-celery==0.3        # via -r requirements/test.txt, edx-lint
 pylint-django==2.0.11     # via -r requirements/test.txt, edx-lint
@@ -41,7 +41,7 @@ pylint-plugin-utils==0.6  # via -r requirements/test.txt, pylint-celery, pylint-
 pylint==2.4.2             # via -r requirements/test.txt, edx-lint, pylint-celery, pylint-django, pylint-plugin-utils
 pyparsing==2.4.7          # via -r requirements/test.txt, -r requirements/travis.txt, packaging
 pytest-django==3.9.0      # via -r requirements/test.txt
-pytest==5.4.1             # via -r requirements/test.txt, pytest-django
+pytest==5.4.2             # via -r requirements/test.txt, pytest-django
 python-dateutil==2.8.1    # via -r requirements/test.txt, xblock
 pytz==2020.1              # via -r requirements/test.txt, django, fs, xblock
 pyyaml==5.3.1             # via -r requirements/test.txt, xblock
@@ -50,7 +50,7 @@ selenium==3.141.0         # via -r requirements/test.txt
 simplejson==3.17.0        # via -r requirements/test.txt
 six==1.14.0               # via -r requirements/pip-tools.txt, -r requirements/test.txt, -r requirements/travis.txt, astroid, bleach, edx-lint, fs, mock, packaging, pathlib2, pip-tools, python-dateutil, readme-renderer, tox, virtualenv, xblock
 sqlparse==0.3.1           # via -r requirements/test.txt, django
-toml==0.10.0              # via -r requirements/travis.txt, tox
+toml==0.10.1              # via -r requirements/travis.txt, tox
 tox-battery==0.5.2        # via -r requirements/travis.txt
 tox==3.15.0               # via -r requirements/travis.txt, tox-battery
 typed-ast==1.4.1          # via -r requirements/test.txt, astroid
@@ -58,7 +58,7 @@ typing==3.7.4.1           # via -r requirements/test.txt, fs
 urllib3==1.25.9           # via -r requirements/test.txt, selenium
 virtualenv==20.0.20       # via -r requirements/travis.txt, tox
 wcwidth==0.1.9            # via -r requirements/test.txt, pytest
-web-fragments==0.3.1      # via -r requirements/test.txt, xblock
+web-fragments==0.3.2      # via -r requirements/test.txt, xblock
 webencodings==0.5.1       # via -r requirements/test.txt, bleach
 webob==1.8.6              # via -r requirements/test.txt, xblock
 wrapt==1.11.2             # via -r requirements/test.txt, astroid

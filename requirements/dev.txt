@@ -30,7 +30,7 @@ mock==3.0.5               # via -r requirements/test.txt
 more-itertools==8.3.0     # via -r requirements/test.txt, pytest
 packaging==20.4           # via -r requirements/test.txt, -r requirements/travis.txt, bleach, pytest, tox
 pathlib2==2.3.5           # via -r requirements/test.txt, pytest
-pip-tools==5.1.2          # via -r requirements/pip-tools.txt
+pip-tools==5.2.0          # via -r requirements/pip-tools.txt
 pluggy==0.13.1            # via -r requirements/test.txt, -r requirements/travis.txt, pytest, tox
 py==1.8.1                 # via -r requirements/test.txt, -r requirements/travis.txt, pytest, tox
 pycodestyle==2.6.0        # via -r requirements/test.txt
@@ -51,7 +51,7 @@ simplejson==3.17.0        # via -r requirements/test.txt
 six==1.15.0               # via -r requirements/pip-tools.txt, -r requirements/test.txt, -r requirements/travis.txt, astroid, bleach, edx-lint, fs, mock, packaging, pathlib2, pip-tools, python-dateutil, readme-renderer, tox, virtualenv, xblock
 sqlparse==0.3.1           # via -r requirements/test.txt, django
 toml==0.10.1              # via -r requirements/travis.txt, tox
-tox-battery==0.6.0        # via -r requirements/travis.txt
+tox-battery==0.6.1        # via -r requirements/travis.txt
 tox==3.15.1               # via -r requirements/travis.txt, tox-battery
 typed-ast==1.4.1          # via -r requirements/test.txt, astroid
 typing==3.7.4.1           # via -r requirements/test.txt, fs

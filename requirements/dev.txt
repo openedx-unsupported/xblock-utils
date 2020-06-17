@@ -4,34 +4,43 @@
 #
 #    make upgrade
 #
--e git+https://github.com/edx/xblock-sdk.git@446e979bad1f3bf7f891787b32d5b2e7620b2f23#egg=xblock-sdk==0.1.9  # via -r requirements/test.txt
 appdirs==1.4.4            # via -r requirements/test.txt, -r requirements/travis.txt, fs, virtualenv
 astroid==2.3.3            # via -r requirements/test.txt, pylint, pylint-celery
 attrs==19.3.0             # via -r requirements/test.txt, pytest
 bleach==3.1.5             # via -r requirements/test.txt, readme-renderer
+bok_choy==0.7.1           # via -r requirements/test.txt
+boto3==1.14.33            # via -r requirements/test.txt, fs-s3fs
+botocore==1.17.33         # via -r requirements/test.txt, boto3, s3transfer
 click-log==0.3.2          # via -r requirements/test.txt, edx-lint
 click==7.1.2              # via -r requirements/pip-tools.txt, -r requirements/test.txt, click-log, edx-lint, pip-tools
 ddt==1.4.1                # via -r requirements/test.txt
 distlib==0.3.1            # via -r requirements/travis.txt, virtualenv
-django==2.2.14            # via -r requirements/test.txt, xblock-sdk
-docutils==0.16            # via -r requirements/test.txt, readme-renderer
+django-pyfs==2.2          # via -r requirements/test.txt
+django==2.2.15            # via -r requirements/test.txt, django-pyfs, xblock-sdk
+docutils==0.15.2          # via -r requirements/test.txt, botocore, readme-renderer
 edx-lint==1.5.0           # via -r requirements/test.txt
 filelock==3.0.12          # via -r requirements/travis.txt, tox, virtualenv
-fs==2.4.11                # via -r requirements/test.txt, xblock
+fs-s3fs==1.1.1            # via -r requirements/test.txt, django-pyfs
+fs==2.4.11                # via -r requirements/test.txt, django-pyfs, fs-s3fs, xblock
 importlib-metadata==1.7.0  # via -r requirements/test.txt, -r requirements/travis.txt, pluggy, pytest, tox, virtualenv
 importlib-resources==3.0.0  # via -r requirements/travis.txt, virtualenv
-iniconfig==1.0.0          # via -r requirements/test.txt, pytest
+iniconfig==1.0.1          # via -r requirements/test.txt, pytest
 isort==4.3.21             # via -r requirements/test.txt, pylint
+jmespath==0.10.0          # via -r requirements/test.txt, boto3, botocore
 lazy-object-proxy==1.4.3  # via -r requirements/test.txt, astroid
+lazy==1.4                 # via -r requirements/test.txt, bok-choy
 lxml==4.5.2               # via -r requirements/test.txt, xblock
 mako==1.1.3               # via -r requirements/test.txt
 markupsafe==1.1.1         # via -r requirements/test.txt, mako, xblock
 mccabe==0.6.1             # via -r requirements/test.txt, pylint
 mock==3.0.5               # via -r requirements/test.txt
 more-itertools==8.4.0     # via -r requirements/test.txt, pytest
+needle==0.5.0             # via -r requirements/test.txt, bok-choy
+nose==1.3.7               # via -r requirements/test.txt, needle
 packaging==20.4           # via -r requirements/test.txt, -r requirements/travis.txt, bleach, pytest, tox
 pathlib2==2.3.5           # via -r requirements/test.txt, pytest
-pip-tools==5.3.0          # via -r requirements/pip-tools.txt
+pillow==7.2.0             # via -r requirements/test.txt, needle
+pip-tools==5.3.1          # via -r requirements/pip-tools.txt
 pluggy==0.13.1            # via -r requirements/test.txt, -r requirements/travis.txt, pytest, tox
 py==1.9.0                 # via -r requirements/test.txt, -r requirements/travis.txt, pytest, tox
 pycodestyle==2.6.0        # via -r requirements/test.txt
@@ -41,27 +50,30 @@ pylint-django==2.0.11     # via -r requirements/test.txt, edx-lint
 pylint-plugin-utils==0.6  # via -r requirements/test.txt, pylint-celery, pylint-django
 pylint==2.4.4             # via -r requirements/test.txt, edx-lint, pylint-celery, pylint-django, pylint-plugin-utils
 pyparsing==2.4.7          # via -r requirements/test.txt, -r requirements/travis.txt, packaging
+pypng==0.0.20             # via -r requirements/test.txt
 pytest-django==3.9.0      # via -r requirements/test.txt
 pytest==6.0.1             # via -r requirements/test.txt, pytest-django
-python-dateutil==2.8.1    # via -r requirements/test.txt, xblock
+python-dateutil==2.8.1    # via -r requirements/test.txt, botocore, xblock
 pytz==2020.1              # via -r requirements/test.txt, django, fs, xblock
 pyyaml==5.3.1             # via -r requirements/test.txt, xblock
 readme-renderer==26.0     # via -r requirements/test.txt
-selenium==3.141.0         # via -r requirements/test.txt
+s3transfer==0.3.3         # via -r requirements/test.txt, boto3
+selenium==3.4.1           # via -r requirements/test.txt, bok-choy, needle
 simplejson==3.17.2        # via -r requirements/test.txt
-six==1.15.0               # via -r requirements/pip-tools.txt, -r requirements/test.txt, -r requirements/travis.txt, astroid, bleach, edx-lint, fs, mock, packaging, pathlib2, pip-tools, python-dateutil, readme-renderer, tox, virtualenv, xblock
+six==1.15.0               # via -r requirements/pip-tools.txt, -r requirements/test.txt, -r requirements/travis.txt, astroid, bleach, bok-choy, edx-lint, fs, fs-s3fs, mock, packaging, pathlib2, pip-tools, python-dateutil, readme-renderer, tox, virtualenv, xblock
 sqlparse==0.3.1           # via -r requirements/test.txt, django
 toml==0.10.1              # via -r requirements/test.txt, -r requirements/travis.txt, pytest, tox
 tox-battery==0.6.1        # via -r requirements/travis.txt
 tox==3.18.1               # via -r requirements/travis.txt, tox-battery
 typed-ast==1.4.1          # via -r requirements/test.txt, astroid
 typing==3.7.4.3           # via -r requirements/test.txt, fs
-urllib3==1.25.10          # via -r requirements/test.txt, selenium
-virtualenv==20.0.28       # via -r requirements/travis.txt, tox
+urllib3==1.25.10          # via -r requirements/test.txt, botocore
+virtualenv==20.0.29       # via -r requirements/travis.txt, tox
 web-fragments==0.3.2      # via -r requirements/test.txt, xblock
 webencodings==0.5.1       # via -r requirements/test.txt, bleach
 webob==1.8.6              # via -r requirements/test.txt, xblock
 wrapt==1.11.2             # via -r requirements/test.txt, astroid
+xblock-sdk==0.2.2         # via -r requirements/test.txt
 xblock==1.3.1             # via -r requirements/test.txt
 zipp==1.2.0               # via -r requirements/test.txt, -r requirements/travis.txt, importlib-metadata, importlib-resources
 

@@ -18,7 +18,6 @@
 # "AGPLv3". If not, see <http://www.gnu.org/licenses/>.
 #
 """Set up for xblock-utils"""
-from __future__ import absolute_import, print_function
 
 import os
 import os.path

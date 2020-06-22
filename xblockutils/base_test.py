@@ -21,7 +21,6 @@
 Base classes for Selenium or bok-choy based integration tests of XBlocks.
 """
 
-from __future__ import absolute_import
 import time
 
 from selenium.webdriver.support.ui import WebDriverWait

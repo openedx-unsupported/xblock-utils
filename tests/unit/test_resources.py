@@ -18,7 +18,7 @@
 # "AGPLv3". If not, see <http://www.gnu.org/licenses/>.
 #
 
-from __future__ import absolute_import
+
 import unittest
 import gettext
 from mock import patch, DEFAULT

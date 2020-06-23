@@ -3,7 +3,7 @@ Template tags for handling i18n translations for xblocks
 
 Based on: https://github.com/eduNEXT/django-xblock-i18n
 """
-from __future__ import absolute_import
+
 from contextlib import contextmanager
 
 from django.template import Library, Node

@@ -21,7 +21,6 @@
 PublishEventMixin: A mixin for publishing events from an XBlock
 """
 
-from __future__ import absolute_import
 from xblock.core import XBlock
 
 

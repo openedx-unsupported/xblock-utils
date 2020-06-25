@@ -27,8 +27,6 @@ import warnings
 
 import pkg_resources
 
-from six import text_type
-
 import django
 from django.template import Context, Template, Engine, base as TemplateBase
 
@@ -132,7 +130,7 @@ class ResourceLoader(object):
                 identifier = template[:-4]
                 title = identifier.replace('_', ' ').title()
                 template_path = os.path.join(relative_scenario_dir, template)
-                scenario = text_type(self.render_django_template(template_path, {"url_name": identifier}))
+                scenario = str(self.render_django_template(template_path, {"url_name": identifier}))
                 if not include_identifier:
                     scenarios.append((title, scenario))
                 else:

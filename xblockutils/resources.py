@@ -27,8 +27,8 @@ import warnings
 
 import pkg_resources
 
-import django
-from django.template import Context, Template, Engine, base as TemplateBase
+from django.template import Context, Template, Engine
+from django.template.backends.django import get_installed_libraries
 
 from mako.template import Template as MakoTemplate
 from mako.lookup import TemplateLookup as MakoTemplateLookup
@@ -56,30 +56,13 @@ class ResourceLoader(object):
             'i18n': 'xblockutils.templatetags.i18n',
         }
 
-        # For django 1.8, we have to load the libraries manually, and restore them once the template is rendered.
-        _libraries = None
-        if django.VERSION[0] == 1 and django.VERSION[1] == 8:
-            _libraries = TemplateBase.libraries.copy()
-            for library_name in libraries:
-                library = TemplateBase.import_library(libraries[library_name])  # pylint: disable=no-member
-                if library:
-                    TemplateBase.libraries[library_name] = library
-            engine = Engine()
-        else:
-            # Django>1.8 Engine can load the extra templatetag libraries itself
-            # but we have to override the default installed libraries.
-            from django.template.backends.django import get_installed_libraries
-            installed_libraries = get_installed_libraries()
-            installed_libraries.update(libraries)
-            engine = Engine(libraries=installed_libraries)
+        installed_libraries = get_installed_libraries()
+        installed_libraries.update(libraries)
+        engine = Engine(libraries=installed_libraries)
 
         template_str = self.load_unicode(template_path)
         template = Template(template_str, engine=engine)
         rendered = template.render(Context(context))
-
-        # Restore the original TemplateBase.libraries
-        if _libraries is not None:
-            TemplateBase.libraries = _libraries
 
         return rendered
 

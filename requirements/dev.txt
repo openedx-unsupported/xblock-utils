@@ -47,16 +47,16 @@ pytz==2020.1              # via -r requirements/test.txt, django, fs, xblock
 pyyaml==5.3.1             # via -r requirements/test.txt, xblock
 readme-renderer==26.0     # via -r requirements/test.txt
 selenium==3.141.0         # via -r requirements/test.txt
-simplejson==3.17.0        # via -r requirements/test.txt
+simplejson==3.17.2        # via -r requirements/test.txt
 six==1.15.0               # via -r requirements/pip-tools.txt, -r requirements/test.txt, -r requirements/travis.txt, astroid, bleach, edx-lint, fs, mock, packaging, pathlib2, pip-tools, python-dateutil, readme-renderer, tox, virtualenv, xblock
 sqlparse==0.3.1           # via -r requirements/test.txt, django
 toml==0.10.1              # via -r requirements/travis.txt, tox
 tox-battery==0.6.1        # via -r requirements/travis.txt
-tox==3.16.1               # via -r requirements/travis.txt, tox-battery
+tox==3.17.1               # via -r requirements/travis.txt, tox-battery
 typed-ast==1.4.1          # via -r requirements/test.txt, astroid
-typing==3.7.4.1           # via -r requirements/test.txt, fs
+typing==3.7.4.3           # via -r requirements/test.txt, fs
 urllib3==1.25.9           # via -r requirements/test.txt, selenium
-virtualenv==20.0.26       # via -r requirements/travis.txt, tox
+virtualenv==20.0.27       # via -r requirements/travis.txt, tox
 wcwidth==0.2.5            # via -r requirements/test.txt, pytest
 web-fragments==0.3.2      # via -r requirements/test.txt, xblock
 webencodings==0.5.1       # via -r requirements/test.txt, bleach

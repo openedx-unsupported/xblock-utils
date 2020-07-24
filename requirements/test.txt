@@ -47,7 +47,7 @@ six==1.15.0               # via -r requirements/base.txt, astroid, bleach, edx-l
 sqlparse==0.3.1           # via django
 typed-ast==1.4.1          # via astroid
 typing==3.7.4.3           # via -r requirements/base.txt, fs
-urllib3==1.25.9           # via selenium
+urllib3==1.25.10          # via selenium
 wcwidth==0.2.5            # via pytest
 web-fragments==0.3.2      # via -r requirements/base.txt, xblock
 webencodings==0.5.1       # via bleach

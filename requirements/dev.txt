@@ -52,10 +52,10 @@ six==1.15.0               # via -r requirements/pip-tools.txt, -r requirements/t
 sqlparse==0.3.1           # via -r requirements/test.txt, django
 toml==0.10.1              # via -r requirements/travis.txt, tox
 tox-battery==0.6.1        # via -r requirements/travis.txt
-tox==3.17.1               # via -r requirements/travis.txt, tox-battery
+tox==3.18.0               # via -r requirements/travis.txt, tox-battery
 typed-ast==1.4.1          # via -r requirements/test.txt, astroid
 typing==3.7.4.3           # via -r requirements/test.txt, fs
-urllib3==1.25.9           # via -r requirements/test.txt, selenium
+urllib3==1.25.10          # via -r requirements/test.txt, selenium
 virtualenv==20.0.27       # via -r requirements/travis.txt, tox
 wcwidth==0.2.5            # via -r requirements/test.txt, pytest
 web-fragments==0.3.2      # via -r requirements/test.txt, xblock

@@ -9,8 +9,8 @@ astroid==2.3.3            # via -r requirements/test.txt, pylint, pylint-celery
 attrs==19.3.0             # via -r requirements/test.txt, pytest
 bleach==3.1.5             # via -r requirements/test.txt, readme-renderer
 bok_choy==0.7.1           # via -r requirements/test.txt
-boto3==1.14.33            # via -r requirements/test.txt, fs-s3fs
-botocore==1.17.33         # via -r requirements/test.txt, boto3, s3transfer
+boto3==1.14.34            # via -r requirements/test.txt, fs-s3fs
+botocore==1.17.34         # via -r requirements/test.txt, boto3, s3transfer
 click-log==0.3.2          # via -r requirements/test.txt, edx-lint
 click==7.1.2              # via -r requirements/pip-tools.txt, -r requirements/test.txt, click-log, edx-lint, pip-tools
 ddt==1.4.1                # via -r requirements/test.txt

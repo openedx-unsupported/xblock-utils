@@ -1,13 +1,16 @@
 # Requirements for test runs
 
+-c constraints.txt
 -r base.txt                         # Package dependencies
 
-bok_choy==0.7.1
-xblock-sdk
+bok_choy
 ddt
+django-pyfs
 edx-lint
 mock
 pycodestyle
+pypng
 pytest-django
 readme_renderer
-selenium==3.4.1
+selenium
+xblock-sdk

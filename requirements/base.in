@@ -1,5 +1,7 @@
 # Core requirements for using this package
 
+-c constraints.txt
+
 mako                                # Used by xblockutils.resources
 simplejson
 web-fragments

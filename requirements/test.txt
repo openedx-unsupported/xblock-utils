@@ -7,10 +7,10 @@
 appdirs==1.4.4            # via -r requirements/base.txt, fs
 astroid==2.3.3            # via pylint, pylint-celery
 attrs==20.2.0             # via pytest
-bleach==3.2.0             # via readme-renderer
+bleach==3.2.1             # via readme-renderer
 bok_choy==0.7.1           # via -c requirements/constraints.txt, -r requirements/test.in
-boto3==1.15.0             # via fs-s3fs
-botocore==1.18.0          # via boto3, s3transfer
+boto3==1.15.5             # via fs-s3fs
+botocore==1.18.5          # via boto3, s3transfer
 click-log==0.3.2          # via edx-lint
 click==7.1.2              # via click-log, edx-lint
 ddt==1.4.1                # via -r requirements/test.in
@@ -19,7 +19,7 @@ docutils==0.16            # via readme-renderer
 edx-lint==1.5.2           # via -r requirements/test.in
 fs-s3fs==1.1.1            # via django-pyfs
 fs==2.4.11                # via -r requirements/base.txt, django-pyfs, fs-s3fs, xblock
-importlib-metadata==1.7.0  # via pluggy, pytest
+importlib-metadata==1.7.0  # via -c requirements/constraints.txt, pluggy, pytest
 iniconfig==1.0.1          # via pytest
 isort==4.3.21             # via pylint
 jmespath==0.10.0          # via boto3, botocore

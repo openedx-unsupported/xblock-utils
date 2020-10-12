@@ -12,6 +12,3 @@
 # suite of xblock-sdk in this package
 bok_choy==0.7.1
 selenium==3.4.1
-
-# importlib-metadata>1.7.0 causing conflicts in make upgrade on python35
-importlib-metadata==1.7.0

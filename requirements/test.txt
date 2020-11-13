@@ -9,8 +9,8 @@ astroid==2.3.3            # via pylint, pylint-celery
 attrs==20.3.0             # via pytest
 bleach==3.2.1             # via readme-renderer
 bok_choy==0.7.1           # via -c requirements/constraints.txt, -r requirements/test.in
-boto3==1.16.12            # via fs-s3fs
-botocore==1.19.12         # via boto3, s3transfer
+boto3==1.16.17            # via fs-s3fs
+botocore==1.19.17         # via boto3, s3transfer
 click-log==0.3.2          # via edx-lint
 click==7.1.2              # via click-log, edx-lint
 ddt==1.4.1                # via -r requirements/test.in
@@ -59,7 +59,7 @@ sqlparse==0.4.1           # via django
 toml==0.10.2              # via pytest
 typed-ast==1.4.1          # via astroid
 typing==3.7.4.3           # via -r requirements/base.txt, fs
-urllib3==1.25.11          # via botocore
+urllib3==1.26.2           # via botocore
 web-fragments==0.3.2      # via -r requirements/base.txt, xblock
 webencodings==0.5.1       # via bleach
 webob==1.8.6              # via -r requirements/base.txt, xblock

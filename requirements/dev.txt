@@ -9,8 +9,8 @@ astroid==2.3.3            # via -r requirements/test.txt, pylint, pylint-celery
 attrs==20.3.0             # via -r requirements/test.txt, pytest
 bleach==3.2.1             # via -r requirements/test.txt, readme-renderer
 bok_choy==0.7.1           # via -r requirements/test.txt
-boto3==1.16.12            # via -r requirements/test.txt, fs-s3fs
-botocore==1.19.12         # via -r requirements/test.txt, boto3, s3transfer
+boto3==1.16.17            # via -r requirements/test.txt, fs-s3fs
+botocore==1.19.17         # via -r requirements/test.txt, boto3, s3transfer
 click-log==0.3.2          # via -r requirements/test.txt, edx-lint
 click==7.1.2              # via -r requirements/pip-tools.txt, -r requirements/test.txt, click-log, edx-lint, pip-tools
 ddt==1.4.1                # via -r requirements/test.txt
@@ -66,7 +66,7 @@ tox-battery==0.6.1        # via -r requirements/travis.txt
 tox==3.20.1               # via -r requirements/travis.txt, tox-battery
 typed-ast==1.4.1          # via -r requirements/test.txt, astroid
 typing==3.7.4.3           # via -r requirements/test.txt, fs
-urllib3==1.25.11          # via -r requirements/test.txt, botocore
+urllib3==1.26.2           # via -r requirements/test.txt, botocore
 virtualenv==20.1.0        # via -r requirements/travis.txt, tox
 web-fragments==0.3.2      # via -r requirements/test.txt, xblock
 webencodings==0.5.1       # via -r requirements/test.txt, bleach

@@ -11,4 +11,3 @@
 # Unpin these when un-pinned from xblock-sdk too, pinned to prevent test failures that are caused due to using test
 # suite of xblock-sdk in this package
 bok_choy==0.7.1
-selenium==3.4.1

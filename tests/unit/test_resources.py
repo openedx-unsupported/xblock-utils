@@ -105,6 +105,23 @@ expected_filled_js_template = u"""\
 </script>\
 """.format(expected_filled_template)
 
+expected_filled_translated_js_template = u"""\
+<script type='text/template' id='example-unique-id'>
+{}
+</script>\
+""".format(expected_translated_template)
+
+expected_filled_not_translated_js_template = u"""\
+<script type='text/template' id='example-unique-id'>
+{}
+</script>\
+""".format(expected_not_translated_template)
+
+expected_filled_localized_js_template = u"""\
+<script type='text/template' id='example-unique-id'>
+{}
+</script>\
+""".format(expected_localized_template)
 
 another_template = u"""\
 <explanation>This is an even simpler xml template.</explanation>
@@ -198,6 +215,27 @@ class TestResourceLoader(unittest.TestCase):
         loader = ResourceLoader(__name__)
         s = loader.render_js_template("data/simple_django_template.txt", example_id, example_context)
         self.assertEqual(s, expected_filled_js_template)
+
+    def test_render_js_template_translated(self):
+        loader = ResourceLoader(__name__)
+        s = loader.render_js_template("data/trans_django_template.txt",
+                                      example_id,
+                                      context=example_context,
+                                      i18n_service=MockI18nService())
+        self.assertEqual(s, expected_filled_translated_js_template)
+
+        # Test that the language changes were reverted
+        s = loader.render_js_template("data/trans_django_template.txt", example_id, example_context)
+        self.assertEqual(s, expected_filled_not_translated_js_template)
+
+    def test_render_js_template_localized(self):
+        # Test that default template tags like l10n are loaded
+        loader = ResourceLoader(__name__)
+        s = loader.render_js_template("data/l10n_django_template.txt",
+                                      example_id,
+                                      context=example_context,
+                                      i18n_service=MockI18nService())
+        self.assertEqual(s, expected_filled_localized_js_template)
 
     def test_load_scenarios(self):
         loader = ResourceLoader(__name__)

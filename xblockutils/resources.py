@@ -85,14 +85,14 @@ class ResourceLoader(object):
         )
         return self.render_django_template(template_path, context)
 
-    def render_js_template(self, template_path, element_id, context=None):
+    def render_js_template(self, template_path, element_id, context=None, i18n_service=None):
         """
         Render a js template.
         """
         context = context or {}
         return u"<script type='text/template' id='{}'>\n{}\n</script>".format(
             element_id,
-            self.render_django_template(template_path, context)
+            self.render_django_template(template_path, context, i18n_service)
         )
 
     def load_scenarios_from_path(self, relative_scenario_dir, include_identifier=False):

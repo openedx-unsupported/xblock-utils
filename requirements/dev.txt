@@ -9,8 +9,8 @@ astroid==2.3.3            # via -r requirements/test.txt, pylint, pylint-celery
 attrs==20.3.0             # via -r requirements/test.txt, pytest
 bleach==3.2.1             # via -r requirements/test.txt, readme-renderer
 bok_choy==0.7.1           # via -r requirements/test.txt
-boto3==1.16.29            # via -r requirements/test.txt, fs-s3fs
-botocore==1.19.29         # via -r requirements/test.txt, boto3, s3transfer
+boto3==1.16.31            # via -r requirements/test.txt, fs-s3fs
+botocore==1.19.31         # via -r requirements/test.txt, boto3, s3transfer
 click-log==0.3.2          # via -r requirements/test.txt, edx-lint
 click==7.1.2              # via -r requirements/pip-tools.txt, -r requirements/test.txt, click-log, edx-lint, pip-tools
 ddt==1.4.1                # via -r requirements/test.txt
@@ -43,7 +43,7 @@ pip-tools==5.4.0          # via -r requirements/pip-tools.txt
 pluggy==0.13.1            # via -r requirements/test.txt, -r requirements/travis.txt, pytest, tox
 py==1.9.0                 # via -r requirements/test.txt, -r requirements/travis.txt, pytest, tox
 pycodestyle==2.6.0        # via -r requirements/test.txt
-pygments==2.7.2           # via -r requirements/test.txt, readme-renderer
+pygments==2.7.3           # via -r requirements/test.txt, readme-renderer
 pylint-celery==0.3        # via -r requirements/test.txt, edx-lint
 pylint-django==2.0.11     # via -r requirements/test.txt, edx-lint
 pylint-plugin-utils==0.6  # via -r requirements/test.txt, pylint-celery, pylint-django
@@ -67,7 +67,7 @@ tox==3.20.1               # via -r requirements/travis.txt, tox-battery
 typed-ast==1.4.1          # via -r requirements/test.txt, astroid
 typing==3.7.4.3           # via -r requirements/test.txt, fs
 urllib3==1.26.2           # via -r requirements/test.txt, botocore
-virtualenv==20.2.1        # via -r requirements/travis.txt, tox
+virtualenv==20.2.2        # via -r requirements/travis.txt, tox
 web-fragments==0.3.2      # via -r requirements/test.txt, xblock
 webencodings==0.5.1       # via -r requirements/test.txt, bleach
 webob==1.8.6              # via -r requirements/test.txt, xblock

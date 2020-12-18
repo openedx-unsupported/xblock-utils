@@ -265,7 +265,7 @@ class StudioEditableXBlockMixin(object):
         Subclasses should override validate_field_data() to validate fields and override this
         only for validation not related to this block's field values.
         """
-        validation = super(StudioEditableXBlockMixin, self).validate()
+        validation = super().validate()
         self.validate_field_data(validation, self)
         return validation
 

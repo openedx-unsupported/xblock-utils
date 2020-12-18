@@ -41,7 +41,7 @@ class SeleniumXBlockTest(SeleniumTest):
     timeout = 10  # seconds
 
     def setUp(self):
-        super(SeleniumXBlockTest, self).setUp()
+        super().setUp()
         # Delete all scenarios from the workbench:
         # Trigger initial scenario load.
         import workbench.urls  # pylint: disable=import-outside-toplevel
@@ -142,7 +142,7 @@ class SeleniumBaseTest(SeleniumXBlockTest):
         return self.default_css_selector
 
     def setUp(self):
-        super(SeleniumBaseTest, self).setUp()
+        super().setUp()
         # Use test scenarios:
         loader = ResourceLoader(self._module_name)
         scenarios_list = loader.load_scenarios_from_path(self.relative_scenario_path, include_identifier=True)

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # Copyright (C) 2014-2015 edX
 #
@@ -21,7 +20,7 @@
 
 import unittest
 import gettext
-from mock import patch, DEFAULT
+from unittest.mock import patch, DEFAULT
 from pkg_resources import resource_filename
 
 from django.utils.translation import get_language, to_locale
@@ -29,7 +28,7 @@ from django.utils.translation import get_language, to_locale
 from xblockutils.resources import ResourceLoader
 
 
-expected_string = u"""\
+expected_string = """\
 This is a simple template example.
 
 This template can make use of the following context variables:
@@ -53,7 +52,7 @@ example_context = {
 }
 
 
-expected_filled_template = u"""\
+expected_filled_template = """\
 This is a simple template example.
 
 This template can make use of the following context variables:
@@ -70,7 +69,7 @@ Although it is simple, it can also contain non-ASCII characters:
 Thé Fütüré øf Ønlïné Édüçätïøn Ⱡσяєм ι# Før änýøné, änýwhéré, änýtïmé Ⱡσяєм #
 """
 
-expected_not_translated_template = u"""\
+expected_not_translated_template = """\
 
 Translate 1
 
@@ -81,7 +80,7 @@ with variable: This is a fine name
 
 """
 
-expected_translated_template = u"""\
+expected_translated_template = """\
 
 tRaNsLaTe !
 
@@ -91,7 +90,7 @@ mUlTi_LiNe TrAnSlAtIoN: This is a fine name
 
 """
 
-expected_localized_template = u"""\
+expected_localized_template = """\
 
 1000
 1000
@@ -99,36 +98,36 @@ expected_localized_template = u"""\
 
 example_id = "example-unique-id"
 
-expected_filled_js_template = u"""\
+expected_filled_js_template = """\
 <script type='text/template' id='example-unique-id'>
 {}
 </script>\
 """.format(expected_filled_template)
 
-expected_filled_translated_js_template = u"""\
+expected_filled_translated_js_template = """\
 <script type='text/template' id='example-unique-id'>
 {}
 </script>\
 """.format(expected_translated_template)
 
-expected_filled_not_translated_js_template = u"""\
+expected_filled_not_translated_js_template = """\
 <script type='text/template' id='example-unique-id'>
 {}
 </script>\
 """.format(expected_not_translated_template)
 
-expected_filled_localized_js_template = u"""\
+expected_filled_localized_js_template = """\
 <script type='text/template' id='example-unique-id'>
 {}
 </script>\
 """.format(expected_localized_template)
 
-another_template = u"""\
+another_template = """\
 <explanation>This is an even simpler xml template.</explanation>
 """
 
 
-simple_template = u"""\
+simple_template = """\
 <example>
     <title>This is a simple xml template.</title>
     <arguments>
@@ -147,7 +146,7 @@ expected_scenarios_with_identifiers = [
 expected_scenarios = [(t, c) for (i, t, c) in expected_scenarios_with_identifiers]
 
 
-class MockI18nService(object):
+class MockI18nService:
     """
     I18n service used for testing translations.
     """

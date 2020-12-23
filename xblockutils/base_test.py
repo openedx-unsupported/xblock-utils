@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # Copyright (C) 2014-2015 edX
 #
@@ -53,40 +52,40 @@ class SeleniumXBlockTest(SeleniumTest):
     def wait_until_visible(self, elem):
         """ Wait until the given element is visible """
         wait = WebDriverWait(elem, self.timeout)
-        wait.until(lambda e: e.is_displayed(), u"{} should be visible".format(elem.text))
+        wait.until(lambda e: e.is_displayed(), f"{elem.text} should be visible")
 
     def wait_until_hidden(self, elem):
         """ Wait until the DOM element elem is hidden """
         wait = WebDriverWait(elem, self.timeout)
-        wait.until(lambda e: not e.is_displayed(), u"{} should be hidden".format(elem.text))
+        wait.until(lambda e: not e.is_displayed(), f"{elem.text} should be hidden")
 
     def wait_until_disabled(self, elem):
         """ Wait until the DOM element elem is disabled """
         wait = WebDriverWait(elem, self.timeout)
-        wait.until(lambda e: not e.is_enabled(), u"{} should be disabled".format(elem.text))
+        wait.until(lambda e: not e.is_enabled(), f"{elem.text} should be disabled")
 
     def wait_until_clickable(self, elem):
         """ Wait until the DOM element elem is display and enabled """
         wait = WebDriverWait(elem, self.timeout)
-        wait.until(lambda e: e.is_displayed() and e.is_enabled(), u"{} should be clickable".format(elem.text))
+        wait.until(lambda e: e.is_displayed() and e.is_enabled(), f"{elem.text} should be clickable")
 
     def wait_until_text_in(self, text, elem):
         """ Wait until the specified text appears in the DOM element elem """
         wait = WebDriverWait(elem, self.timeout)
-        wait.until(lambda e: text in e.text, u"{} should be in {}".format(text, elem.text))
+        wait.until(lambda e: text in e.text, f"{text} should be in {elem.text}")
 
     def wait_until_html_in(self, html, elem):
         """ Wait until the specified HTML appears in the DOM element elem """
         wait = WebDriverWait(elem, self.timeout)
         wait.until(lambda e: html in e.get_attribute('innerHTML'),
-                   u"{} should be in {}".format(html, elem.get_attribute('innerHTML')))
+                   "{} should be in {}".format(html, elem.get_attribute('innerHTML')))
 
     def wait_until_exists(self, selector):
         """ Wait until the specified selector exists on the page """
         wait = WebDriverWait(self.browser, self.timeout)
         wait.until(
             lambda driver: driver.find_element_by_css_selector(selector),
-            u"Selector '{}' should exist.".format(selector)
+            f"Selector '{selector}' should exist."
         )
 
     @staticmethod
@@ -100,9 +99,9 @@ class SeleniumXBlockTest(SeleniumTest):
         Navigate to the page `page_name`, as listed on the workbench home
         Returns the DOM element on the visited page located by the `css_selector`
         """
-        url = self.live_server_url + '/scenario/test/{}/'.format(view_name)
+        url = self.live_server_url + f'/scenario/test/{view_name}/'
         if student_id:
-            url += '?student={}'.format(student_id)
+            url += f'?student={student_id}'
         self.browser.get(url)
         return self.browser.find_element_by_css_selector('.workbench .preview > div.xblock-v1:first-child')
 
@@ -168,7 +167,7 @@ class SeleniumBaseTest(SeleniumXBlockTest):
         self.browser.get(self.live_server_url)
         target_url = self.browser.find_element_by_link_text(page_name).get_attribute('href')
         if view_name:
-            target_url += '{}/'.format(view_name)
+            target_url += f'{view_name}/'
         self.browser.get(target_url)
         time.sleep(1)
         block = self.browser.find_element_by_css_selector(css_selector)

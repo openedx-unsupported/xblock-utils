@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # Copyright (C) 2015 OpenCraft
 # License: AGPLv3
@@ -30,7 +29,7 @@ loader = ResourceLoader(__name__)
 # Classes ###########################################################
 
 
-class FutureFields(object):
+class FutureFields:
     """
     A helper class whose attribute values come from the specified dictionary or fallback object.
 
@@ -66,7 +65,7 @@ class FutureFields(object):
             return getattr(self._fallback_obj, name)
 
 
-class StudioEditableXBlockMixin(object):
+class StudioEditableXBlockMixin:
     """
     An XBlock mixin to provide a configuration UI for an XBlock in Studio.
     """
@@ -213,7 +212,7 @@ class StudioEditableXBlockMixin(object):
                 if isinstance(field, JSONField):
                     values[field_name] = field.from_json(data['values'][field_name])
                 else:
-                    raise JsonHandlerError(400, "Unsupported field type: {}".format(field_name))
+                    raise JsonHandlerError(400, f"Unsupported field type: {field_name}")
             elif field_name in data['defaults'] and field.is_set_on(self):
                 to_reset.append(field_name)
         self.clean_studio_edits(values)
@@ -270,7 +269,7 @@ class StudioEditableXBlockMixin(object):
         return validation
 
 
-class StudioContainerXBlockMixin(object):
+class StudioContainerXBlockMixin:
     """
     An XBlock mixin to provide convenient use of an XBlock in Studio
     that wants to allow the user to assign children to it.
@@ -337,7 +336,7 @@ class StudioContainerXBlockMixin(object):
         return self.student_view(context)
 
 
-class NestedXBlockSpec(object):
+class NestedXBlockSpec:
     """
     Class that allows detailed specification of allowed nested XBlocks. For use with
     StudioContainerWithNestedXBlocksMixin.allowed_nested_blocks
@@ -393,7 +392,7 @@ class NestedXBlockSpec(object):
         return self._boilerplate
 
 
-class XBlockWithPreviewMixin(object):
+class XBlockWithPreviewMixin:
     """
     An XBlock mixin providing simple preview view. It is to be used with StudioContainerWithNestedXBlocksMixin to
     avoid adding studio wrappers (title, edit button, etc.) to a block when it is rendered as child in parent's

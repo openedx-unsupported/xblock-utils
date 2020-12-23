@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # Copyright (C) 2014-2015 edX
 #
@@ -24,7 +23,7 @@ PublishEventMixin: A mixin for publishing events from an XBlock
 from xblock.core import XBlock
 
 
-class PublishEventMixin(object):
+class PublishEventMixin:
     """
     A mixin for publishing events from an XBlock
 
@@ -50,7 +49,7 @@ class PublishEventMixin(object):
         """
         for key, value in self.additional_publish_event_data.items():
             if key in data:
-                return {'result': 'error', 'message': 'Key should not be in publish_event data: {}'.format(key)}
+                return {'result': 'error', 'message': f'Key should not be in publish_event data: {key}'}
             data[key] = value
 
         self.runtime.publish(self, event_type, data)

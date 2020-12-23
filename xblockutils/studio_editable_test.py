@@ -57,12 +57,12 @@ class StudioEditableBaseTest(CommonBaseTest):
 
     def get_element_for_field(self, field_name):
         """ Given the name of a field, return the DOM element for its form control """
-        selector = "li.field[data-field-name={}] .field-data-control".format(field_name)
+        selector = f"li.field[data-field-name={field_name}] .field-data-control"
         return self.browser.find_element_by_css_selector(selector)
 
     def click_reset_for_field(self, field_name):
         """ Click the reset button next to the specified setting field """
-        selector = "li.field[data-field-name={}] .setting-clear".format(field_name)
+        selector = f"li.field[data-field-name={field_name}] .setting-clear"
         self.browser.find_element_by_css_selector(selector).click()
 
 

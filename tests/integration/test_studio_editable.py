@@ -1,7 +1,6 @@
-
 import datetime
 import textwrap
-import mock
+from unittest import mock
 import pytz
 from selenium.common.exceptions import NoSuchElementException
 from xblock.core import XBlock
@@ -36,9 +35,9 @@ class EditableXBlock(StudioEditableXBlockMixin, XBlock):
         swearing in the 'comment' field.
         """
         if data.count < 0:
-            validation.add(ValidationMessage(ValidationMessage.ERROR, u"Count cannot be negative"))
+            validation.add(ValidationMessage(ValidationMessage.ERROR, "Count cannot be negative"))
         if "damn" in data.comment.lower():
-            validation.add(ValidationMessage(ValidationMessage.ERROR, u"No swearing allowed"))
+            validation.add(ValidationMessage(ValidationMessage.ERROR, "No swearing allowed"))
 
 
 class UnawareXBlock(XBlock):
@@ -128,8 +127,8 @@ class TestEditableXBlock_StudioView(StudioEditableBaseTest):
         field_names = EditableXBlock.editable_fields
         # It is crucial to this test that at least one of the fields is a String field with
         # an empty string as its default value:
-        defaults = set([block.fields[field_name].default for field_name in field_names])
-        self.assertIn(u'', defaults)
+        defaults = {block.fields[field_name].default for field_name in field_names}
+        self.assertIn('', defaults)
 
         for field_name in field_names:
             control = self.get_element_for_field(field_name)
@@ -383,7 +382,7 @@ class TestFancyXBlock_StudioView(StudioEditableBaseTest):
             self.assertEqual(
                 getattr(block, field_name),
                 orig_values[field_name],
-                "{} should be unchanged".format(field_name)
+                f"{field_name} should be unchanged"
             )
             self.assertTrue(block.fields[field_name].is_set_on(block))
 
@@ -399,7 +398,7 @@ class TestFancyXBlock_StudioView(StudioEditableBaseTest):
             self.fail("HTML anchor tag missing from field help text")
 
 
-class FancyBlockShim(object):
+class FancyBlockShim:
     CATEGORY = "fancy"
     STUDIO_LABEL = "Fancy Block"
 
@@ -432,7 +431,7 @@ class XBlockWithOverriddenNested(StudioContainerWithNestedXBlocksMixin, XBlock):
 
 class StudioContainerWithNestedXBlocksTest(StudioContainerWithNestedXBlocksBaseTest):
     def setUp(self):
-        super(StudioContainerWithNestedXBlocksTest, self).setUp()
+        super().setUp()
         patcher = mock.patch(
             'workbench.runtime.WorkbenchRuntime.render_template', mock.Mock(side_effect=render_template)
         )

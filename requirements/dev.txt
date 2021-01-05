@@ -9,8 +9,8 @@ astroid==2.4.2            # via -r requirements/test.txt, pylint, pylint-celery
 attrs==20.3.0             # via -r requirements/test.txt, pytest
 bleach==3.2.1             # via -r requirements/test.txt, readme-renderer
 bok_choy==0.7.1           # via -r requirements/test.txt
-boto3==1.16.39            # via -r requirements/test.txt, fs-s3fs
-botocore==1.19.39         # via -r requirements/test.txt, boto3, s3transfer
+boto3==1.16.43            # via -r requirements/test.txt, fs-s3fs
+botocore==1.19.43         # via -r requirements/test.txt, boto3, s3transfer
 click-log==0.3.2          # via -r requirements/test.txt, edx-lint
 click==7.1.2              # via -r requirements/pip-tools.txt, -r requirements/test.txt, click-log, edx-lint, pip-tools
 ddt==1.4.1                # via -r requirements/test.txt
@@ -53,7 +53,7 @@ pypng==0.0.20             # via -r requirements/test.txt
 pytest-django==4.1.0      # via -r requirements/test.txt
 pytest==6.1.2             # via -r requirements/test.txt, pytest-django
 python-dateutil==2.8.1    # via -r requirements/test.txt, botocore, xblock
-pytz==2020.4              # via -r requirements/test.txt, django, fs, xblock
+pytz==2020.5              # via -r requirements/test.txt, django, fs, xblock
 pyyaml==5.3.1             # via -r requirements/test.txt, xblock
 readme-renderer==28.0     # via -r requirements/test.txt
 s3transfer==0.3.3         # via -r requirements/test.txt, boto3

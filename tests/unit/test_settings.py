@@ -1,8 +1,7 @@
-
 import unittest
 import ddt
 import itertools
-from mock import Mock, MagicMock, patch
+from unittest.mock import Mock, MagicMock, patch
 
 from xblock.core import XBlock
 from xblockutils.settings import XBlockWithSettingsMixin, ThemableXBlockMixin

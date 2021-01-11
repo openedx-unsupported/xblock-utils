@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # Copyright (C) 2014-2015 edX
 #
@@ -29,21 +28,21 @@ class EmptyMock():
     pass
 
 
-class RequestMock(object):
+class RequestMock:
     method = "POST"
 
     def __init__(self, data):
         self.body = json.dumps(data).encode('utf-8')
 
 
-class RuntimeMock(object):
+class RuntimeMock:
     last_call = None
 
     def publish(self, block, event_type, data):
         self.last_call = (block, event_type, data)
 
 
-class XBlockMock(object):
+class XBlockMock:
     def __init__(self):
         self.runtime = RuntimeMock()
 

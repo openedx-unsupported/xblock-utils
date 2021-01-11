@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # Copyright (C) 2015 OpenCraft
 # License: AGPLv3
@@ -9,7 +8,7 @@ This module contains a mixins that allows third party XBlocks to access Settings
 from xblockutils.resources import ResourceLoader
 
 
-class XBlockWithSettingsMixin(object):
+class XBlockWithSettingsMixin:
     """
     This XBlock Mixin provides access to XBlock settings service
     Descendant Xblock must add @XBlock.wants('settings') declaration
@@ -39,7 +38,7 @@ class XBlockWithSettingsMixin(object):
         return default
 
 
-class ThemableXBlockMixin(object):
+class ThemableXBlockMixin:
     """
     This XBlock Mixin provides configurable theme support via Settings Service.
     This mixin implies XBlockWithSettingsMixin is already mixed in into Descendant XBlock

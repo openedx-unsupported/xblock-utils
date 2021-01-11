@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # Copyright (C) 2014-2015 Harvard, edX, OpenCraft
 #
@@ -34,7 +33,7 @@ from mako.template import Template as MakoTemplate
 from mako.lookup import TemplateLookup as MakoTemplateLookup
 
 
-class ResourceLoader(object):
+class ResourceLoader:
     """Loads resources relative to the module named by the module_name parameter."""
     def __init__(self, module_name):
         self.module_name = module_name
@@ -90,7 +89,7 @@ class ResourceLoader(object):
         Render a js template.
         """
         context = context or {}
-        return u"<script type='text/template' id='{}'>\n{}\n</script>".format(
+        return "<script type='text/template' id='{}'>\n{}\n</script>".format(
             element_id,
             self.render_django_template(template_path, context, i18n_service)
         )

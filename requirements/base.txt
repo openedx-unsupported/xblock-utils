@@ -6,11 +6,11 @@
 #
 appdirs==1.4.4
     # via fs
-fs==2.4.11
+fs==2.4.12
     # via xblock
 lxml==4.6.2
     # via xblock
-mako==1.1.3
+mako==1.1.4
     # via -r requirements/base.in
 markupsafe==1.1.1
     # via
@@ -31,6 +31,8 @@ six==1.15.0
     #   fs
     #   python-dateutil
     #   xblock
+typing==3.7.4.3
+    # via fs
 web-fragments==0.3.2
     # via
     #   -r requirements/base.in

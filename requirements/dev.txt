@@ -19,17 +19,17 @@ attrs==20.3.0
     # via
     #   -r requirements/test.txt
     #   pytest
-bleach==3.2.1
+bleach==3.2.2
     # via
     #   -r requirements/test.txt
     #   readme-renderer
 bok_choy==0.7.1
     # via -r requirements/test.txt
-boto3==1.16.55
+boto3==1.16.58
     # via
     #   -r requirements/test.txt
     #   fs-s3fs
-botocore==1.19.55
+botocore==1.19.58
     # via
     #   -r requirements/test.txt
     #   boto3
@@ -51,7 +51,7 @@ distlib==0.3.1
     # via
     #   -r requirements/travis.txt
     #   virtualenv
-django-pyfs==2.2
+django-pyfs==3.0
     # via -r requirements/test.txt
 django==2.2.17
     # via
@@ -79,23 +79,11 @@ fs==2.4.12
     #   django-pyfs
     #   fs-s3fs
     #   xblock
-importlib-metadata==2.1.1
-    # via
-    #   -r requirements/test.txt
-    #   -r requirements/travis.txt
-    #   pluggy
-    #   pytest
-    #   tox
-    #   virtualenv
-importlib-resources==3.2.1
-    # via
-    #   -r requirements/travis.txt
-    #   virtualenv
 iniconfig==1.1.1
     # via
     #   -r requirements/test.txt
     #   pytest
-isort==4.3.21
+isort==5.7.0
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -127,7 +115,7 @@ mccabe==0.6.1
     # via
     #   -r requirements/test.txt
     #   pylint
-mock==3.0.5
+mock==4.0.3
     # via -r requirements/test.txt
 needle==0.5.0
     # via
@@ -144,11 +132,7 @@ packaging==20.8
     #   bleach
     #   pytest
     #   tox
-pathlib2==2.3.5
-    # via
-    #   -r requirements/test.txt
-    #   pytest
-pillow==7.2.0
+pillow==8.1.0
     # via
     #   -r requirements/test.txt
     #   needle
@@ -201,7 +185,7 @@ pypng==0.0.20
     # via -r requirements/test.txt
 pytest-django==4.1.0
     # via -r requirements/test.txt
-pytest==6.1.2
+pytest==6.2.1
     # via
     #   -r requirements/test.txt
     #   pytest-django
@@ -216,7 +200,7 @@ pytz==2020.5
     #   django
     #   fs
     #   xblock
-pyyaml==5.3.1
+pyyaml==5.4.1
     # via
     #   -r requirements/test.txt
     #   xblock
@@ -243,8 +227,6 @@ six==1.15.0
     #   edx-lint
     #   fs
     #   fs-s3fs
-    #   mock
-    #   pathlib2
     #   python-dateutil
     #   readme-renderer
     #   tox
@@ -263,27 +245,19 @@ toml==0.10.2
     #   tox
 tox-battery==0.6.1
     # via -r requirements/travis.txt
-tox==3.21.1
+tox==3.21.2
     # via
     #   -r requirements/travis.txt
     #   tox-battery
-typed-ast==1.4.2
-    # via
-    #   -r requirements/test.txt
-    #   astroid
-typing==3.7.4.3
-    # via
-    #   -r requirements/test.txt
-    #   fs
 urllib3==1.26.2
     # via
     #   -r requirements/test.txt
     #   botocore
-virtualenv==20.3.1
+virtualenv==20.4.0
     # via
     #   -r requirements/travis.txt
     #   tox
-web-fragments==0.3.2
+web-fragments==1.0.0
     # via
     #   -r requirements/test.txt
     #   xblock
@@ -303,12 +277,6 @@ xblock-sdk==0.2.2
     # via -r requirements/test.txt
 xblock==1.4.0
     # via -r requirements/test.txt
-zipp==1.2.0
-    # via
-    #   -r requirements/test.txt
-    #   -r requirements/travis.txt
-    #   importlib-metadata
-    #   importlib-resources
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip

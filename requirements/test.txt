@@ -14,15 +14,15 @@ astroid==2.4.2
     #   pylint-celery
 attrs==20.3.0
     # via pytest
-bleach==3.2.1
+bleach==3.2.2
     # via readme-renderer
 bok_choy==0.7.1
     # via
     #   -c requirements/constraints.txt
     #   -r requirements/test.in
-boto3==1.16.55
+boto3==1.16.58
     # via fs-s3fs
-botocore==1.19.55
+botocore==1.19.58
     # via
     #   boto3
     #   s3transfer
@@ -34,7 +34,7 @@ click==7.1.2
     #   edx-lint
 ddt==1.4.1
     # via -r requirements/test.in
-django-pyfs==2.2
+django-pyfs==3.0
     # via -r requirements/test.in
     # via
     #   django-pyfs
@@ -51,13 +51,9 @@ fs==2.4.12
     #   django-pyfs
     #   fs-s3fs
     #   xblock
-importlib-metadata==2.1.1
-    # via
-    #   pluggy
-    #   pytest
 iniconfig==1.1.1
     # via pytest
-isort==4.3.21
+isort==5.7.0
     # via pylint
 jmespath==0.10.0
     # via
@@ -80,7 +76,7 @@ markupsafe==1.1.1
     #   xblock
 mccabe==0.6.1
     # via pylint
-mock==3.0.5
+mock==4.0.3
     # via -r requirements/test.in
 needle==0.5.0
     # via bok-choy
@@ -90,9 +86,7 @@ packaging==20.8
     # via
     #   bleach
     #   pytest
-pathlib2==2.3.5
-    # via pytest
-pillow==7.2.0
+pillow==8.1.0
     # via needle
 pluggy==0.13.1
     # via pytest
@@ -122,7 +116,7 @@ pypng==0.0.20
     # via -r requirements/test.in
 pytest-django==4.1.0
     # via -r requirements/test.in
-pytest==6.1.2
+pytest==6.2.1
     # via pytest-django
 python-dateutil==2.8.1
     # via
@@ -135,7 +129,7 @@ pytz==2020.5
     #   django
     #   fs
     #   xblock
-pyyaml==5.3.1
+pyyaml==5.4.1
     # via
     #   -r requirements/base.txt
     #   xblock
@@ -160,8 +154,6 @@ six==1.15.0
     #   edx-lint
     #   fs
     #   fs-s3fs
-    #   mock
-    #   pathlib2
     #   python-dateutil
     #   readme-renderer
     #   xblock
@@ -171,15 +163,9 @@ toml==0.10.2
     # via
     #   pylint
     #   pytest
-typed-ast==1.4.2
-    # via astroid
-typing==3.7.4.3
-    # via
-    #   -r requirements/base.txt
-    #   fs
 urllib3==1.26.2
     # via botocore
-web-fragments==0.3.2
+web-fragments==1.0.0
     # via
     #   -r requirements/base.txt
     #   xblock
@@ -195,8 +181,6 @@ xblock-sdk==0.2.2
     # via -r requirements/test.in
 xblock==1.4.0
     # via -r requirements/base.txt
-zipp==1.2.0
-    # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools

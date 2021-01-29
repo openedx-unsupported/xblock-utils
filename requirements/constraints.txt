@@ -8,6 +8,9 @@
 # pin when possible.  Writing an issue against the offending project and
 # linking to it here is good.
 
+# Common constraints for edx repos
+-c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
+ 
 # Unpin these when un-pinned from xblock-sdk too, pinned to prevent test failures that are caused due to using test
 # suite of xblock-sdk in this package
 bok_choy==0.7.1

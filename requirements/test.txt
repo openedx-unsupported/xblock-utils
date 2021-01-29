@@ -42,11 +42,14 @@ ddt==1.4.2
 django-pyfs==3.0
     # via -r requirements/test.in
     # via
+    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   django-pyfs
     #   edx-lint
     #   xblock-sdk
 docutils==0.17.1
-    # via readme-renderer
+    # via
+    #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
+    #   readme-renderer
 edx-lint==5.0.0
     # via -r requirements/test.in
 fs-s3fs==1.1.1

@@ -62,7 +62,7 @@ distlib==0.3.1
     #   virtualenv
 django-pyfs==3.0
     # via -r requirements/test.txt
-django==3.2.3
+django==2.2.23
     # via
     #   -r requirements/test.txt
     #   django-pyfs

@@ -295,6 +295,7 @@ disable =
 	coerce-builtin,
 	coerce-method,
 	delslice-method,
+	django-not-configured,
 	dict-iter-method,
 	dict-view-method,
 	duplicate-code,

@@ -20,9 +20,9 @@ bok_choy==0.7.1
     # via
     #   -c requirements/constraints.txt
     #   -r requirements/test.in
-boto3==1.17.6
+boto3==1.17.11
     # via fs-s3fs
-botocore==1.20.6
+botocore==1.20.11
     # via
     #   boto3
     #   s3transfer
@@ -104,7 +104,7 @@ py==1.10.0
     # via pytest
 pycodestyle==2.6.0
     # via -r requirements/test.in
-pygments==2.7.4
+pygments==2.8.0
     # via readme-renderer
 pylint-celery==0.3
     # via edx-lint
@@ -114,7 +114,7 @@ pylint-plugin-utils==0.6
     # via
     #   pylint-celery
     #   pylint-django
-pylint==2.6.0
+pylint==2.6.2
     # via
     #   edx-lint
     #   pylint-celery
@@ -188,7 +188,7 @@ web-fragments==1.0.0
     #   xblock
 webencodings==0.5.1
     # via bleach
-webob==1.8.6
+webob==1.8.7
     # via
     #   -r requirements/base.txt
     #   xblock

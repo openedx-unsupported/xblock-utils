@@ -35,7 +35,7 @@ web-fragments==1.0.0
     # via
     #   -r requirements/base.in
     #   xblock
-webob==1.8.6
+webob==1.8.7
     # via xblock
 xblock==1.4.0
     # via -r requirements/base.in

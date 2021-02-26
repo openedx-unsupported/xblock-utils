@@ -10,7 +10,7 @@ appdirs==1.4.4
     #   -r requirements/travis.txt
     #   fs
     #   virtualenv
-astroid==2.4.2
+astroid==2.5
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -25,11 +25,11 @@ bleach==3.3.0
     #   readme-renderer
 bok_choy==0.7.1
     # via -r requirements/test.txt
-boto3==1.17.11
+boto3==1.17.16
     # via
     #   -r requirements/test.txt
     #   fs-s3fs
-botocore==1.20.11
+botocore==1.20.16
     # via
     #   -r requirements/test.txt
     #   boto3
@@ -58,7 +58,7 @@ distlib==0.3.1
     #   virtualenv
 django-pyfs==3.0
     # via -r requirements/test.txt
-django==2.2.18
+django==2.2.19
     # via
     #   -r requirements/test.txt
     #   code-annotations
@@ -69,7 +69,7 @@ docutils==0.16
     # via
     #   -r requirements/test.txt
     #   readme-renderer
-edx-lint==4.0.1
+edx-lint==4.1.0
     # via -r requirements/test.txt
 filelock==3.0.12
     # via
@@ -103,7 +103,7 @@ jmespath==0.10.0
     #   -r requirements/test.txt
     #   boto3
     #   botocore
-lazy-object-proxy==1.4.3
+lazy-object-proxy==1.5.2
     # via
     #   -r requirements/test.txt
     #   astroid
@@ -185,7 +185,7 @@ pylint-plugin-utils==0.6
     #   -r requirements/test.txt
     #   pylint-celery
     #   pylint-django
-pylint==2.6.2
+pylint==2.7.1
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -225,7 +225,7 @@ pyyaml==5.4.1
     #   -r requirements/test.txt
     #   code-annotations
     #   xblock
-readme-renderer==28.0
+readme-renderer==29.0
     # via -r requirements/test.txt
 s3transfer==0.3.4
     # via
@@ -242,7 +242,6 @@ six==1.15.0
     # via
     #   -r requirements/test.txt
     #   -r requirements/travis.txt
-    #   astroid
     #   bleach
     #   bok-choy
     #   edx-lint

@@ -25,11 +25,11 @@ bleach==3.3.0
     #   readme-renderer
 bok_choy==0.7.1
     # via -r requirements/test.txt
-boto3==1.17.21
+boto3==1.17.26
     # via
     #   -r requirements/test.txt
     #   fs-s3fs
-botocore==1.20.21
+botocore==1.20.26
     # via
     #   -r requirements/test.txt
     #   boto3
@@ -148,7 +148,7 @@ pbr==5.5.1
     # via
     #   -r requirements/test.txt
     #   stevedore
-pillow==8.1.1
+pillow==8.1.2
     # via
     #   -r requirements/test.txt
     #   needle
@@ -168,7 +168,7 @@ py==1.10.0
     #   tox
 pycodestyle==2.6.0
     # via -r requirements/test.txt
-pygments==2.8.0
+pygments==2.8.1
     # via
     #   -r requirements/test.txt
     #   readme-renderer

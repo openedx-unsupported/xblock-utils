@@ -20,9 +20,9 @@ bok_choy==0.7.1
     # via
     #   -c requirements/constraints.txt
     #   -r requirements/test.in
-boto3==1.17.26
+boto3==1.17.32
     # via fs-s3fs
-botocore==1.20.26
+botocore==1.20.32
     # via
     #   boto3
     #   s3transfer
@@ -35,7 +35,7 @@ click==7.1.2
     #   edx-lint
 code-annotations==1.1.0
     # via edx-lint
-ddt==1.4.1
+ddt==1.4.2
     # via -r requirements/test.in
 django-pyfs==3.0
     # via -r requirements/test.in
@@ -46,7 +46,7 @@ django-pyfs==3.0
     #   xblock-sdk
 docutils==0.16
     # via readme-renderer
-edx-lint==4.1.0
+edx-lint==4.1.1
     # via -r requirements/test.in
 fs-s3fs==1.1.1
     # via django-pyfs
@@ -102,7 +102,7 @@ pluggy==0.13.1
     # via pytest
 py==1.10.0
     # via pytest
-pycodestyle==2.6.0
+pycodestyle==2.7.0
     # via -r requirements/test.in
 pygments==2.8.1
     # via readme-renderer
@@ -148,7 +148,7 @@ pyyaml==5.4.1
     #   xblock
 readme-renderer==29.0
     # via -r requirements/test.in
-s3transfer==0.3.4
+s3transfer==0.3.6
     # via boto3
 selenium==3.4.1
     # via
@@ -179,7 +179,7 @@ toml==0.10.2
     # via
     #   pylint
     #   pytest
-urllib3==1.26.3
+urllib3==1.26.4
     # via botocore
 web-fragments==1.0.0
     # via

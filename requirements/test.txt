@@ -20,9 +20,9 @@ bok_choy==0.7.1
     # via
     #   -c requirements/constraints.txt
     #   -r requirements/test.in
-boto3==1.17.32
+boto3==1.17.37
     # via fs-s3fs
-botocore==1.20.32
+botocore==1.20.37
     # via
     #   boto3
     #   s3transfer
@@ -46,7 +46,7 @@ django-pyfs==3.0
     #   xblock-sdk
 docutils==0.16
     # via readme-renderer
-edx-lint==4.1.1
+edx-lint==5.0.0
     # via -r requirements/test.in
 fs-s3fs==1.1.1
     # via django-pyfs
@@ -58,7 +58,7 @@ fs==2.4.12
     #   xblock
 iniconfig==1.1.1
     # via pytest
-isort==5.7.0
+isort==5.8.0
     # via pylint
 jinja2==2.11.3
     # via code-annotations
@@ -66,11 +66,11 @@ jmespath==0.10.0
     # via
     #   boto3
     #   botocore
-lazy-object-proxy==1.5.2
+lazy-object-proxy==1.6.0
     # via astroid
 lazy==1.4
     # via bok-choy
-lxml==4.6.2
+lxml==4.6.3
     # via
     #   -r requirements/base.txt
     #   xblock

@@ -25,11 +25,11 @@ bleach==3.3.0
     #   readme-renderer
 bok_choy==0.7.1
     # via -r requirements/test.txt
-boto3==1.17.32
+boto3==1.17.37
     # via
     #   -r requirements/test.txt
     #   fs-s3fs
-botocore==1.20.32
+botocore==1.20.37
     # via
     #   -r requirements/test.txt
     #   boto3
@@ -69,7 +69,7 @@ docutils==0.16
     # via
     #   -r requirements/test.txt
     #   readme-renderer
-edx-lint==4.1.1
+edx-lint==5.0.0
     # via -r requirements/test.txt
 filelock==3.0.12
     # via
@@ -90,7 +90,7 @@ iniconfig==1.1.1
     # via
     #   -r requirements/test.txt
     #   pytest
-isort==5.7.0
+isort==5.8.0
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -103,7 +103,7 @@ jmespath==0.10.0
     #   -r requirements/test.txt
     #   boto3
     #   botocore
-lazy-object-proxy==1.5.2
+lazy-object-proxy==1.6.0
     # via
     #   -r requirements/test.txt
     #   astroid
@@ -111,7 +111,7 @@ lazy==1.4
     # via
     #   -r requirements/test.txt
     #   bok-choy
-lxml==4.6.2
+lxml==4.6.3
     # via
     #   -r requirements/test.txt
     #   xblock

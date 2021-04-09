@@ -25,11 +25,11 @@ bleach==3.3.0
     #   readme-renderer
 bok_choy==0.7.1
     # via -r requirements/test.txt
-boto3==1.17.43
+boto3==1.17.48
     # via
     #   -r requirements/test.txt
     #   fs-s3fs
-botocore==1.20.43
+botocore==1.20.48
     # via
     #   -r requirements/test.txt
     #   boto3
@@ -58,14 +58,14 @@ distlib==0.3.1
     #   virtualenv
 django-pyfs==3.0
     # via -r requirements/test.txt
-django==2.2.19
+django==2.2.20
     # via
     #   -r requirements/test.txt
     #   code-annotations
     #   django-pyfs
     #   edx-lint
     #   xblock-sdk
-docutils==0.16
+docutils==0.17
     # via
     #   -r requirements/test.txt
     #   readme-renderer
@@ -205,7 +205,7 @@ pypng==0.0.20
     # via -r requirements/test.txt
 pytest-django==4.1.0
     # via -r requirements/test.txt
-pytest==6.2.2
+pytest==6.2.3
     # via
     #   -r requirements/test.txt
     #   pytest-django

@@ -10,7 +10,7 @@ appdirs==1.4.4
     #   -r requirements/travis.txt
     #   fs
     #   virtualenv
-astroid==2.5.2
+astroid==2.5.3
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -25,11 +25,11 @@ bleach==3.3.0
     #   readme-renderer
 bok_choy==0.7.1
     # via -r requirements/test.txt
-boto3==1.17.48
+boto3==1.17.53
     # via
     #   -r requirements/test.txt
     #   fs-s3fs
-botocore==1.20.48
+botocore==1.20.53
     # via
     #   -r requirements/test.txt
     #   boto3
@@ -156,7 +156,7 @@ pillow==8.2.0
     # via
     #   -r requirements/test.txt
     #   needle
-pip-tools==6.0.1
+pip-tools==6.1.0
     # via -r requirements/pip-tools.txt
 pluggy==0.13.1
     # via
@@ -180,7 +180,7 @@ pylint-celery==0.3
     # via
     #   -r requirements/test.txt
     #   edx-lint
-pylint-django==2.4.2
+pylint-django==2.4.3
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -203,7 +203,7 @@ pyparsing==2.4.7
     #   packaging
 pypng==0.0.20
     # via -r requirements/test.txt
-pytest-django==4.1.0
+pytest-django==4.2.0
     # via -r requirements/test.txt
 pytest==6.2.3
     # via
@@ -231,7 +231,7 @@ pyyaml==5.4.1
     #   xblock
 readme-renderer==29.0
     # via -r requirements/test.txt
-s3transfer==0.3.6
+s3transfer==0.3.7
     # via
     #   -r requirements/test.txt
     #   boto3

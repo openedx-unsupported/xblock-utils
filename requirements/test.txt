@@ -8,7 +8,7 @@ appdirs==1.4.4
     # via
     #   -r requirements/base.txt
     #   fs
-astroid==2.5.2
+astroid==2.5.3
     # via
     #   pylint
     #   pylint-celery
@@ -20,9 +20,9 @@ bok_choy==0.7.1
     # via
     #   -c requirements/constraints.txt
     #   -r requirements/test.in
-boto3==1.17.48
+boto3==1.17.53
     # via fs-s3fs
-botocore==1.20.48
+botocore==1.20.53
     # via
     #   boto3
     #   s3transfer
@@ -108,7 +108,7 @@ pygments==2.8.1
     # via readme-renderer
 pylint-celery==0.3
     # via edx-lint
-pylint-django==2.4.2
+pylint-django==2.4.3
     # via edx-lint
 pylint-plugin-utils==0.6
     # via
@@ -124,7 +124,7 @@ pyparsing==2.4.7
     # via packaging
 pypng==0.0.20
     # via -r requirements/test.in
-pytest-django==4.1.0
+pytest-django==4.2.0
     # via -r requirements/test.in
 pytest==6.2.3
     # via pytest-django
@@ -148,7 +148,7 @@ pyyaml==5.4.1
     #   xblock
 readme-renderer==29.0
     # via -r requirements/test.in
-s3transfer==0.3.6
+s3transfer==0.3.7
     # via boto3
 selenium==3.4.1
     # via

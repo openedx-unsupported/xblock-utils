@@ -10,7 +10,7 @@ appdirs==1.4.4
     #   -r requirements/travis.txt
     #   fs
     #   virtualenv
-astroid==2.5.3
+astroid==2.5.6
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -25,11 +25,11 @@ bleach==3.3.0
     #   readme-renderer
 bok_choy==0.7.1
     # via -r requirements/test.txt
-boto3==1.17.56
+boto3==1.17.61
     # via
     #   -r requirements/test.txt
     #   fs-s3fs
-botocore==1.20.56
+botocore==1.20.61
     # via
     #   -r requirements/test.txt
     #   boto3
@@ -144,7 +144,7 @@ packaging==20.9
     #   bleach
     #   pytest
     #   tox
-pbr==5.5.1
+pbr==5.6.0
     # via
     #   -r requirements/test.txt
     #   stevedore
@@ -180,7 +180,7 @@ pylint-celery==0.3
     # via
     #   -r requirements/test.txt
     #   edx-lint
-pylint-django==2.4.3
+pylint-django==2.4.4
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -189,7 +189,7 @@ pylint-plugin-utils==0.6
     #   -r requirements/test.txt
     #   pylint-celery
     #   pylint-django
-pylint==2.7.4
+pylint==2.8.2
     # via
     #   -r requirements/test.txt
     #   edx-lint

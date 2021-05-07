@@ -10,12 +10,16 @@ appdirs==1.4.4
     #   -r requirements/travis.txt
     #   fs
     #   virtualenv
+asgiref==3.3.4
+    # via
+    #   -r requirements/test.txt
+    #   django
 astroid==2.5.6
     # via
     #   -r requirements/test.txt
     #   pylint
     #   pylint-celery
-attrs==20.3.0
+attrs==21.1.0
     # via
     #   -r requirements/test.txt
     #   pytest
@@ -25,11 +29,11 @@ bleach==3.3.0
     #   readme-renderer
 bok_choy==0.7.1
     # via -r requirements/test.txt
-boto3==1.17.61
+boto3==1.17.68
     # via
     #   -r requirements/test.txt
     #   fs-s3fs
-botocore==1.20.61
+botocore==1.20.68
     # via
     #   -r requirements/test.txt
     #   boto3
@@ -58,7 +62,7 @@ distlib==0.3.1
     #   virtualenv
 django-pyfs==3.0
     # via -r requirements/test.txt
-django==2.2.20
+django==3.2.2
     # via
     #   -r requirements/test.txt
     #   code-annotations
@@ -172,7 +176,7 @@ py==1.10.0
     #   tox
 pycodestyle==2.7.0
     # via -r requirements/test.txt
-pygments==2.8.1
+pygments==2.9.0
     # via
     #   -r requirements/test.txt
     #   readme-renderer
@@ -205,7 +209,7 @@ pypng==0.0.20
     # via -r requirements/test.txt
 pytest-django==4.2.0
     # via -r requirements/test.txt
-pytest==6.2.3
+pytest==6.2.4
     # via
     #   -r requirements/test.txt
     #   pytest-django
@@ -214,7 +218,7 @@ python-dateutil==2.8.1
     #   -r requirements/test.txt
     #   botocore
     #   xblock
-python-slugify==4.0.1
+python-slugify==5.0.2
     # via
     #   -r requirements/test.txt
     #   code-annotations
@@ -242,7 +246,7 @@ selenium==3.4.1
     #   needle
 simplejson==3.17.2
     # via -r requirements/test.txt
-six==1.15.0
+six==1.16.0
     # via
     #   -r requirements/test.txt
     #   -r requirements/travis.txt
@@ -279,7 +283,7 @@ toml==0.10.2
     #   tox
 tox-battery==0.6.1
     # via -r requirements/travis.txt
-tox==3.23.0
+tox==3.23.1
     # via
     #   -r requirements/travis.txt
     #   tox-battery
@@ -287,7 +291,7 @@ urllib3==1.26.4
     # via
     #   -r requirements/test.txt
     #   botocore
-virtualenv==20.4.4
+virtualenv==20.4.6
     # via
     #   -r requirements/travis.txt
     #   tox
@@ -307,7 +311,7 @@ wrapt==1.12.1
     # via
     #   -r requirements/test.txt
     #   astroid
-xblock-sdk==0.2.2
+xblock-sdk==0.3.0
     # via -r requirements/test.txt
 xblock==1.4.0
     # via -r requirements/test.txt

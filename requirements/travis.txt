@@ -32,5 +32,5 @@ tox==3.23.1
     # via
     #   -r requirements/travis.in
     #   tox-battery
-virtualenv==20.4.6
+virtualenv==20.4.7
     # via tox

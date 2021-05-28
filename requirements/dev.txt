@@ -29,11 +29,11 @@ bleach==3.3.0
     #   readme-renderer
 bok_choy==0.7.1
     # via -r requirements/test.txt
-boto3==1.17.78
+boto3==1.17.83
     # via
     #   -r requirements/test.txt
     #   fs-s3fs
-botocore==1.20.78
+botocore==1.20.83
     # via
     #   -r requirements/test.txt
     #   boto3
@@ -285,11 +285,11 @@ tox==3.23.1
     # via
     #   -r requirements/travis.txt
     #   tox-battery
-urllib3==1.26.4
+urllib3==1.26.5
     # via
     #   -r requirements/test.txt
     #   botocore
-virtualenv==20.4.6
+virtualenv==20.4.7
     # via
     #   -r requirements/travis.txt
     #   tox
@@ -311,7 +311,7 @@ wrapt==1.12.1
     #   astroid
 xblock-sdk==0.3.0
     # via -r requirements/test.txt
-xblock==1.4.1
+xblock==1.4.2
     # via -r requirements/test.txt
 
 # The following packages are considered to be unsafe in a requirements file:

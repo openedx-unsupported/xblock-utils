@@ -36,7 +36,7 @@ web-fragments==1.0.0
     #   xblock
 webob==1.8.7
     # via xblock
-xblock==1.4.1
+xblock==1.4.2
     # via -r requirements/base.in
 
 # The following packages are considered to be unsafe in a requirements file:

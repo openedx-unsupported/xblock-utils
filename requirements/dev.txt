@@ -10,10 +10,6 @@ appdirs==1.4.4
     #   -r requirements/travis.txt
     #   fs
     #   virtualenv
-asgiref==3.3.4
-    # via
-    #   -r requirements/test.txt
-    #   django
 astroid==2.5.6
     # via
     #   -r requirements/test.txt
@@ -29,11 +25,11 @@ bleach==3.3.0
     #   readme-renderer
 bok_choy==0.7.1
     # via -r requirements/test.txt
-boto3==1.17.83
+boto3==1.17.84
     # via
     #   -r requirements/test.txt
     #   fs-s3fs
-botocore==1.20.83
+botocore==1.20.84
     # via
     #   -r requirements/test.txt
     #   boto3
@@ -56,7 +52,7 @@ code-annotations==1.1.2
     #   edx-lint
 ddt==1.4.2
     # via -r requirements/test.txt
-distlib==0.3.1
+distlib==0.3.2
     # via
     #   -r requirements/travis.txt
     #   virtualenv
@@ -68,7 +64,7 @@ django==2.2.23
     #   django-pyfs
     #   edx-lint
     #   xblock-sdk
-docutils==0.17.1
+docutils==0.16
     # via
     #   -r requirements/test.txt
     #   readme-renderer
@@ -192,7 +188,7 @@ pylint-plugin-utils==0.6
     #   -r requirements/test.txt
     #   pylint-celery
     #   pylint-django
-pylint==2.8.2
+pylint==2.8.3
     # via
     #   -r requirements/test.txt
     #   edx-lint

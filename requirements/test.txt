@@ -8,8 +8,6 @@ appdirs==1.4.4
     # via
     #   -r requirements/base.txt
     #   fs
-asgiref==3.3.4
-    # via django
 astroid==2.5.6
     # via
     #   pylint
@@ -22,9 +20,9 @@ bok_choy==0.7.1
     # via
     #   -c requirements/constraints.txt
     #   -r requirements/test.in
-boto3==1.17.83
+boto3==1.17.84
     # via fs-s3fs
-botocore==1.20.83
+botocore==1.20.84
     # via
     #   boto3
     #   s3transfer
@@ -46,7 +44,7 @@ django-pyfs==3.0
     #   django-pyfs
     #   edx-lint
     #   xblock-sdk
-docutils==0.17.1
+docutils==0.16
     # via
     #   -c https://raw.githubusercontent.com/edx/edx-lint/master/edx_lint/files/common_constraints.txt
     #   readme-renderer
@@ -118,7 +116,7 @@ pylint-plugin-utils==0.6
     # via
     #   pylint-celery
     #   pylint-django
-pylint==2.8.2
+pylint==2.8.3
     # via
     #   edx-lint
     #   pylint-celery

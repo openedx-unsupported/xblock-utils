@@ -34,8 +34,9 @@ jobs:
     - uses: browser-actions/setup-chrome@latest
     - run: chrome --version
 
-    - name: Run Tests
     - uses: nanasess/setup-chromedriver@master
+
+    - name: Run Tests
     - run: |
         export DISPLAY=:99
         chromedriver --url-base=/wd/hub &

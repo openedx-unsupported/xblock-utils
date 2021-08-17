@@ -30,7 +30,7 @@ jobs:
       run: |
         sudo apt-get purge firefox
         wget "https://ftp.mozilla.org/pub/firefox/releases/52.0esr/linux-x86_64/en-US/firefox-52.0esr.tar.bz2"
-        tar -xjf firefox-52.0.tar.bz2
+        tar -xjf firefox-52.0esr.tar.bz2
         sudo mv firefox /opt/firefox
         sudo ln -s /opt/firefox/firefox /usr/bin/firefox
 

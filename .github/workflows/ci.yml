@@ -39,10 +39,3 @@ jobs:
         export DISPLAY=:99
         chromedriver --url-base=/wd/hub &
         sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & tox -e ${{ matrix.toxenv }}
-
-    - name: Run Coverage
-      if: matrix.python-version == '3.8' && matrix.toxenv=='django22'
-      uses: codecov/codecov-action@v1
-      with:
-        flags: unittests
-        fail_ci_if_error: true

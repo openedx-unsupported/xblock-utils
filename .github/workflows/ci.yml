@@ -41,7 +41,7 @@ jobs:
 
     - name: Run Tests
       run: |
-        xvfb-run --auto-servernum tox -e ${{ matrix.toxenv }}
+        sudo xvfb-run --auto-servernum tox -e ${{ matrix.toxenv }}
 
     - name: Run Coverage
       if: matrix.python-version == '3.8' && matrix.toxenv=='django22'

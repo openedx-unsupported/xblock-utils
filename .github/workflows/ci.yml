@@ -38,11 +38,13 @@ jobs:
     - name: Install Dependencies
       run: |
         mkdir var
-        wget https://github.com/mozilla/geckodriver/releases/download/v0.15.0/geckodriver-v0.15.0-linux64.tar.gz
-        mkdir geckodriver
-        tar -xzf geckodriver-v0.15.0-linux64.tar.gz -C geckodriver
-        export PATH=$PATH:$PWD/geckodriver
         pip install -r requirements/travis.txt
+
+    - uses: nanasess/setup-chromedriver@master
+    - run: |
+        export DISPLAY=:99
+        chromedriver --url-base=/wd/hub &
+        sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
 
     - name: Run Tests
       run: |

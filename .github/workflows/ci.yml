@@ -26,15 +26,6 @@ jobs:
     - name: Install Required System Packages
       run: sudo apt-get update && sudo apt-get install xvfb
 
-    - name: Install Firefox 52
-      run: |
-        sudo apt-get purge firefox
-        wget "https://ftp.mozilla.org/pub/firefox/releases/52.0esr/linux-x86_64/en-US/firefox-52.0esr.tar.bz2"
-        tar -xjf firefox-52.0esr.tar.bz2
-        sudo mv firefox /opt/firefox
-        sudo ln -s /opt/firefox/firefox /usr/bin/firefox
-
-
     - name: Install Dependencies
       run: |
         mkdir var
@@ -45,6 +36,8 @@ jobs:
         export DISPLAY=:99
         chromedriver --url-base=/wd/hub &
         sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
+    - uses: browser-actions/setup-chrome@latest
+    - run: chrome --version
 
     - name: Run Tests
       run: |

@@ -29,7 +29,7 @@ jobs:
     - name: Install Dependencies
       run: |
         mkdir var
-        pip install -r requirements/travis.txt
+        pip install -r requirements/ci.txt
 
     - uses: browser-actions/setup-chrome@latest
     - run: chrome --version

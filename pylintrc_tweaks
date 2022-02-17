@@ -6,4 +6,4 @@ load-plugins = edx_lint.pylint,pylint_django,pylint_celery
 [MESSAGES CONTROL]
 # Disable unicode-format-string until we can agree to turn it on.
 disable+ =
-    useless-object-inheritance,
+    useless-object-inheritance,django-not-configured,

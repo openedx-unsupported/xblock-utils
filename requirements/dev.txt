@@ -8,75 +8,106 @@ appdirs==1.4.4
     # via
     #   -r requirements/test.txt
     #   fs
-astroid==2.7.3
+arrow==1.2.2
+    # via
+    #   -r requirements/test.txt
+    #   jinja2-time
+asgiref==3.5.0
+    # via
+    #   -r requirements/test.txt
+    #   django
+astroid==2.9.3
     # via
     #   -r requirements/test.txt
     #   pylint
     #   pylint-celery
-attrs==21.2.0
+attrs==21.4.0
     # via
     #   -r requirements/test.txt
     #   pytest
-backports.entry-points-selectable==1.1.0
+binaryornot==0.4.4
     # via
-    #   -r requirements/ci.txt
-    #   virtualenv
+    #   -r requirements/test.txt
+    #   cookiecutter
 bleach==4.1.0
     # via
     #   -r requirements/test.txt
     #   readme-renderer
 bok_choy==0.7.1
     # via -r requirements/test.txt
-boto3==1.18.36
+boto==2.49.0
+    # via
+    #   -r requirements/test.txt
+    #   xblock-sdk
+boto3==1.20.52
     # via
     #   -r requirements/test.txt
     #   fs-s3fs
-botocore==1.21.36
+botocore==1.23.52
     # via
     #   -r requirements/test.txt
     #   boto3
     #   s3transfer
-click==8.0.1
+certifi==2021.10.8
+    # via
+    #   -r requirements/test.txt
+    #   requests
+chardet==4.0.0
+    # via
+    #   -r requirements/test.txt
+    #   binaryornot
+charset-normalizer==2.0.11
+    # via
+    #   -r requirements/test.txt
+    #   requests
+click==8.0.3
     # via
     #   -r requirements/pip-tools.txt
     #   -r requirements/test.txt
     #   click-log
     #   code-annotations
+    #   cookiecutter
     #   edx-lint
     #   pip-tools
 click-log==0.3.2
     # via
     #   -r requirements/test.txt
     #   edx-lint
-code-annotations==1.2.0
+code-annotations==1.3.0
     # via
     #   -r requirements/test.txt
     #   edx-lint
-ddt==1.4.2
+cookiecutter==1.7.3
+    # via
+    #   -r requirements/test.txt
+    #   xblock-sdk
+ddt==1.4.4
     # via -r requirements/test.txt
-distlib==0.3.2
+distlib==0.3.4
     # via
     #   -r requirements/ci.txt
     #   virtualenv
-django==2.2.24
+django==3.2.12
     # via
     #   -r requirements/test.txt
     #   django-pyfs
     #   xblock-sdk
-django-pyfs==3.1.0
-    # via -r requirements/test.txt
-docutils==0.17.1
+django-pyfs==3.2.0
+    # via
+    #   -r requirements/test.txt
+    #   xblock-sdk
+docutils==0.18.1
     # via
     #   -r requirements/test.txt
     #   readme-renderer
-edx-lint==5.1.0
+edx-lint==5.2.1
     # via -r requirements/test.txt
-filelock==3.0.12
+filelock==3.4.2
     # via
     #   -r requirements/ci.txt
     #   tox
     #   virtualenv
-fs==2.4.13
+fs==2.4.15
     # via
     #   -r requirements/test.txt
     #   django-pyfs
@@ -86,18 +117,29 @@ fs-s3fs==1.1.1
     # via
     #   -r requirements/test.txt
     #   django-pyfs
+    #   xblock-sdk
+idna==3.3
+    # via
+    #   -r requirements/test.txt
+    #   requests
 iniconfig==1.1.1
     # via
     #   -r requirements/test.txt
     #   pytest
-isort==5.9.3
+isort==5.10.1
     # via
     #   -r requirements/test.txt
     #   pylint
-jinja2==3.0.1
+jinja2==3.0.3
     # via
     #   -r requirements/test.txt
     #   code-annotations
+    #   cookiecutter
+    #   jinja2-time
+jinja2-time==0.2.0
+    # via
+    #   -r requirements/test.txt
+    #   cookiecutter
 jmespath==0.10.0
     # via
     #   -r requirements/test.txt
@@ -107,15 +149,17 @@ lazy==1.4
     # via
     #   -r requirements/test.txt
     #   bok-choy
-lazy-object-proxy==1.6.0
+    #   xblock-sdk
+lazy-object-proxy==1.7.1
     # via
     #   -r requirements/test.txt
     #   astroid
-lxml==4.6.3
+lxml==4.7.1
     # via
     #   -r requirements/test.txt
     #   xblock
-mako==1.1.5
+    #   xblock-sdk
+mako==1.1.6
     # via -r requirements/test.txt
 markupsafe==2.0.1
     # via
@@ -137,28 +181,28 @@ nose==1.3.7
     # via
     #   -r requirements/test.txt
     #   needle
-packaging==21.0
+packaging==21.3
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   bleach
     #   pytest
     #   tox
-pbr==5.6.0
+pbr==5.8.1
     # via
     #   -r requirements/test.txt
     #   stevedore
-pep517==0.11.0
+pep517==0.12.0
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
-pillow==8.3.2
+pillow==9.0.1
     # via
     #   -r requirements/test.txt
     #   needle
-pip-tools==6.2.0
+pip-tools==6.5.1
     # via -r requirements/pip-tools.txt
-platformdirs==2.3.0
+platformdirs==2.5.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -170,19 +214,23 @@ pluggy==1.0.0
     #   -r requirements/test.txt
     #   pytest
     #   tox
-py==1.10.0
+poyo==0.5.0
+    # via
+    #   -r requirements/test.txt
+    #   cookiecutter
+py==1.11.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   pytest
     #   tox
-pycodestyle==2.7.0
+pycodestyle==2.8.0
     # via -r requirements/test.txt
-pygments==2.10.0
+pygments==2.11.2
     # via
     #   -r requirements/test.txt
     #   readme-renderer
-pylint==2.10.2
+pylint==2.12.2
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -193,51 +241,60 @@ pylint-celery==0.3
     # via
     #   -r requirements/test.txt
     #   edx-lint
-pylint-django==2.4.4
+pylint-django==2.5.0
     # via
     #   -r requirements/test.txt
     #   edx-lint
-pylint-plugin-utils==0.6
+pylint-plugin-utils==0.7
     # via
     #   -r requirements/test.txt
     #   pylint-celery
     #   pylint-django
-pyparsing==2.4.7
+pyparsing==3.0.7
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   packaging
 pypng==0.0.21
-    # via -r requirements/test.txt
-pytest==6.2.5
+    # via
+    #   -r requirements/test.txt
+    #   xblock-sdk
+pytest==7.0.0
     # via
     #   -r requirements/test.txt
     #   pytest-django
-pytest-django==4.4.0
+pytest-django==4.5.2
     # via -r requirements/test.txt
 python-dateutil==2.8.2
     # via
     #   -r requirements/test.txt
+    #   arrow
     #   botocore
     #   xblock
 python-slugify==5.0.2
     # via
     #   -r requirements/test.txt
     #   code-annotations
-pytz==2021.1
+    #   cookiecutter
+pytz==2021.3
     # via
     #   -r requirements/test.txt
     #   django
     #   fs
     #   xblock
-pyyaml==5.4.1
+pyyaml==6.0
     # via
     #   -r requirements/test.txt
     #   code-annotations
     #   xblock
-readme-renderer==29.0
+readme-renderer==32.0
     # via -r requirements/test.txt
-s3transfer==0.5.0
+requests==2.27.1
+    # via
+    #   -r requirements/test.txt
+    #   cookiecutter
+    #   xblock-sdk
+s3transfer==0.5.1
     # via
     #   -r requirements/test.txt
     #   boto3
@@ -246,26 +303,28 @@ selenium==3.4.1
     #   -r requirements/test.txt
     #   bok-choy
     #   needle
-simplejson==3.17.5
-    # via -r requirements/test.txt
+simplejson==3.17.6
+    # via
+    #   -r requirements/test.txt
+    #   xblock-sdk
 six==1.16.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   bleach
     #   bok-choy
+    #   cookiecutter
     #   edx-lint
     #   fs
     #   fs-s3fs
     #   python-dateutil
-    #   readme-renderer
     #   tox
     #   virtualenv
-sqlparse==0.4.1
+sqlparse==0.4.2
     # via
     #   -r requirements/test.txt
     #   django
-stevedore==3.4.0
+stevedore==3.5.0
     # via
     #   -r requirements/test.txt
     #   code-annotations
@@ -278,30 +337,38 @@ toml==0.10.2
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   pylint
-    #   pytest
     #   tox
-tomli==1.2.1
+tomli==2.0.1
     # via
     #   -r requirements/pip-tools.txt
+    #   -r requirements/test.txt
     #   pep517
-tox==3.24.3
+    #   pytest
+tox==3.24.5
     # via
     #   -r requirements/ci.txt
     #   tox-battery
 tox-battery==0.6.1
     # via -r requirements/ci.txt
-urllib3==1.26.6
+typing-extensions==4.0.1
+    # via
+    #   -r requirements/test.txt
+    #   astroid
+    #   pylint
+urllib3==1.26.8
     # via
     #   -r requirements/test.txt
     #   botocore
-virtualenv==20.7.2
+    #   requests
+virtualenv==20.13.1
     # via
     #   -r requirements/ci.txt
     #   tox
-web-fragments==1.1.0
+web-fragments==2.0.0
     # via
     #   -r requirements/test.txt
     #   xblock
+    #   xblock-sdk
 webencodings==0.5.1
     # via
     #   -r requirements/test.txt
@@ -310,17 +377,20 @@ webob==1.8.7
     # via
     #   -r requirements/test.txt
     #   xblock
-wheel==0.37.0
+    #   xblock-sdk
+wheel==0.37.1
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
-wrapt==1.12.1
+wrapt==1.13.3
     # via
     #   -r requirements/test.txt
     #   astroid
-xblock==1.5.1
-    # via -r requirements/test.txt
-xblock-sdk==0.3.0
+xblock==1.6.1
+    # via
+    #   -r requirements/test.txt
+    #   xblock-sdk
+xblock-sdk==0.5.1
     # via -r requirements/test.txt
 
 # The following packages are considered to be unsafe in a requirements file:

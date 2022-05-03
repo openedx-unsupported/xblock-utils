@@ -8,7 +8,7 @@ from contextlib import contextmanager
 
 from django.template import Library, Node
 from django.templatetags import i18n
-from django.utils.translation import trans_real, get_language
+from django.utils.translation import get_language, trans_real
 
 
 register = Library()

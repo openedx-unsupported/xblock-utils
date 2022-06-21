@@ -12,7 +12,7 @@ arrow==1.2.2
     # via jinja2-time
 asgiref==3.5.2
     # via django
-astroid==2.11.5
+astroid==2.11.6
     # via
     #   pylint
     #   pylint-celery
@@ -28,13 +28,13 @@ bok-choy==0.7.1
     #   -r requirements/test.in
 boto==2.49.0
     # via xblock-sdk
-boto3==1.24.2
+boto3==1.24.13
     # via fs-s3fs
-botocore==1.27.2
+botocore==1.27.13
     # via
     #   boto3
     #   s3transfer
-certifi==2022.5.18.1
+certifi==2022.6.15
     # via requests
 chardet==4.0.0
     # via binaryornot
@@ -66,7 +66,7 @@ django-pyfs==3.2.0
     #   xblock-sdk
 docutils==0.18.1
     # via readme-renderer
-edx-lint==5.2.2
+edx-lint==5.2.4
     # via -r requirements/test.in
 fs==2.4.16
     # via
@@ -91,7 +91,7 @@ jinja2==3.1.2
     #   jinja2-time
 jinja2-time==0.2.0
     # via cookiecutter
-jmespath==1.0.0
+jmespath==1.0.1
     # via
     #   boto3
     #   botocore
@@ -138,7 +138,7 @@ pycodestyle==2.8.0
     # via -r requirements/test.in
 pygments==2.12.0
     # via readme-renderer
-pylint==2.14.0
+pylint==2.14.3
     # via
     #   edx-lint
     #   pylint-celery
@@ -185,7 +185,7 @@ pyyaml==6.0
     #   xblock
 readme-renderer==35.0
     # via -r requirements/test.in
-requests==2.27.1
+requests==2.28.0
     # via
     #   cookiecutter
     #   xblock-sdk

@@ -12,7 +12,7 @@ arrow==1.2.2
     # via jinja2-time
 asgiref==3.5.2
     # via django
-astroid==2.11.6
+astroid==2.11.7
     # via
     #   pylint
     #   pylint-celery
@@ -28,9 +28,9 @@ bok-choy==0.7.1
     #   -r requirements/test.in
 boto==2.49.0
     # via xblock-sdk
-boto3==1.24.22
+boto3==1.24.27
     # via fs-s3fs
-botocore==1.27.22
+botocore==1.27.27
     # via
     #   boto3
     #   s3transfer
@@ -64,7 +64,7 @@ django-pyfs==3.2.0
     # via
     #   -r requirements/test.in
     #   xblock-sdk
-docutils==0.18.1
+docutils==0.19
     # via readme-renderer
 edx-lint==5.2.4
     # via -r requirements/test.in
@@ -220,13 +220,13 @@ tomli==2.0.1
     # via
     #   pylint
     #   pytest
-tomlkit==0.11.0
+tomlkit==0.11.1
     # via pylint
 typing-extensions==4.3.0
     # via
     #   astroid
     #   pylint
-urllib3==1.26.9
+urllib3==1.26.10
     # via
     #   botocore
     #   requests

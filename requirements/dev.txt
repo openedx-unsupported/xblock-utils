@@ -39,11 +39,11 @@ boto==2.49.0
     # via
     #   -r requirements/test.txt
     #   xblock-sdk
-boto3==1.24.27
+boto3==1.24.32
     # via
     #   -r requirements/test.txt
     #   fs-s3fs
-botocore==1.27.27
+botocore==1.27.32
     # via
     #   -r requirements/test.txt
     #   boto3
@@ -91,7 +91,7 @@ dill==0.3.5.1
     # via
     #   -r requirements/test.txt
     #   pylint
-distlib==0.3.4
+distlib==0.3.5
     # via
     #   -r requirements/ci.txt
     #   virtualenv
@@ -235,7 +235,7 @@ pygments==2.12.0
     # via
     #   -r requirements/test.txt
     #   readme-renderer
-pylint==2.14.4
+pylint==2.14.5
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -261,7 +261,7 @@ pyparsing==3.0.9
     #   -r requirements/pip-tools.txt
     #   -r requirements/test.txt
     #   packaging
-pypng==0.0.21
+pypng==0.20220715.0
     # via
     #   -r requirements/test.txt
     #   xblock-sdk
@@ -329,7 +329,7 @@ sqlparse==0.4.2
     # via
     #   -r requirements/test.txt
     #   django
-stevedore==3.5.0
+stevedore==4.0.0
     # via
     #   -r requirements/test.txt
     #   code-annotations

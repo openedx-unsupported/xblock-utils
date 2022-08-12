@@ -28,9 +28,9 @@ bok-choy==0.7.1
     #   -r requirements/test.in
 boto==2.49.0
     # via xblock-sdk
-boto3==1.24.43
+boto3==1.24.47
     # via fs-s3fs
-botocore==1.27.43
+botocore==1.27.47
     # via
     #   boto3
     #   s3transfer
@@ -134,7 +134,7 @@ pluggy==1.0.0
     # via pytest
 py==1.11.0
     # via pytest
-pycodestyle==2.9.0
+pycodestyle==2.9.1
     # via -r requirements/test.in
 pygments==2.12.0
     # via readme-renderer
@@ -183,7 +183,7 @@ pyyaml==6.0
     #   code-annotations
     #   cookiecutter
     #   xblock
-readme-renderer==35.0
+readme-renderer==36.0
     # via -r requirements/test.in
 requests==2.28.1
     # via
@@ -220,7 +220,7 @@ tomli==2.0.1
     # via
     #   pylint
     #   pytest
-tomlkit==0.11.1
+tomlkit==0.11.2
     # via pylint
 typing-extensions==4.3.0
     # via

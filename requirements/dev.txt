@@ -16,7 +16,7 @@ asgiref==3.5.2
     # via
     #   -r requirements/test.txt
     #   django
-astroid==2.12.6
+astroid==2.12.9
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -39,11 +39,11 @@ boto==2.49.0
     # via
     #   -r requirements/test.txt
     #   xblock-sdk
-boto3==1.24.66
+boto3==1.24.71
     # via
     #   -r requirements/test.txt
     #   fs-s3fs
-botocore==1.27.66
+botocore==1.27.71
     # via
     #   -r requirements/test.txt
     #   boto3
@@ -52,7 +52,7 @@ build==0.8.0
     # via
     #   -r requirements/pip-tools.txt
     #   pip-tools
-certifi==2022.6.15
+certifi==2022.6.15.1
     # via
     #   -r requirements/test.txt
     #   requests
@@ -108,7 +108,7 @@ docutils==0.19
     # via
     #   -r requirements/test.txt
     #   readme-renderer
-edx-lint==5.2.4
+edx-lint==5.2.5
     # via -r requirements/test.txt
 filelock==3.8.0
     # via
@@ -235,7 +235,7 @@ pygments==2.13.0
     # via
     #   -r requirements/test.txt
     #   readme-renderer
-pylint==2.15.0
+pylint==2.15.2
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -336,23 +336,21 @@ text-unidecode==1.3
     # via
     #   -r requirements/test.txt
     #   python-slugify
-toml==0.10.2
-    # via
-    #   -r requirements/ci.txt
-    #   tox
 tomli==2.0.1
     # via
+    #   -r requirements/ci.txt
     #   -r requirements/pip-tools.txt
     #   -r requirements/test.txt
     #   build
     #   pep517
     #   pylint
     #   pytest
+    #   tox
 tomlkit==0.11.4
     # via
     #   -r requirements/test.txt
     #   pylint
-tox==3.25.1
+tox==3.26.0
     # via
     #   -r requirements/ci.txt
     #   tox-battery
@@ -368,7 +366,7 @@ urllib3==1.26.12
     #   -r requirements/test.txt
     #   botocore
     #   requests
-virtualenv==20.16.4
+virtualenv==20.16.5
     # via
     #   -r requirements/ci.txt
     #   tox

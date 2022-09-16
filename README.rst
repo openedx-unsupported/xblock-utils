@@ -3,9 +3,6 @@ xblock-utils: Various utilities for XBlocks
 
 These are a collection of useful utility functions,
 test base classes and documentation shared by many XBlocks.
-(Especially those of `edx-solutions`_.)
-
-.. _edx-solutions: https://github.com/edx-solutions
 
 
 To test the utilities, run::
@@ -89,7 +86,7 @@ Supported field options (all field types):
 
 * ``values`` can define a list of possible options, changing the UI element
   to a select box. Values can be set to any of the formats `defined in the
-  XBlock source code <https://github.com/edx/XBlock/blob/master/xblock/fields.py>`__:
+  XBlock source code <https://github.com/openedx/XBlock/blob/master/xblock/fields.py>`__:
   
   - A finite set of elements: ``[1, 2, 3]``
   - A finite set of elements where the display names differ from the values::
@@ -200,10 +197,10 @@ XBlockWithSettingsMixin
 -----------------------
 
 This mixin provides access to instance-wide XBlock-specific configuration settings.
-See [wiki page](https://github.com/edx/xblock-utils/wiki/Settings-and-theme-support#accessing-xblock-specific-settings) for details
+See [wiki page](https://github.com/openedx/xblock-utils/wiki/Settings-and-theme-support#accessing-xblock-specific-settings) for details
 
 ThemableXBlockMixin
 -------------------
 
 This mixin provides XBlock theming capabilities built on top of XBlock-specific settings.
-See [wiki page](https://github.com/edx/xblock-utils/wiki/Settings-and-theme-support#theming-support) for details
+See [wiki page](https://github.com/openedx/xblock-utils/wiki/Settings-and-theme-support#theming-support) for details

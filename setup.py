@@ -101,7 +101,7 @@ setup(
     ],
     install_requires=load_requirements('requirements/base.in'),
     package_data=package_data("xblockutils", ["public", "templates", "templatetags"]),
-    url='https://github.com/edx/xblock-utils',
+    url='https://github.com/openedx/xblock-utils',
     classifiers=[
         'Framework :: Django :: 3.2',
         'Framework :: Django :: 4.0',

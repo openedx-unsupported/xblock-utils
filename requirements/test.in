@@ -5,7 +5,6 @@
 
 bok_choy
 ddt
-django-pyfs
 edx-lint
 mock
 pycodestyle

@@ -7,7 +7,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: 'xblock-utils'
-  description: "Various utilities for Xblocks"
+  description: "Various utilities for XBlocks"
   links: []
   annotations:
     # (Optional) Annotation keys and values can be whatever you want.

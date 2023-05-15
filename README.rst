@@ -53,6 +53,10 @@ Every time you develop something in this repo
   # Using your favorite editor, edit the code to make your change.
   vim ...
 
+  # Temporary until https://github.com/openedx/xblock-utils/issues/199 is resolved
+  mkdir var
+  touch var/workbench.log
+
   # Run your new tests
   pytest ./path/to/new/tests
 

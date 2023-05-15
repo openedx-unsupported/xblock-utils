@@ -28,6 +28,7 @@ upgrade: ## update the pip requirements files to use the latest releases satisfy
 	pip-compile --upgrade -o requirements/test.txt requirements/test.in
 	pip-compile --upgrade -o requirements/ci.txt requirements/ci.in
 	pip-compile --upgrade -o requirements/dev.txt requirements/dev.in
+	pip-compile --upgrade -o requirements/docs.txt requirements/docs.in
 	# Let tox control the Django version for tests
 	sed '/^[dD]jango==/d' requirements/test.txt > requirements/test.tmp
 	mv requirements/test.tmp requirements/test.txt

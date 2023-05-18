@@ -13,7 +13,7 @@ StudioEditableXBlockMixin to your XBlock.
 import logging
 import simplejson as json
 
-from xblock.core import XBlock
+from xblock.core import XBlock, XBlockMixin
 from xblock.fields import Scope, JSONField, List, Integer, Float, Boolean, String, DateTime
 from xblock.exceptions import JsonHandlerError, NoSuchViewError
 from web_fragments.fragment import Fragment
@@ -269,7 +269,8 @@ class StudioEditableXBlockMixin:
         return validation
 
 
-class StudioContainerXBlockMixin:
+@XBlock.needs('mako')
+class StudioContainerXBlockMixin(XBlockMixin):
     """
     An XBlock mixin to provide convenient use of an XBlock in Studio
     that wants to allow the user to assign children to it.
@@ -300,7 +301,10 @@ class StudioContainerXBlockMixin:
                 'content': rendered_child.content
             })
 
-        fragment.add_content(self.runtime.render_template("studio_render_children_view.html", {
+        mako_service = self.runtime.service(self, 'mako')
+        # 'lms.' namespace_prefix is required for rendering in studio
+        mako_service.namespace_prefix = 'lms.'
+        fragment.add_content(mako_service.render_template("studio_render_children_view.html", {
             'items': contents,
             'xblock_context': context,
             'can_add': can_add,

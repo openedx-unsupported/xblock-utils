@@ -2,6 +2,9 @@ import datetime
 import textwrap
 from unittest import mock
 import pytz
+
+from django.conf import settings
+from django.test import modify_settings
 from selenium.common.exceptions import NoSuchElementException
 from xblock.core import XBlock
 from xblock.fields import Boolean, Dict, Float, Integer, List, String, DateTime
@@ -429,15 +432,11 @@ class XBlockWithOverriddenNested(StudioContainerWithNestedXBlocksMixin, XBlock):
         ]
 
 
+@modify_settings
 class StudioContainerWithNestedXBlocksTest(StudioContainerWithNestedXBlocksBaseTest):
     def setUp(self):
         super().setUp()
-        patcher = mock.patch(
-            'workbench.runtime.WorkbenchRuntime.render_template', mock.Mock(side_effect=render_template)
-        )
-        patcher.start()
-
-        self.addCleanup(patcher.stop)
+        settings.WORKBENCH.services["mako"] = mock.Mock(render_template=mock.Mock(side_effect=render_template))
 
     def _check_button(self, button, category, label, single, disabled, disabled_reason='', boilerplate=None):
         self.assertEqual(button.get_attribute('data-category'), category)

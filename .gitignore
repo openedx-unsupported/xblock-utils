@@ -7,3 +7,5 @@ tests.integration.*.png
 .idea/
 .tox/
 var/
+
+_build/

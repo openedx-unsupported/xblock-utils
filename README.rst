@@ -1,21 +1,192 @@
 xblock-utils: Various utilities for XBlocks
-===========================================
+###########################################
 
-These are a collection of useful utility functions,
-test base classes and documentation shared by many XBlocks.
+|pypi-badge| |ci-badge| |codecov-badge| |doc-badge| |pyversions-badge|
+|license-badge| |status-badge|
+
+Purpose
+*******
+
+These are a collection of utility functions, base test classes and
+documentation that are useful for any XBlocks.
+
+Getting Started
+***************
+
+Developing
+==========
+
+One Time Setup
+--------------
+.. code-block::
+
+  # Clone the repository
+  git clone git@github.com:openedx/xblock-utils.git
+  cd xblock-utils
+
+  # Set up a virtualenv with the same name as the repo and activate it
+  # Here's how you might do that if you have virtualenvwrapper setup.
+  mkvirtualenv -p python3.8 xblock-utils
 
 
-To test the utilities, run::
+Every time you develop something in this repo
+---------------------------------------------
+.. code-block::
 
-    make test
+  # Activate the virtualenv
+  # Here's how you might do that if you're using virtualenvwrapper.
+  workon xblock-utils
 
-To get a coverage report, use::
+  # Grab the latest code
+  git checkout master
+  git pull
 
-    tox -- --cover-html
+  # Install/update the dev requirements
+  make requirements
 
+  # Run the tests and quality checks (to verify the status before you make any changes)
+  make test 
+
+  # Make a new branch for your changes
+  git checkout -b <your_github_username>/<short_description>
+
+  # Using your favorite editor, edit the code to make your change.
+  vim ...
+
+  # Temporary until https://github.com/openedx/xblock-utils/issues/199 is resolved
+  mkdir var
+  touch var/workbench.log
+
+  # Run your new tests
+  pytest ./path/to/new/tests
+
+  # Run all the tests and quality checks
+  make test
+
+  # Commit all your changes
+  git commit ...
+  git push
+
+  # Open a PR and ask for review.
+
+Deploying
+=========
+
+This component is automatically deployed to PyPI whenever new GitHub releases are made.
+
+To deploy this library.
+
+#. Update the version in ``xblockutils/__init__.py`` based on semantic versioning.
+
+#. Create a new GitHub release with a tag matching the version.
+
+#. Automation should build and deploy the version to PyPI
+
+Getting Help
+************
+
+Documentation
+=============
+
+Start by going through `the documentation`_.  If you need more help see below.
+
+.. _the documentation: https://docs.openedx.org/projects/xblock-utils
+
+More Help
+=========
+
+If you're having trouble, we have discussion forums at
+https://discuss.openedx.org where you can connect with others in the
+community.
+
+Our real-time conversations are on Slack. You can request a `Slack
+invitation`_, then join our `community Slack workspace`_.
+
+For anything non-trivial, the best path is to open an issue in this
+repository with as many details about the issue you are facing as you
+can provide.
+
+https://github.com/openedx/xblock-utils/issues
+
+For more information about these options, see the `Project Getting Help`_ page.
+
+.. _Slack invitation: https://openedx.org/slack
+.. _community Slack workspace: https://openedx.slack.com/
+.. _Project Getting Help: https://openedx.org/getting-help
+
+License
+*******
+
+The code in this repository is licensed under the AGPLv3 unless
+otherwise noted.
+
+Please see `the LICENSE <LICENSE>`_ for details.
+
+Contributing
+************
+
+Contributions are very welcome.
+Please read `How To Contribute <https://openedx.org/r/how-to-contribute>`_ for details.
+
+This project is currently accepting all types of contributions, bug fixes,
+security fixes, maintenance work, or new features.  However, please make sure
+to have a discussion about your new feature idea with the maintainers prior to
+beginning development to maximize the chances of your change being accepted.
+You can start a conversation by creating a new issue on this repo summarizing
+your idea.
+
+The Open edX Code of Conduct
+****************************
+
+All community members are expected to follow the `Open edX Code of Conduct`_.
+
+.. _Open edX Code of Conduct: https://openedx.org/code-of-conduct/
+
+People
+******
+
+The assigned maintainers for this component and other project details may be
+found in `Backstage`_. Backstage pulls this data from the ``catalog-info.yaml``
+file in this repo.
+
+.. _Backstage: https://backstage.openedx.org/catalog/default/component/xblock-utils
+
+Reporting Security Issues
+*************************
+
+Please do not report security issues in public. Please email security@openedx.org.
+
+.. |pypi-badge| image:: https://img.shields.io/pypi/v/xblock-utils.svg
+    :target: https://pypi.python.org/pypi/xblock-utils/
+    :alt: PyPI
+
+.. |ci-badge| image:: https://github.com/openedx/xblock-utils/workflows/Python%20CI/badge.svg?branch=main
+    :target: https://github.com/openedx/xblock-utils/actions
+    :alt: CI
+
+.. |codecov-badge| image:: https://codecov.io/github/openedx/xblock-utils/coverage.svg?branch=main
+    :target: https://codecov.io/github/openedx/xblock-utils?branch=main
+    :alt: Codecov
+
+.. |doc-badge| image:: https://readthedocs.org/projects/xblock-utils/badge/?version=latest
+    :target: https://docs.openedx.org/projects/xblock-utils/
+    :alt: Documentation
+
+.. |pyversions-badge| image:: https://img.shields.io/pypi/pyversions/xblock-utils.svg
+    :target: https://pypi.python.org/pypi/xblock-utils/
+    :alt: Supported Python versions
+
+.. |license-badge| image:: https://img.shields.io/github/license/openedx/xblock-utils.svg
+    :target: https://github.com/openedx/xblock-utils/blob/main/LICENSE
+    :alt: License
+
+.. |status-badge| image:: https://img.shields.io/badge/Status-Maintained-brightgreen
+
+More Documentation
+******************
 
 StudioEditableXBlockMixin
--------------------------
+=========================
 
 .. code:: python
 
@@ -110,7 +281,7 @@ Supported field options (all field types):
 Basic screenshot: |Screenshot 1|
 
 StudioContainerXBlockMixin
---------------------------
+==========================
 
 .. code:: python
 
@@ -128,7 +299,7 @@ child blocks or a limited number of children requires custom HTML.
 An example is the mentoring XBlock: |Screenshot 2|
 
 SeleniumXBlockTest
-------------------
+==================
 
 .. code:: python
 
@@ -157,7 +328,7 @@ Here is an example:
             self.assertIn("hello", self.element.text)
 
 StudioEditableBaseTest
-----------------------
+======================
 
 .. code:: python
 
@@ -168,7 +339,7 @@ methods useful for testing the ``studio_view`` of any XBlock using
 ``StudioEditableXBlockMixin``.
 
 child\_isinstance
------------------
+=================
 
 .. code:: python
 
@@ -194,13 +365,13 @@ orders of magnitude faster.
 .. |Screenshot 2| image:: https://cloud.githubusercontent.com/assets/945577/6341803/d0195ec4-bb83-11e4-82f6-8052c9f70690.png
 
 XBlockWithSettingsMixin
------------------------
+=======================
 
 This mixin provides access to instance-wide XBlock-specific configuration settings.
 See [wiki page](https://github.com/openedx/xblock-utils/wiki/Settings-and-theme-support#accessing-xblock-specific-settings) for details
 
 ThemableXBlockMixin
--------------------
+===================
 
 This mixin provides XBlock theming capabilities built on top of XBlock-specific settings.
 See [wiki page](https://github.com/openedx/xblock-utils/wiki/Settings-and-theme-support#theming-support) for details

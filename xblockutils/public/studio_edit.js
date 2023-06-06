@@ -51,17 +51,18 @@ function StudioEditableXBlockMixin(runtime, element) {
         if (type == 'html' && tinyMceAvailable) {
             tinyMCE.baseURL = baseUrl + "/js/vendor/tinymce/js/tinymce";
             $field.tinymce({
-                theme: 'modern',
-                skin: 'studio-tmce4',
+                theme: 'silver',
+                skin: 'studio-tmce5',
+                content_css: 'studio-tmce5',
                 height: '200px',
                 formats: { code: { inline: 'code' } },
                 codemirror: { path: "" + baseUrl + "/js/vendor" },
                 convert_urls: false,
-                plugins: "link codemirror",
+                plugins: "lists, link, codemirror",
                 menubar: false,
                 statusbar: false,
                 toolbar_items_size: 'small',
-                toolbar: "formatselect | styleselect | bold italic underline forecolor wrapAsCode | bullist numlist outdent indent blockquote | link unlink | code",
+                toolbar: "formatselect | styleselect | bold italic underline forecolor | bullist numlist outdent indent blockquote | link unlink | code",
                 resize: "both",
                 extended_valid_elements : 'i[class],span[class]',
                 setup : function(ed) {

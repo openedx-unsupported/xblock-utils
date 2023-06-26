@@ -24,9 +24,9 @@ bok-choy==0.7.1
     # via
     #   -c requirements/constraints.txt
     #   -r requirements/test.in
-boto3==1.26.152
+boto3==1.26.160
     # via fs-s3fs
-botocore==1.29.152
+botocore==1.29.160
     # via
     #   boto3
     #   s3transfer
@@ -124,9 +124,9 @@ pbr==5.11.1
     # via stevedore
 pillow==9.5.0
     # via needle
-platformdirs==3.5.3
+platformdirs==3.8.0
     # via pylint
-pluggy==1.0.0
+pluggy==1.2.0
     # via pytest
 pycodestyle==2.10.0
     # via -r requirements/test.in
@@ -150,7 +150,7 @@ pypng==0.20220715.0
     # via
     #   -r requirements/test.in
     #   xblock-sdk
-pytest==7.3.2
+pytest==7.4.0
     # via pytest-django
 pytest-django==4.5.2
     # via -r requirements/test.in
@@ -175,7 +175,7 @@ pyyaml==6.0
     #   code-annotations
     #   cookiecutter
     #   xblock
-readme-renderer==37.3
+readme-renderer==40.0
     # via -r requirements/test.in
 requests==2.31.0
     # via

@@ -31,11 +31,11 @@ bleach==6.0.0
     #   readme-renderer
 bok-choy==0.7.1
     # via -r requirements/test.txt
-boto3==1.26.152
+boto3==1.26.160
     # via
     #   -r requirements/test.txt
     #   fs-s3fs
-botocore==1.29.152
+botocore==1.29.160
     # via
     #   -r requirements/test.txt
     #   boto3
@@ -203,13 +203,13 @@ pillow==9.5.0
     #   needle
 pip-tools==6.13.0
     # via -r requirements/pip-tools.txt
-platformdirs==3.5.3
+platformdirs==3.8.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
     #   pylint
     #   virtualenv
-pluggy==1.0.0
+pluggy==1.2.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -253,7 +253,7 @@ pyproject-hooks==1.0.0
     # via
     #   -r requirements/pip-tools.txt
     #   build
-pytest==7.3.2
+pytest==7.4.0
     # via
     #   -r requirements/test.txt
     #   pytest-django
@@ -281,7 +281,7 @@ pyyaml==6.0
     #   code-annotations
     #   cookiecutter
     #   xblock
-readme-renderer==37.3
+readme-renderer==40.0
     # via -r requirements/test.txt
 requests==2.31.0
     # via
@@ -355,7 +355,7 @@ urllib3==1.26.16
     #   -r requirements/test.txt
     #   botocore
     #   requests
-virtualenv==20.23.0
+virtualenv==20.23.1
     # via
     #   -r requirements/ci.txt
     #   tox

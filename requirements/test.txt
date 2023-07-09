@@ -9,10 +9,10 @@ appdirs==1.4.4
     #   -r requirements/base.txt
     #   fs
 arrow==1.2.3
-    # via jinja2-time
+    # via cookiecutter
 asgiref==3.7.2
     # via django
-astroid==2.15.5
+astroid==2.15.6
     # via
     #   pylint
     #   pylint-celery
@@ -24,9 +24,9 @@ bok-choy==0.7.1
     # via
     #   -c requirements/constraints.txt
     #   -r requirements/test.in
-boto3==1.26.165
+boto3==1.28.1
     # via fs-s3fs
-botocore==1.29.165
+botocore==1.31.1
     # via
     #   boto3
     #   s3transfer
@@ -34,9 +34,9 @@ certifi==2023.5.7
     # via requests
 chardet==5.1.0
     # via binaryornot
-charset-normalizer==3.1.0
+charset-normalizer==3.2.0
     # via requests
-click==8.1.3
+click==8.1.4
     # via
     #   click-log
     #   code-annotations
@@ -46,7 +46,7 @@ click-log==0.4.0
     # via edx-lint
 code-annotations==1.3.0
     # via edx-lint
-cookiecutter==2.1.1
+cookiecutter==2.2.0
     # via xblock-sdk
 ddt==1.6.0
     # via -r requirements/test.in
@@ -82,9 +82,6 @@ jinja2==3.1.2
     # via
     #   code-annotations
     #   cookiecutter
-    #   jinja2-time
-jinja2-time==0.2.0
-    # via cookiecutter
 jmespath==1.0.1
     # via
     #   boto3
@@ -95,7 +92,7 @@ lazy==1.5
     #   xblock
 lazy-object-proxy==1.9.0
     # via astroid
-lxml==4.9.2
+lxml==4.9.3
     # via
     #   -r requirements/base.txt
     #   xblock
@@ -124,7 +121,7 @@ pbr==5.11.1
     # via stevedore
 pillow==10.0.0
     # via needle
-platformdirs==3.8.0
+platformdirs==3.8.1
     # via pylint
 pluggy==1.2.0
     # via pytest

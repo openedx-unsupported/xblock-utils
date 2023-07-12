@@ -46,7 +46,11 @@ click-log==0.4.0
     # via edx-lint
 code-annotations==1.3.0
     # via edx-lint
+<<<<<<< HEAD
 cookiecutter==2.2.3
+=======
+cookiecutter==2.2.0
+>>>>>>> origin/master
     # via xblock-sdk
 ddt==1.6.0
     # via -r requirements/test.in

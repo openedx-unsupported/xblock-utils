@@ -20,7 +20,7 @@ python-dateutil==2.8.2
     # via xblock
 pytz==2023.3
     # via xblock
-pyyaml==6.0
+pyyaml==6.0.1
     # via xblock
 simplejson==3.19.1
     # via -r requirements/base.in

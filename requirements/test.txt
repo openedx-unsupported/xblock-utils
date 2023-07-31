@@ -24,9 +24,9 @@ bok-choy==0.7.1
     # via
     #   -c requirements/constraints.txt
     #   -r requirements/test.in
-boto3==1.28.9
+boto3==1.28.15
     # via fs-s3fs
-botocore==1.31.9
+botocore==1.31.15
     # via
     #   boto3
     #   s3transfer
@@ -121,15 +121,15 @@ pbr==5.11.1
     # via stevedore
 pillow==10.0.0
     # via needle
-platformdirs==3.9.1
+platformdirs==3.10.0
     # via pylint
 pluggy==1.2.0
     # via pytest
-pycodestyle==2.10.0
+pycodestyle==2.11.0
     # via -r requirements/test.in
 pygments==2.15.1
     # via readme-renderer
-pylint==2.17.4
+pylint==2.17.5
     # via
     #   edx-lint
     #   pylint-celery
@@ -209,7 +209,7 @@ tomli==2.0.1
     # via
     #   pylint
     #   pytest
-tomlkit==0.11.8
+tomlkit==0.12.1
     # via pylint
 typing-extensions==4.7.1
     # via

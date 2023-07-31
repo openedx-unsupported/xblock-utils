@@ -31,11 +31,11 @@ bleach==6.0.0
     #   readme-renderer
 bok-choy==0.7.1
     # via -r requirements/test.txt
-boto3==1.28.9
+boto3==1.28.15
     # via
     #   -r requirements/test.txt
     #   fs-s3fs
-botocore==1.31.9
+botocore==1.31.15
     # via
     #   -r requirements/test.txt
     #   boto3
@@ -198,7 +198,7 @@ pillow==10.0.0
     #   needle
 pip-tools==7.1.0
     # via -r requirements/pip-tools.txt
-platformdirs==3.9.1
+platformdirs==3.10.0
     # via
     #   -r requirements/ci.txt
     #   -r requirements/test.txt
@@ -214,13 +214,13 @@ py==1.11.0
     # via
     #   -r requirements/ci.txt
     #   tox
-pycodestyle==2.10.0
+pycodestyle==2.11.0
     # via -r requirements/test.txt
 pygments==2.15.1
     # via
     #   -r requirements/test.txt
     #   readme-renderer
-pylint==2.17.4
+pylint==2.17.5
     # via
     #   -r requirements/test.txt
     #   edx-lint
@@ -330,7 +330,7 @@ tomli==2.0.1
     #   pyproject-hooks
     #   pytest
     #   tox
-tomlkit==0.11.8
+tomlkit==0.12.1
     # via
     #   -r requirements/test.txt
     #   pylint
@@ -351,7 +351,7 @@ urllib3==1.26.16
     #   -r requirements/test.txt
     #   botocore
     #   requests
-virtualenv==20.24.1
+virtualenv==20.24.2
     # via
     #   -r requirements/ci.txt
     #   tox

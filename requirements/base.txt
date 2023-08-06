@@ -28,13 +28,13 @@ six==1.16.0
     # via
     #   fs
     #   python-dateutil
-web-fragments==2.0.0
+web-fragments==2.1.0
     # via
     #   -r requirements/base.in
     #   xblock
 webob==1.8.7
     # via xblock
-xblock==1.6.2
+xblock==1.7.0
     # via -r requirements/base.in
 
 # The following packages are considered to be unsafe in a requirements file:

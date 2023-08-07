@@ -5,4 +5,4 @@
 mako                                # Used by xblockutils.resources
 simplejson
 web-fragments
-Xblock
+Xblock[django]

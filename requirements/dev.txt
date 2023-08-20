@@ -31,11 +31,11 @@ bleach==6.0.0
     #   readme-renderer
 bok-choy==0.7.1
     # via -r requirements/test.txt
-boto3==1.28.25
+boto3==1.28.30
     # via
     #   -r requirements/test.txt
     #   fs-s3fs
-botocore==1.31.25
+botocore==1.31.30
     # via
     #   -r requirements/test.txt
     #   boto3
@@ -56,7 +56,7 @@ charset-normalizer==3.2.0
     # via
     #   -r requirements/test.txt
     #   requests
-click==8.1.6
+click==8.1.7
     # via
     #   -r requirements/pip-tools.txt
     #   -r requirements/test.txt
@@ -98,7 +98,7 @@ docutils==0.20.1
     #   readme-renderer
 edx-lint==5.3.4
     # via -r requirements/test.txt
-exceptiongroup==1.1.2
+exceptiongroup==1.1.3
     # via
     #   -r requirements/test.txt
     #   pytest
@@ -285,7 +285,7 @@ pyyaml==6.0.1
     #   code-annotations
     #   cookiecutter
     #   xblock
-readme-renderer==40.0
+readme-renderer==41.0
     # via -r requirements/test.txt
 requests==2.31.0
     # via
@@ -296,7 +296,7 @@ rich==13.5.2
     # via
     #   -r requirements/test.txt
     #   cookiecutter
-s3transfer==0.6.1
+s3transfer==0.6.2
     # via
     #   -r requirements/test.txt
     #   boto3
@@ -351,7 +351,7 @@ tox==3.28.0
     # via
     #   -r requirements/ci.txt
     #   tox-battery
-tox-battery==0.6.1
+tox-battery==0.6.2
     # via -r requirements/ci.txt
 typing-extensions==4.7.1
     # via

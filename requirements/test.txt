@@ -14,7 +14,7 @@ asgiref==3.7.2
     # via
     #   -r requirements/base.txt
     #   django
-astroid==2.15.6
+astroid==2.15.7
     # via
     #   pylint
     #   pylint-celery
@@ -24,11 +24,11 @@ bok-choy==0.7.1
     # via
     #   -c requirements/constraints.txt
     #   -r requirements/test.in
-boto3==1.28.49
+boto3==1.28.53
     # via
     #   -r requirements/base.txt
     #   fs-s3fs
-botocore==1.31.49
+botocore==1.31.53
     # via
     #   -r requirements/base.txt
     #   boto3
@@ -49,7 +49,7 @@ click-log==0.4.0
     # via edx-lint
 code-annotations==1.5.0
     # via edx-lint
-cookiecutter==2.3.0
+cookiecutter==2.3.1
     # via xblock-sdk
 ddt==1.6.0
     # via -r requirements/test.in
@@ -195,7 +195,7 @@ requests==2.31.0
     # via
     #   cookiecutter
     #   xblock-sdk
-rich==13.5.2
+rich==13.5.3
     # via cookiecutter
 s3transfer==0.6.2
     # via
@@ -233,7 +233,7 @@ tomli==2.0.1
     #   pytest
 tomlkit==0.12.1
     # via pylint
-typing-extensions==4.7.1
+typing-extensions==4.8.0
     # via
     #   -r requirements/base.txt
     #   asgiref

@@ -12,7 +12,7 @@ documentation that are useful for any XBlocks.
 
 
 ⚠️ Deprecation Notice ⚠️
-**********************
+************************
 
 **Effective Date:** September 26, 2023
 

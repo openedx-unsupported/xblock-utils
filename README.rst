@@ -17,14 +17,11 @@ documentation that are useful for any XBlocks.
 **Effective Date:** September 26, 2023
 
 **Repository Migration:**
-This `xblock-utils` repository has been deprecated as of September 26, 2023, and the code and documentation have been migrated to the `Xblock <https://github.com/openedx/XBlock>`_ repository.
+This `xblock-utils` repository has been `deprecated <https://github.com/openedx/xblock-utils/issues/197>`_ as of September 26, 2023, and the code and documentation have been migrated to the `Xblock <https://github.com/openedx/XBlock>`_ repository.
 
 This decision was made to streamline and consolidate our codebase.
 
 The migration process was completed through this Pull Request: `PR #669 <https://github.com/openedx/XBlock/pull/669>`_
-
-What to Expect:
-===============
 
 **Archival**: We are going to archive the `xblock-utils` repository. This means that it will become read-only, and no further updates or changes will be accepted.
 

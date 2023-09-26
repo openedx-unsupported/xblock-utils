@@ -10,6 +10,29 @@ Purpose
 These are a collection of utility functions, base test classes and
 documentation that are useful for any XBlocks.
 
+
+⚠️ Deprecation Notice ⚠️
+**********************
+
+**Effective Date:** September 26, 2023
+
+**Repository Migration:**
+This `xblock-utils` repository has been deprecated as of September 26, 2023, and the code and documentation have been migrated to the `Xblock <https://github.com/openedx/XBlock>`_ repository.
+
+This decision was made to streamline and consolidate our codebase.
+
+The migration process was completed through this Pull Request: `PR #669 <https://github.com/openedx/XBlock/pull/669>`_
+
+What to Expect:
+===============
+
+**Archival**: We are going to archive the `xblock-utils` repository. This means that it will become read-only, and no further updates or changes will be accepted.
+
+We appreciate your understanding and cooperation during this transition. If you have any questions or concerns, please don't hesitate to reach out to us through the `XBlock` repository's issue tracker.
+
+Thank you for your continued support and contributions to the Open edX community.
+
+
 Getting Started
 ***************
 

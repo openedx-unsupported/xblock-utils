@@ -22,6 +22,13 @@ PublishEventMixin: A mixin for publishing events from an XBlock
 
 from xblock.core import XBlock
 
+from xblockutils.deprecation.warn import warn_deprecated_package
+
+warn_deprecated_package(
+    'xblockutils.publish_event',
+    'xblock.utils.publish_event'
+)
+
 
 class PublishEventMixin:
     """

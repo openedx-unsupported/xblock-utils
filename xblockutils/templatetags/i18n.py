@@ -10,6 +10,12 @@ from django.template import Library, Node
 from django.templatetags import i18n
 from django.utils.translation import get_language, trans_real
 
+from xblockutils.deprecation.warn import warn_deprecated_package
+
+warn_deprecated_package(
+    'xblockutils.templatetags.i18n',
+    'xblock.utils.templatetags.i18n'
+)
 
 register = Library()
 

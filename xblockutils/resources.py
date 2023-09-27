@@ -25,12 +25,17 @@ import sys
 import warnings
 
 import pkg_resources
-
 from django.template import Context, Template, Engine
 from django.template.backends.django import get_installed_libraries
-
-from mako.template import Template as MakoTemplate
 from mako.lookup import TemplateLookup as MakoTemplateLookup
+from mako.template import Template as MakoTemplate
+
+from xblockutils.deprecation.warn import warn_deprecated_package
+
+warn_deprecated_package(
+    'xblockutils.resources',
+    'xblock.utils.resources'
+)
 
 
 class ResourceLoader:

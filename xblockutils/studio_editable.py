@@ -11,23 +11,29 @@ StudioEditableXBlockMixin to your XBlock.
 
 
 import logging
-import simplejson as json
 
-from xblock.core import XBlock, XBlockMixin
-from xblock.fields import Scope, JSONField, List, Integer, Float, Boolean, String, DateTime
-from xblock.exceptions import JsonHandlerError, NoSuchViewError
+import simplejson as json
 from web_fragments.fragment import Fragment
+from xblock.core import XBlock, XBlockMixin
+from xblock.exceptions import JsonHandlerError, NoSuchViewError
+from xblock.fields import Scope, JSONField, List, Integer, Float, Boolean, String, DateTime
 from xblock.validation import Validation
 
+from xblockutils.deprecation.warn import warn_deprecated_package
 from xblockutils.resources import ResourceLoader
+
+warn_deprecated_package(
+    'xblockutils.studio_editable',
+    'xblock.utils.studio_editable'
+)
 
 # Globals ###########################################################
 
 log = logging.getLogger(__name__)
 loader = ResourceLoader(__name__)
 
-# Classes ###########################################################
 
+# Classes ###########################################################
 
 class FutureFields:
     """

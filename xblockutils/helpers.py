@@ -2,6 +2,13 @@
 Useful helper methods
 """
 
+from xblockutils.deprecation.warn import warn_deprecated_package
+
+warn_deprecated_package(
+    'xblockutils.helpers',
+    'xblock.utils.helpers'
+)
+
 
 def child_isinstance(block, child_id, block_class_or_mixin):
     """

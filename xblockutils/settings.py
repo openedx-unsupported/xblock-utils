@@ -5,7 +5,13 @@
 This module contains a mixins that allows third party XBlocks to access Settings Service in edX LMS.
 """
 
+from xblockutils.deprecation.warn import warn_deprecated_package
 from xblockutils.resources import ResourceLoader
+
+warn_deprecated_package(
+    'xblockutils.settings',
+    'xblock.utils.settings'
+)
 
 
 class XBlockWithSettingsMixin:

@@ -117,7 +117,7 @@ class TextThemableXBlockMixin(unittest.TestCase):
         package_name = 'some_package'
         theme_config = {xblock_class.theme_key: {'package': package_name, 'locations': ['lms.css']}}
         self.service_mock.get_settings_bucket = Mock(return_value=theme_config)
-        with patch("xblockutils.settings.ResourceLoader") as patched_resource_loader:
+        with patch("xblock.utils.settings.ResourceLoader") as patched_resource_loader:
             xblock.include_theme_files(fragment)
             patched_resource_loader.assert_called_with(package_name)
 
@@ -133,7 +133,7 @@ class TextThemableXBlockMixin(unittest.TestCase):
         fragment = MagicMock()
         theme_config = {DummyXBlockWithSettings.theme_key: {'package': package_name, 'locations': locations}}
         self.service_mock.get_settings_bucket = Mock(return_value=theme_config)
-        with patch("xblockutils.settings.ResourceLoader.load_unicode") as patched_load_unicode:
+        with patch("xblock.utils.settings.ResourceLoader.load_unicode") as patched_load_unicode:
             xblock.include_theme_files(fragment)
             for location in locations:
                 patched_load_unicode.assert_any_call(location)
@@ -146,6 +146,6 @@ class TextThemableXBlockMixin(unittest.TestCase):
         xblock.default_theme_config = theme_config
         self.service_mock.get_settings_bucket = Mock(return_value={})
         fragment = MagicMock()
-        with patch("xblockutils.settings.ResourceLoader.load_unicode") as patched_load_unicode:
+        with patch("xblock.utils.settings.ResourceLoader.load_unicode") as patched_load_unicode:
             xblock.include_theme_files(fragment)
             patched_load_unicode.assert_not_called()

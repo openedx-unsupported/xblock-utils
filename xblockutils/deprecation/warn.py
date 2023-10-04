@@ -19,8 +19,8 @@ class DeprecatedPackageWarning(DeprecationWarning):
 
     def __str__(self):
         return (
-            "Please use import {self.new_import} instead of {self.old_import} as "
-            "'xblock-utils' package has been deprecated and migrated within 'xblock' package. "
+            "Please use import {self.new_import} instead of {self.old_import} because "
+            "the 'xblock-utils' package has been deprecated and migrated to within 'xblock' package. "
         ).format(self=self)
 
 
